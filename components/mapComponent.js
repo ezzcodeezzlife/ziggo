@@ -8,7 +8,24 @@ const MapComponent = () => {
   const markersRef = useRef({});
   const [lastBBox, setLastBBox] = useState('');
 
-  const fetchMarkers = () => {
+  const fetchMarkers = (location = null, zoomLevel = 13) => {
+    location = location || [50.11, 8.68]; // Default location
+
+    if (!mapRef.current) {
+      // Initialize the map
+      mapRef.current = L.map('map').setView(location, zoomLevel);
+
+      L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
+        attribution: '©OpenStreetMap, ©CartoDB',
+        maxZoom: 19,
+      }).addTo(mapRef.current);
+
+      clusterGroupRef.current = L.markerClusterGroup();
+      mapRef.current.addLayer(clusterGroupRef.current);
+      
+      mapRef.current.on('moveend', fetchMarkers);
+    }
+
     const bounds = mapRef.current.getBounds();
     const bbox =
       bounds.getSouth() +
@@ -53,21 +70,7 @@ const MapComponent = () => {
   };
 
   useEffect(() => {
-    const defaultLocation = [50.11, 8.68];
-
-    if (!mapRef.current) {
-      mapRef.current = L.map('map').setView(defaultLocation, 13);
-    
-      L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
-        attribution: '©OpenStreetMap, ©CartoDB',
-        maxZoom: 19,
-      }).addTo(mapRef.current);
-
-      clusterGroupRef.current = L.markerClusterGroup();
-      mapRef.current.addLayer(clusterGroupRef.current);
-
-      mapRef.current.on('moveend', fetchMarkers);
-    }
+    fetchMarkers(); // Call fetchMarkers with the default location and zoom level
 
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition((position) => {
