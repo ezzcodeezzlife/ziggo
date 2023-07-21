@@ -9,6 +9,8 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@headlessui/react": "^1.7.15",
+    "@heroicons/react": "^2.0.18",
     "leaflet": "^1.9.4",
     "leaflet-search": "^3.0.9",
     "leaflet.markercluster": "^1.5.3",
@@ -16,5 +18,10 @@
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "swr": "^2.2.0"
+  },
+  "devDependencies": {
+    "autoprefixer": "^10.4.14",
+    "postcss": "^8.4.27",
+    "tailwindcss": "^3.3.3"
   }
 }
