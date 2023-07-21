@@ -1,5 +1,7 @@
 import { ChevronRightIcon } from "@heroicons/react/20/solid";
 import Contents from "../components/contents";
+import Image from "next/image";
+import profilePic from '../public/screenshot.png'
 
 export default function Example() {
   return (
@@ -68,8 +70,8 @@ export default function Example() {
             <div className="max-w-3xl flex-none sm:max-w-5xl lg:max-w-none">
               <div className="-m-2 rounded-xl bg-gray-900/5 p-2 ring-1 ring-inset ring-gray-900/10 lg:-m-4 lg:rounded-2xl lg:p-4">
                 <a href="/karte" className="block">
-                  <img
-                    src="./screenshot.png"
+                  <Image
+                    src={profilePic}
                     alt="App screenshot"
                     width={2432}
                     height={1442}
