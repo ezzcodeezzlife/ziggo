@@ -5,7 +5,10 @@ class MyDocument extends Document {
     return (
       <Html className="scroll-smooth">
         <Head>
-       
+          <link
+            rel="stylesheet"
+            href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+          />
           <link
             rel="stylesheet"
             href="https://unpkg.com/leaflet.markercluster@1.0.3/dist/MarkerCluster.Default.css"
