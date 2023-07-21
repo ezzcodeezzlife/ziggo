@@ -21,7 +21,7 @@ const MapComponent = () => {
     if (!mapRef.current) {
       // Initialize the map
       mapRef.current = L.map("map", {
-        minZoom: 13,
+        minZoom: 10,
         maxZoom: 18,
       }).setView(location, zoomLevel);
 
