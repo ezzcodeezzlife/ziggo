@@ -5,7 +5,7 @@ class MyDocument extends Document {
   render() {
     return (
       <>
-      <title>Zigarettenautomatkarte - Finden Sie Zigarettenautomaten iauf unserer Karte</title>
+      <title>Zigarettenautomaten auf der Karte Finden | zigarettenautomatkarte.de</title>
             
       <meta name="title" content="Zigarettenautomatkarte - Finden Sie Zigarettenautomaten iauf unserer Karte" />
     
