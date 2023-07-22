@@ -5,6 +5,7 @@ class MyDocument extends Document {
     return (
       <>
       <title>Zigarettenautomatkarte - Finden Sie Zigarettenautomaten iauf unserer Karte</title>
+      <meta name="title" content="Zigarettenautomatkarte - Finden Sie Zigarettenautomaten iauf unserer Karte" />
             <NextSeo
         title="Zigarettenautomatkarte - Finden Sie Ihren Zigarettenautomat in Deutschland"
         description="Wir helfen Rauchern in Deutschland, den nächsten Zigarettenautomat einfach zu finden. Unsere umfassende Karte ist stets aktuell und benutzerfreundlich."
