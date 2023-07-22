@@ -1,6 +1,5 @@
 import "@/styles/globals.css";
-import Script
- from "next/script";
+import Script from "next/script";
 
 export default function App({ Component, pageProps }) {
   return (
@@ -8,7 +7,6 @@ export default function App({ Component, pageProps }) {
       <Script
         src="https://www.googletagmanager.com/gtag/js?id=G-LDCLSV0XN9"
         strategy="lazyOnload"
-        
       />
       <Script id="google-analytics" strategy="afterInteractive">
         {`

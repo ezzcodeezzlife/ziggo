@@ -1,7 +1,7 @@
 import { ChevronRightIcon } from "@heroicons/react/20/solid";
 import Contents from "../components/contents";
 import Image from "next/image";
-import profilePic from '../public/screenshot.png'
+import profilePic from "../public/screenshot.png";
 
 export default function Example() {
   return (

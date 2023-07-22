@@ -49,9 +49,11 @@ const MapComponent = () => {
       newBounds.getEast();
 
     if (bbox !== lastBBox) {
-      const oldBounds = lastBBox ? L.latLngBounds(
-        ...lastBBox.split(",").map((coord) => parseFloat(coord))
-      ) : null;
+      const oldBounds = lastBBox
+        ? L.latLngBounds(
+            ...lastBBox.split(",").map((coord) => parseFloat(coord))
+          )
+        : null;
       const diffBounds = oldBounds ? newBounds.subtract(oldBounds) : newBounds;
 
       const diffBbox =
