@@ -92,21 +92,21 @@ const MapComponent = () => {
               markersRef.current[key] ||
               L.marker([node.lat, node.lon], { icon: myIcon });
 
-            marker.bindPopup(
-              '<ul style="list-style-type: none; padding: 0; margin: 0">' +
-                Object.keys(node.tags)
-                  .map(function (key) {
-                    return (
-                      '<li style="padding: 5px 0; font-family: Arial, sans-serif; font-size: 14px; color: #333;">' +
-                      key +
-                      ': <span style="font-weight: bold;">' +
-                      node.tags[key] +
-                      "</span></li>"
-                    );
-                  })
-                  .join("") +
+              marker.bindPopup(
+                '<ul style="list-style-type: none; padding: 0; margin: 0">' +
+                  Object.keys(node.tags)
+                    .map(function (key) {
+                      return (
+                        '<li style="padding: 5px 0; font-family: Arial, sans-serif; font-size: 14px; color: #333;">' +
+                        key +
+                        ': <span style="font-weight: bold;">' +
+                        node.tags[key] +
+                        "</span></li>"
+                      );
+                    }).join("") +
+                    '<li style="padding: 5px 0; font-family: Arial, sans-serif; font-size: 14px; color: #333;"><a href="https://www.google.com/maps/dir/?api=1&destination=' + encodeURIComponent(node.lat + ',' + node.lon) + '" target="_blank">Routenplanung starten</a></li>' +
                 "</ul>"
-            );
+              );
 
             if (newBounds.contains(marker.getLatLng())) {
               newMarkers[key] = marker;
