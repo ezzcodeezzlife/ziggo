@@ -13,7 +13,7 @@ import { CheckIcon } from "@heroicons/react/20/solid";
 const navigation = [
   { name: "Home", href: "/" },
   { name: "Zigarettenautomat Karte", href: "/karte" },
-  { name: "Warum Uns Wählen", href: "#features" },
+
 ];
 
 const features = [
