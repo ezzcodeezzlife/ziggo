@@ -17,6 +17,20 @@ export default function App({ Component, pageProps }) {
           gtag('config', 'G-LDCLSV0XN9');
         `}
       </Script>
+      <Script strategy="afterInteractive">
+        {`
+(function() {
+
+
+  // load leaflet.css
+  var cssLeaflet = document.createElement('link');
+  cssLeaflet.href = 'https://unpkg.com/leaflet@1.7.1/dist/leaflet.css';
+  cssLeaflet.rel = 'stylesheet';
+  cssLeaflet.type = 'text/css';
+  document.getElementsByTagName('head')[0].appendChild(cssLeaflet);
+})();
+        `}
+      </Script>
       <Component {...pageProps} />
     </>
   );

@@ -7,6 +7,7 @@ class MyDocument extends Document {
       <>
       <title>Zigarettenautomatkarte - Finden Sie Zigarettenautomaten iauf unserer Karte</title>
             
+      <meta name="title" content="Zigarettenautomatkarte - Finden Sie Zigarettenautomaten iauf unserer Karte" />
       <NextSeo
         title="Zigarettenautomatkarte - Finden Sie Ihren Zigarettenautomat in Deutschland"
         description="Wir helfen Rauchern in Deutschland, den nächsten Zigarettenautomat einfach zu finden. Unsere umfassende Karte ist stets aktuell und benutzerfreundlich."
@@ -36,7 +37,6 @@ class MyDocument extends Document {
 
       <Html className="scroll-smooth">
         <Head>
-        
           <link
             rel="stylesheet"
             href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
@@ -55,6 +55,7 @@ class MyDocument extends Document {
           />
         </Head>
         <body>
+          
           <Main />
           <NextScript />
         </body>
