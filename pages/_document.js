@@ -1,11 +1,13 @@
 import Document, { Html, Head, Main, NextScript } from "next/document";
+import { NextSeo } from 'next-seo';
 
 class MyDocument extends Document {
   render() {
     return (
       <>
       <title>Zigarettenautomatkarte - Finden Sie Zigarettenautomaten iauf unserer Karte</title>
-            <NextSeo
+            
+      <NextSeo
         title="Zigarettenautomatkarte - Finden Sie Ihren Zigarettenautomat in Deutschland"
         description="Wir helfen Rauchern in Deutschland, den nächsten Zigarettenautomat einfach zu finden. Unsere umfassende Karte ist stets aktuell und benutzerfreundlich."
         canonical="https://www.zigarettenautomatkarte.de/"
@@ -32,9 +34,9 @@ class MyDocument extends Document {
         }}
       />
 
-
       <Html className="scroll-smooth">
         <Head>
+        
           <link
             rel="stylesheet"
             href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
