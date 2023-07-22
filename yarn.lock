@@ -430,6 +430,11 @@ leaflet-search@^3.0.9:
   dependencies:
     leaflet "*"
 
+leaflet.locatecontrol@^0.79.0:
+  version "0.79.0"
+  resolved "https://registry.yarnpkg.com/leaflet.locatecontrol/-/leaflet.locatecontrol-0.79.0.tgz#0236b87c699a49f9ddb2f289941fbc0d3c3f8b62"
+  integrity sha512-h64QIHFkypYdr90lkSfjKvPvvk8/b8UnP3m9WuoWdp5p2AaCWC0T1NVwyuj4rd5U4fBW3tQt4ppmZ2LceHMIDg==
+
 leaflet.markercluster@^1.5.3:
   version "1.5.3"
   resolved "https://registry.yarnpkg.com/leaflet.markercluster/-/leaflet.markercluster-1.5.3.tgz#9cdb52a4eab92671832e1ef9899669e80efc4056"

@@ -15,7 +15,11 @@ class MyDocument extends Document {
           />
           <link
             rel="stylesheet"
-            href="https://unpkg.com/leaflet.markercluster@1.0.3/dist/MarkerCluster.css"
+            href="https://unpkg.com/leaflet.markercluster@1.0.3/dist/MarkerCluster.min.css"
+          />
+          <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
           />
         </Head>
         <body>

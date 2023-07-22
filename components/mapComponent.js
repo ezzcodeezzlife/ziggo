@@ -1,6 +1,10 @@
 import { useEffect, useRef, useState } from "react";
 import L from "leaflet";
+import 'leaflet.markercluster/dist/MarkerCluster.css';
+import 'leaflet.markercluster/dist/MarkerCluster.Default.css';
 import "leaflet.markercluster/dist/leaflet.markercluster";
+import "leaflet.locatecontrol/dist/L.Control.Locate.min.css";
+import LocateControl from "leaflet.locatecontrol";
 
 const myIcon = L.icon({
   iconUrl: "./icon.png",
@@ -36,6 +40,15 @@ const MapComponent = () => {
       mapRef.current.addLayer(clusterGroupRef.current);
 
       mapRef.current.on("moveend", fetchMarkers);
+
+      // Add a control button to zoom on the user's location
+      L.control.locate({
+        position: 'topright',
+        icon: 'fa fa-location-arrow',
+        strings: {
+          title: "Locate me"
+        }
+      }).addTo(mapRef.current);
     }
 
     const newBounds = mapRef.current.getBounds();
@@ -136,7 +149,14 @@ const MapComponent = () => {
     }
   }, []);
 
-  return <div id="map" style={{ width: "100%", height: "100vh" }}></div>;
+  return (
+    <div style={{ position: 'relative', width: '100%', height: '100vh' }}>
+      <div id="map" style={{ width: '100%', height: '100%' }}></div>
+      <div style={{ position: 'absolute', bottom: '20px', left: '20px', zIndex: 1000 }}>
+        <a href="/" style={{ backgroundColor: 'white', padding: '10px', borderRadius: '5px', textDecoration: 'none', color: 'black' }}>← Homepage</a>
+      </div>
+    </div>
+  );
 };
 
 export default MapComponent;
