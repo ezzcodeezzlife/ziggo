@@ -153,7 +153,7 @@ const MapComponent = () => {
     <div style={{ position: 'relative', width: '100%', height: '100vh' }}>
       <div id="map" style={{ width: '100%', height: '100%' }}></div>
       <div style={{ position: 'absolute', bottom: '10px', left: '10px', zIndex: 1000 }}>
-        <a href="/" style={{ backgroundColor: 'white', padding: '5px', borderRadius: '5px', textDecoration: 'none', color: 'black' }}>← Homepage</a>
+        <a href="/" style={{ backgroundColor: 'white', paddingLeft: '4px',paddingRight: '4px', paddingTop : '0px',paddingBottom : '2px',borderRadius: '5px', textDecoration: 'none', color: 'black' }}>←</a>
       </div>
     </div>
   );
