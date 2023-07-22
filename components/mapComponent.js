@@ -38,20 +38,34 @@ const MapComponent = () => {
       mapRef.current.on("moveend", fetchMarkers);
     }
 
-    const bounds = mapRef.current.getBounds();
+    const newBounds = mapRef.current.getBounds();
     const bbox =
-      bounds.getSouth() +
+      newBounds.getSouth() +
       "," +
-      bounds.getWest() +
+      newBounds.getWest() +
       "," +
-      bounds.getNorth() +
+      newBounds.getNorth() +
       "," +
-      bounds.getEast();
+      newBounds.getEast();
 
     if (bbox !== lastBBox) {
+      const oldBounds = lastBBox ? L.latLngBounds(
+        ...lastBBox.split(",").map((coord) => parseFloat(coord))
+      ) : null;
+      const diffBounds = oldBounds ? newBounds.subtract(oldBounds) : newBounds;
+
+      const diffBbox =
+        diffBounds.getSouth() +
+        "," +
+        diffBounds.getWest() +
+        "," +
+        diffBounds.getNorth() +
+        "," +
+        diffBounds.getEast();
+
       fetch(
         "https://overpass-api.de/api/interpreter?data=[out:json];node[amenity=vending_machine][vending=cigarettes](" +
-          bbox +
+          diffBbox +
           ");out;"
       )
         .then((response) => response.json())
@@ -79,7 +93,7 @@ const MapComponent = () => {
                 "</ul>"
             );
 
-            if (bounds.contains(marker.getLatLng())) {
+            if (newBounds.contains(marker.getLatLng())) {
               newMarkers[key] = marker;
               if (!markersRef.current[key]) {
                 clusterGroupRef.current.addLayer(marker);
