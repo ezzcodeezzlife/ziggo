@@ -10,7 +10,7 @@ class MyDocument extends Document {
       <meta name="title" content="Zigarettenautomatkarte - Finden Sie Zigarettenautomaten iauf unserer Karte" />
     
 
-      <Html className="scroll-smooth">
+      <Html className="scroll-smooth" lang="de">
         <Head>
           <link
             rel="stylesheet"
