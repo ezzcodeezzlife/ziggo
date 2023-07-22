@@ -20,7 +20,7 @@ const MapComponent = () => {
   const [lastBBox, setLastBBox] = useState("");
 
   const fetchMarkers = (location = null, zoomLevel = 13) => {
-    location = location || [50.11, 8.68]; // Default location
+    location = location || [52.52, 13.40]; // Default location
 
     if (!mapRef.current) {
       // Initialize the map
