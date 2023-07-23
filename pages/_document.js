@@ -22,7 +22,7 @@ class MyDocument extends Document {
           />
           <link
             rel="stylesheet"
-            href="https://unpkg.com/leaflet.markercluster@1.0.3/dist/MarkerCluster.min.css"
+            href="https://unpkg.com/leaflet.markercluster@1.0.3/dist/MarkerCluster.css"
           />
           <link
             rel="stylesheet"
