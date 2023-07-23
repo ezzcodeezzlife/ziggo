@@ -6,7 +6,7 @@ export default function App({ Component, pageProps }) {
   return (
     <>
       <NextSeo
-        title="Zigarettenautomatkarte - Finden Sie Ihren Zigarettenautomat in Deutschland"
+        title="Zigarettenautomat finden - Zigarettenautomatkarte.de"
         description="Wir helfen Rauchern in Deutschland, den nächsten Zigarettenautomat einfach zu finden. Unsere umfassende Karte ist stets aktuell und benutzerfreundlich."
         canonical="https://www.zigarettenautomatkarte.de/"
         aggregateRating={{
