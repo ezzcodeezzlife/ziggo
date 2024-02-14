@@ -1,6 +1,6 @@
 import "@/styles/globals.css";
 import Script from "next/script";
-import { NextSeo } from 'next-seo';
+import { NextSeo } from "next-seo";
 
 export default function App({ Component, pageProps }) {
   return (
@@ -10,25 +10,27 @@ export default function App({ Component, pageProps }) {
         description="Wir helfen Rauchern in Deutschland, den nächsten Zigarettenautomat einfach zu finden. Unsere umfassende Karte ist stets aktuell und benutzerfreundlich."
         canonical="https://www.zigarettenautomatkarte.de/"
         aggregateRating={{
-          ratingValue: '5',
-          ratingCount: '185',
+          ratingValue: "5",
+          ratingCount: "94",
         }}
-        datePublished="2023-07-22"
+        datePublished="2024-02-03"
         keywords="zigarettenautomat, zigarettenautomaten, zigarettenautomat finden, zigarettenautomaten finden, zigarettenautomat suche, zigarettenautomat karte, zigarettenautomat karte deutschland, zigarettenautomaten karte, zigarettenautomaten karte de"
         openGraph={{
-          url: 'https://www.zigarettenautomatkarte.de/',
-          title: 'Zigarettenautomatkarte - Finden Sie Ihren Zigarettenautomat in Deutschland',
-          description: 'Wir helfen Rauchern in Deutschland, den nächsten Zigarettenautomat einfach zu finden. Unsere umfassende Karte ist stets aktuell und benutzerfreundlich.',
+          url: "https://www.zigarettenautomatkarte.de/",
+          title:
+            "Zigarettenautomatkarte - Finden Sie Ihren Zigarettenautomat in Deutschland",
+          description:
+            "Wir helfen Rauchern in Deutschland, den nächsten Zigarettenautomat einfach zu finden. Unsere umfassende Karte ist stets aktuell und benutzerfreundlich.",
           images: [
             {
-              url: 'https://www.zigarettenautomatkarte.de/screenshot.png',
+              url: "https://www.zigarettenautomatkarte.de/screenshot.png",
               width: 1200,
               height: 630,
-              alt: 'Zigarettenautomatkarte.de - OG Image',
+              alt: "Zigarettenautomatkarte.de - OG Image",
             },
           ],
-          locale: 'de_DE',
-          site_name: 'Zigarettenautomatkarte',
+          locale: "de_DE",
+          site_name: "Zigarettenautomatkarte",
         }}
       />
       <Script
