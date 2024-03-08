@@ -28,6 +28,7 @@ const MapComponent = () => {
 
     if (!mapRef.current) {
       // Initialize the map
+      // Du bist krass
       mapRef.current = L.map("map", {
         minZoom: 10,
         maxZoom: 18,
