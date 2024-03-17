@@ -40,12 +40,12 @@ export default function Example() {
             <div className="mt-24 sm:mt-32 lg:mt-16">
               <a href="#" className="inline-flex space-x-6">
                 <span className="rounded-full bg-indigo-600/10 px-3 py-1 text-sm font-semibold leading-6 text-indigo-600 ring-1 ring-inset ring-indigo-600/10">
-                  Neu
+                  Zigarettenautomat finden
                 </span>
               </a>
             </div>
             <h1 className="mt-10 text-4xl font-bold tracking-tight text-gray-900 sm:text-6xl">
-              Zigarettenautomaten auf der Karte finden
+              Zigarettenautomat in der Nähe
             </h1>
             <p className="mt-6 text-lg leading-8 text-gray-600">
               Ein praktischer und zuverlässiger Weg um Zigarettenautomaten in
