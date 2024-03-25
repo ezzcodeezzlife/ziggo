@@ -5,9 +5,9 @@ class MyDocument extends Document {
   render() {
     return (
       <>
-      <title>Zigarettenautomaten auf der Karte Finden | zigarettenautomatkarte.de</title>
+      <title>Zigarettenautomat in der Nähe finden</title>
             
-      <meta name="title" content="Zigarettenautomatkarte - Finden Sie Zigarettenautomaten iauf unserer Karte" />
+      <meta name="title" content="Zigarettenautomat in der Nähe finden" />
     
 
       <Html className="scroll-smooth" lang="de">
