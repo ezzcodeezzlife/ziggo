@@ -6,8 +6,8 @@ export default function App({ Component, pageProps }) {
   return (
     <>
       <NextSeo
-        title="Zigarettenautomat finden - Zigarettenautomatkarte.de"
-        description="Wir helfen Rauchern in Deutschland, den nächsten Zigarettenautomat einfach zu finden. Unsere umfassende Karte ist stets aktuell und benutzerfreundlich."
+        title="Zigarettenautomat in der Nähe finden"
+        description="Zigarettenautomat in der Nähe finden auf der Zigarettenautomat Karte"
         canonical="https://www.zigarettenautomatkarte.de/"
         aggregateRating={{
           ratingValue: "5",
@@ -18,9 +18,9 @@ export default function App({ Component, pageProps }) {
         openGraph={{
           url: "https://www.zigarettenautomatkarte.de/",
           title:
-            "Zigarettenautomatkarte - Finden Sie Ihren Zigarettenautomat in Deutschland",
+            "Zigarettenautomat in der Nähe finden",
           description:
-            "Wir helfen Rauchern in Deutschland, den nächsten Zigarettenautomat einfach zu finden. Unsere umfassende Karte ist stets aktuell und benutzerfreundlich.",
+            "Zigarettenautomat in der Nähe finden auf der Zigarettenautomat Karte",
           images: [
             {
               url: "https://www.zigarettenautomatkarte.de/screenshot.png",
