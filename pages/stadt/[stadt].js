@@ -2,10 +2,16 @@ import { ChevronRightIcon } from "@heroicons/react/20/solid";
 import Contents from "../../components/contents";
 import Image from "next/image";
 import profilePic from "../../public/screenshot.png";
+import Head from 'next/head';
 
 export default function Exasmple({ stadt }) {
+  const canonicalUrl = `https://www.zigarettenautomatkarte.de/stadt/${stadt}`;
+
   return (
     <>
+       <Head>
+        <link rel="canonical" href={canonicalUrl} />
+      </Head>
       <div className="relative isolate overflow-hidden bg-white">
         <svg
           className="absolute inset-0 -z-10 h-full w-full stroke-gray-200 [mask-image:radial-gradient(100%_100%_at_top_right,white,transparent)]"
