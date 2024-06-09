@@ -33,6 +33,7 @@ export default function App({ Component, pageProps }) {
           site_name: "Zigarettenautomatkarte",
         }}
       />
+      <meta name="monetag" content="f5eca5017e57a785107f2507bfc140ac"></meta>
       <Script
         src="https://www.googletagmanager.com/gtag/js?id=G-LDCLSV0XN9"
         strategy="lazyOnload"
