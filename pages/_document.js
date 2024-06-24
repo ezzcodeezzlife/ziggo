@@ -12,9 +12,9 @@ class MyDocument extends Document {
 
       <Html className="scroll-smooth" lang="de">
         <Head>
-
+  {/*
     <script src="https://alwingulla.com/88/tag.min.js" data-zone="71812" async data-cfasync="false"></script> 
-
+*/}
           <link
             rel="stylesheet"
             href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
