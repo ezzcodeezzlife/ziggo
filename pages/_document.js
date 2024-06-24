@@ -34,8 +34,9 @@ class MyDocument extends Document {
         </Head>
         <body>
           
+          {/*
     <script src="https://alwingulla.com/88/tag.min.js" data-zone="71812" async data-cfasync="false"></script> 
-
+*/}
           
           <Main />
           <NextScript />
