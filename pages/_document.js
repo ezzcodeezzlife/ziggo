@@ -23,9 +23,9 @@ class MyDocument extends Document {
 
       <Html className="scroll-smooth" lang="de">
         <Head>
-  {/*
-    <script src="https://alwingulla.com/88/tag.min.js" data-zone="71812" async data-cfasync="false"></script>
-  */}
+          {/*
+            <script src="https://alwingulla.com/88/tag.min.js" data-zone="71812" async data-cfasync="false"></script>
+          */}
           <link
             rel="stylesheet"
             href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
@@ -42,13 +42,26 @@ class MyDocument extends Document {
             rel="stylesheet"
             href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
           />
+          <script type="application/ld+json">
+            {`
+              {
+                "@context": "https://schema.org",
+                "@type": "WebSite",
+                "name": "Ziggokarte",
+                "url": "https://www.ziggokarte.com",
+                "potentialAction": {
+                  "@type": "SearchAction",
+                  "target": "https://www.ziggokarte.com/search?q={search_term_string}",
+                  "query-input": "required name=search_term_string"
+                }
+              }
+            `}
+          </script>
         </Head>
         <body>
-
           {/*
-    <script src="https://alwingulla.com/88/tag.min.js" data-zone="71812" async data-cfasync="false"></script>
-  */}
-
+            <script src="https://alwingulla.com/88/tag.min.js" data-zone="71812" async data-cfasync="false"></script>
+          */}
           <Main />
           <NextScript />
         </body>

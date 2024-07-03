@@ -48,8 +48,13 @@ export default function Example() {
               Zigarettenautomat in der Nähe
             </h1>
             <p className="mt-6 text-lg leading-8 text-gray-600">
-              Ein praktischer und zuverlässiger Weg um Zigarettenautomaten in
-              deiner Nähe zu finden
+              Ein praktischer und zuverlässiger Weg, um Zigarettenautomaten in
+              deiner Nähe zu finden. Unsere interaktive Karte und umfangreiche
+              Datenbank machen es einfach, den nächsten Zigarettenautomaten zu
+              finden, egal ob du zu Hause bist oder unterwegs. Mit aktuellen
+              Informationen und einfacher Navigation ist unser Service die
+              beste Wahl, um schnell und kostenlos Zigarettenautomaten zu
+              finden.
             </p>
             <div className="mt-10 flex items-center gap-x-6">
               <a
