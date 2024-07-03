@@ -76,6 +76,7 @@ export default function Example() {
                     width={2432}
                     height={1442}
                     className="w-[76rem] rounded-md shadow-2xl ring-1 ring-gray-900/10"
+                    priority
                   />
                 </a>
               </div>
