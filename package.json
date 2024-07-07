@@ -13,6 +13,7 @@
     "@headlessui/react": "^1.7.15",
     "@heroicons/react": "^2.0.18",
     "i18next": "^23.11.5",
+    "i18next-http-backend": "^2.5.2",
     "i18next-resources-to-backend": "^1.2.1",
     "leaflet": "^1.9.4",
     "leaflet-control-geocoder": "^2.4.0",
