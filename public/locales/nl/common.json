@@ -1,11 +1,11 @@
 {
-  "welcome_message": "Bienvenue",
-  "map_title": "Carte Ziggo",
-  "search_placeholder": "Rechercher un lieu",
-  "language_selector": "Sélectionner la langue",
-  "find_cigarette_machine": "Trouver un distributeur de cigarettes",
-  "cigarette_machine_nearby": "Distributeur de cigarettes à proximité",
-  "find_cigarette_machines_nearby": "Un moyen pratique et fiable de trouver des distributeurs de cigarettes près de chez vous",
-  "cigarette_machine_map": "Carte des distributeurs de cigarettes",
-  "more_information": "Plus d'informations"
+  "welcome_message": "Welkom",
+  "map_title": "Ziggo Kaart",
+  "search_placeholder": "Zoek een plaats",
+  "language_selector": "Selecteer taal",
+  "find_cigarette_machine": "Vind sigarettenautomaat",
+  "cigarette_machine_nearby": "Sigarettenautomaat in de buurt",
+  "find_cigarette_machines_nearby": "Een handige en betrouwbare manier om sigarettenautomaten bij jou in de buurt te vinden",
+  "cigarette_machine_map": "Kaart van sigarettenautomaten",
+  "more_information": "Meer informatie"
 }
