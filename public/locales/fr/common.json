@@ -12,5 +12,12 @@
   "locate_me": "Localisez-moi",
   "start_route_planning": "Commencer la planification de l'itinéraire",
   "enter_address": "Entrez l'adresse...",
-  "not_found": "Non trouvé"
+  "not_found": "Non trouvé",
+  "seo": {
+    "title": "Trouver un distributeur de cigarettes à proximité",
+    "description": "Trouver des distributeurs de cigarettes à proximité sur la carte des distributeurs de cigarettes",
+    "keywords": "distributeur de cigarettes, distributeurs de cigarettes, trouver un distributeur de cigarettes, trouver des distributeurs de cigarettes, recherche de distributeur de cigarettes, carte des distributeurs de cigarettes, carte des distributeurs de cigarettes France, carte des distributeurs de cigarettes fr",
+    "ogTitle": "Trouver un distributeur de cigarettes à proximité",
+    "ogDescription": "Trouver des distributeurs de cigarettes à proximité sur la carte des distributeurs de cigarettes"
+  }
 }

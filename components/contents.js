@@ -9,7 +9,7 @@ import {
   XMarkIcon,
 } from "@heroicons/react/24/outline";
 import { CheckIcon } from "@heroicons/react/20/solid";
-import { useTranslation } from "next-i18next";
+import { useTranslation } from "react-i18next";
 
 export default function Example() {
   const { t } = useTranslation();

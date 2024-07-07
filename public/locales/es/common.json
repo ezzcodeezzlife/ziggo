@@ -12,5 +12,12 @@
   "locate_me": "Localízame",
   "start_route_planning": "Iniciar planificación de ruta",
   "enter_address": "Ingrese la dirección...",
-  "not_found": "No encontrado"
+  "not_found": "No encontrado",
+  "seo": {
+    "title": "Encontrar máquina expendedora de cigarrillos cercana",
+    "description": "Encontrar máquinas expendedoras de cigarrillos cercanas en el mapa de máquinas expendedoras de cigarrillos",
+    "keywords": "máquina expendedora de cigarrillos, máquinas expendedoras de cigarrillos, encontrar máquina expendedora de cigarrillos, encontrar máquinas expendedoras de cigarrillos, búsqueda de máquina expendedora de cigarrillos, mapa de máquinas expendedoras de cigarrillos, mapa de máquinas expendedoras de cigarrillos España, mapa de máquinas expendedoras de cigarrillos es",
+    "ogTitle": "Encontrar máquina expendedora de cigarrillos cercana",
+    "ogDescription": "Encontrar máquinas expendedoras de cigarrillos cercanas en el mapa de máquinas expendedoras de cigarrillos"
+  }
 }

@@ -12,5 +12,12 @@
   "locate_me": "Localizzami",
   "start_route_planning": "Inizia la pianificazione del percorso",
   "enter_address": "Inserisci l'indirizzo...",
-  "not_found": "Non trovato"
+  "not_found": "Non trovato",
+  "seo": {
+    "title": "Trova distributore di sigarette nelle vicinanze",
+    "description": "Trova distributori di sigarette nelle vicinanze sulla mappa dei distributori di sigarette",
+    "keywords": "distributore di sigarette, distributori di sigarette, trova distributore di sigarette, trova distributori di sigarette, ricerca distributore di sigarette, mappa dei distributori di sigarette, mappa dei distributori di sigarette Italia, mappa dei distributori di sigarette it",
+    "ogTitle": "Trova distributore di sigarette nelle vicinanze",
+    "ogDescription": "Trova distributori di sigarette nelle vicinanze sulla mappa dei distributori di sigarette"
+  }
 }

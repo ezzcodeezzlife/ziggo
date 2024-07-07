@@ -2,10 +2,20 @@ import "@/styles/globals.css";
 import Script from "next/script";
 import { NextSeo } from "next-seo";
 import { useTranslation } from "react-i18next";
-import i18n from '../i18n'; // Import the initialized i18next instance
+import i18n, { i18nInitPromise } from '../i18n'; // Import the initialized i18next instance and the i18nInitPromise
 
-function App({ Component, pageProps }) {
+// Function to initialize i18next with server-side translations
+const initializeI18next = (translations) => {
+  if (translations) {
+    i18n.addResources(i18n.language, 'common', translations[i18n.language].common);
+  }
+};
+
+function App({ Component, pageProps, translations }) {
   const { t } = useTranslation();
+
+  // Initialize i18next with server-side translations before rendering
+  initializeI18next(translations);
 
   // Ensure i18n is initialized before rendering
   if (!i18n.isInitialized) {
@@ -69,6 +79,33 @@ function App({ Component, pageProps }) {
       <Component {...pageProps} />
     </>
   );
+}
+
+export async function getServerSideProps(appContext) {
+  await i18nInitPromise; // Wait for i18next initialization
+
+  // Import fs and path modules only in server-side code
+  const fs = await import('fs');
+  const path = await import('path');
+
+  // Determine the current language from the request
+  const currentLanguage = appContext.req.language || 'en';
+
+  // Fetch only the translations for the current language and the required namespace(s)
+  const translations = {
+    [currentLanguage]: {
+      common: JSON.parse(fs.readFileSync(path.resolve('./public/locales', currentLanguage, 'common.json'), 'utf-8')),
+    },
+  };
+
+  // Initialize i18next with server-side translations before rendering
+  initializeI18next(translations);
+
+  return {
+    props: {
+      translations,
+    },
+  };
 }
 
 export default App;

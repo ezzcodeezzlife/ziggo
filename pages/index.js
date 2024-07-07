@@ -2,7 +2,7 @@ import { ChevronRightIcon } from "@heroicons/react/20/solid";
 import Contents from "../components/contents";
 import Image from "next/image";
 import profilePic from "../public/screenshot.png";
-import { useTranslation } from "next-i18next";
+import { useTranslation } from "react-i18next";
 
 export default function Example() {
   const { t } = useTranslation();
