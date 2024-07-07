@@ -3,17 +3,7 @@ import Script from "next/script";
 import { NextSeo } from "next-seo";
 import { Head } from "next/document";
 import { appWithTranslation } from "next-i18next";
-import i18next from 'i18next';
-import { initReactI18next } from 'react-i18next';
-import nextI18NextConfig from '../next-i18next.config.js';
-
-i18next
-  .use(initReactI18next)
-  .init({
-    ...nextI18NextConfig.i18n,
-    fallbackLng: 'en',
-    debug: false,
-  });
+import '../i18n'; // Import the i18next initialization
 
 function App({ Component, pageProps }) {
   return (
