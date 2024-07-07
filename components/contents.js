@@ -9,36 +9,34 @@ import {
   XMarkIcon,
 } from "@heroicons/react/24/outline";
 import { CheckIcon } from "@heroicons/react/20/solid";
+import { useTranslation } from "next-i18next";
+
+const { t } = useTranslation();
 
 const navigation = [
-  { name: "Home", href: "/" },
-  { name: "Zigarettenautomat Karte", href: "/karte" },
-
+  { name: t("home"), href: "/" },
+  { name: t("cigarette_machine_map"), href: "/karte" },
 ];
 
 const features = [
   {
-    name: "Umfassende Datenbank",
-    description:
-      "Wir haben Informationen zu Tausenden von Zigarettenautomaten in ganz Deutschland.",
+    name: t("comprehensive_database"),
+    description: t("comprehensive_database_description"),
     icon: CloudArrowUpIcon,
   },
   {
-    name: "Einfache Navigation",
-    description:
-      "Unsere interaktive Karte macht es einfach, den nächsten Zigarettenautomaten zu finden.",
+    name: t("easy_navigation"),
+    description: t("easy_navigation_description"),
     icon: ArrowPathIcon,
   },
   {
-    name: "Immer Aktuell",
-    description:
-      "Unsere Datenbank wird ständig aktualisiert, um die genauesten Informationen zu liefern.",
+    name: t("always_up_to_date"),
+    description: t("always_up_to_date_description"),
     icon: ArrowPathIcon,
   },
   {
-    name: "Kostenlos",
-    description:
-      "Unser Service ist völlig kostenlos zu nutzen. Finden Sie den nächsten Zigarettenautomaten ohne einen Cent zu bezahlen.",
+    name: t("free_of_charge"),
+    description: t("free_of_charge_description"),
     icon: LockClosedIcon,
   },
 ];
@@ -46,48 +44,45 @@ const features = [
 const faqs = [
   {
     id: 1,
-    question: "Wie finde ich den nächstgelegenen Zigarettenautomaten?",
-    answer:
-      "Nutzen Sie einfach unsere interaktive Karte und wir zeigen Ihnen die nächstgelegenen Automaten an.",
+    question: t("faq_question_1"),
+    answer: t("faq_answer_1"),
   },
   {
     id: 2,
-    question: "Wie aktuell sind die Informationen auf Ihrer Webseite?",
-    answer:
-      "Wir bemühen uns, unsere Datenbank so aktuell wie möglich zu halten und fügen ständig neue Automaten hinzu. Es kann jedoch vorkommen, dass ein Automat umgestellt oder entfernt wird, ohne dass wir davon Kenntnis erhalten.",
+    question: t("faq_question_2"),
+    answer: t("faq_answer_2"),
   },
   {
     id: 3,
-    question: "Kostet es etwas, Ihren Service zu nutzen?",
-    answer:
-      "Nein, unser Service ist völlig kostenlos. Wir sind der Meinung, dass jeder den Zugang zu verlässlichen Informationen über Zigarettenautomaten haben sollte, ohne dafür bezahlen zu müssen.",
+    question: t("faq_question_3"),
+    answer: t("faq_answer_3"),
   },
 ];
 
 const footerNavigation = {
   solutions: [
-    { name: "Home", href: "/" },
-    { name: "Karte", href: "/karte" },
+    { name: t("home"), href: "/" },
+    { name: t("map"), href: "/karte" },
   ],
   support: [
     {
-      name: "Contact",
+      name: t("contact"),
       href: "https://www.programming-helper.com/contact-and-privacy",
     },
   ],
   company: [
     {
-      name: "Appsplosion",
+      name: t("appsplosion"),
       href: "https://www.programming-helper.com/contact-and-privacy",
     }
   ],
   legal: [
     {
-      name: "Privacy",
+      name: t("privacy"),
       href: "https://www.programming-helper.com/contact-and-privacy",
     },
     {
-      name: "Terms",
+      name: t("terms"),
       href: "https://www.programming-helper.com/contact-and-privacy",
     },
   ],
@@ -186,17 +181,13 @@ export default function Example() {
         <div className="mx-auto mt-1 max-w-7xl pt-3 px-6 sm:mt-2 lg:px-8">
           <div className="mx-auto max-w-2xl lg:text-center">
             <h2 className="text-base font-semibold leading-7 text-indigo-600">
-              Finden Sie Zigarettenautomaten in Ihrer Nähe
+              {t("find_cigarette_machines_nearby")}
             </h2>
             <p className="mt-2 text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
-              Alles, was Sie brauchen, um den nächsten Zigarettenautomaten zu
-              finden
+              {t("everything_you_need_to_find")}
             </p>
             <p className="mt-6 text-lg leading-8 text-gray-600">
-              Unsere umfangreiche Datenbank und interaktive Karte machen es
-              einfach, Zigarettenautomaten in Ihrer Nähe zu finden. Egal, ob Sie
-              zu Hause sind oder unterwegs, Sie können den nächsten
-              Zigarettenautomaten in Sekundenschnelle finden.
+              {t("comprehensive_database_and_interactive_map")}
             </p>
           </div>
           <div className="mx-auto mt-16 max-w-2xl sm:mt-20 lg:mt-24 lg:max-w-4xl">
@@ -224,7 +215,7 @@ export default function Example() {
         {/* FAQs */}
         <div className="mx-auto mt-32 max-w-2xl divide-y divide-gray-900/10 px-6 pb-8 sm:pb-24 sm:pt-12 lg:max-w-7xl lg:px-8 lg:pb-32">
           <h2 className="text-2xl font-bold leading-10 tracking-tight text-gray-900">
-            Frequently asked questions
+            {t("frequently_asked_questions")}
           </h2>
           <dl className="mt-10 space-y-8 divide-y divide-gray-900/10">
             {faqs.map((faq) => (
@@ -261,21 +252,19 @@ export default function Example() {
           </div>
           <div className="mx-auto max-w-2xl text-center">
             <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
-              Vereinfachen Sie Ihre Suche.
+              {t("simplify_your_search")}
               <br />
-              Beginnen Sie noch heute, unsere Karte zu nutzen.
+              {t("start_using_our_map_today")}
             </h2>
             <p className="mx-auto mt-6 max-w-xl text-lg leading-8 text-gray-600">
-              Mit unserer interaktiven Karte und umfangreichen Datenbank ist die
-              Suche nach dem nächsten Zigarettenautomaten so einfach wie nie
-              zuvor.
+              {t("interactive_map_and_comprehensive_database")}
             </p>
             <div className="mt-10 flex items-center justify-center gap-x-6">
               <a
                 href="/karte"
                 className="rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
               >
-                Los geht's
+                {t("get_started")}
               </a>
             </div>
           </div>
@@ -313,7 +302,7 @@ export default function Example() {
               <div className="md:grid md:grid-cols-2 md:gap-8">
                 <div>
                   <h3 className="text-sm font-semibold leading-6 text-gray-900">
-                    Solutions
+                    {t("solutions")}
                   </h3>
                   <ul role="list" className="mt-6 space-y-4">
                     {footerNavigation.solutions.map((item) => (
@@ -330,7 +319,7 @@ export default function Example() {
                 </div>
                 <div className="mt-10 md:mt-0">
                   <h3 className="text-sm font-semibold leading-6 text-gray-900">
-                    Support
+                    {t("support")}
                   </h3>
                   <ul role="list" className="mt-6 space-y-4">
                     {footerNavigation.support.map((item) => (
