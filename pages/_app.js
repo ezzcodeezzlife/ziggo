@@ -14,9 +14,6 @@ const initializeI18next = (translations) => {
 function App({ Component, pageProps, translations }) {
   const { t } = useTranslation();
 
-  // Initialize i18next with server-side translations before rendering
-  initializeI18next(translations);
-
   // Ensure i18n is initialized before rendering
   if (!i18n.isInitialized) {
     return null; // or a loading spinner
