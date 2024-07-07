@@ -5,9 +5,10 @@ import { useTranslation } from "react-i18next";
 import i18n, { i18nInitPromise } from '../i18n'; // Import the initialized i18next instance and the i18nInitPromise
 
 // Function to initialize i18next with server-side translations
-const initializeI18next = (translations) => {
+const initializeI18next = (translations, language) => {
   if (translations) {
-    i18n.addResources(i18n.language, 'common', translations[i18n.language].common);
+    i18n.changeLanguage(language); // Set the language before adding resources
+    i18n.addResources(language, 'common', translations[language].common);
   }
 };
 
@@ -96,7 +97,7 @@ export async function getServerSideProps(appContext) {
   };
 
   // Initialize i18next with server-side translations before rendering
-  initializeI18next(translations);
+  initializeI18next(translations, currentLanguage);
 
   return {
     props: {
