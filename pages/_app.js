@@ -2,7 +2,6 @@ import "@/styles/globals.css";
 import Script from "next/script";
 import { NextSeo } from "next-seo";
 import { Head } from "next/document";
-import { appWithTranslation } from "next-i18next";
 import '../i18n'; // Import the i18next initialization
 
 function App({ Component, pageProps }) {
@@ -65,4 +64,4 @@ function App({ Component, pageProps }) {
   );
 }
 
-export default appWithTranslation(App);
+export default App;
