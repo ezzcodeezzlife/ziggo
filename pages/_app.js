@@ -1,26 +1,33 @@
 import "@/styles/globals.css";
 import Script from "next/script";
 import { NextSeo } from "next-seo";
-import { Head } from "next/document";
-import '../i18n'; // Import the i18next initialization
+import { useTranslation } from "react-i18next";
+import i18n from '../i18n'; // Import the initialized i18next instance
 
 function App({ Component, pageProps }) {
+  const { t } = useTranslation();
+
+  // Ensure i18n is initialized before rendering
+  if (!i18n.isInitialized) {
+    return null; // or a loading spinner
+  }
+
   return (
     <>
       <NextSeo
-        title="Zigarettenautomat in der Nähe finden"
-        description="Zigarettenautomat in der Nähe finden auf der Zigarettenautomat Karte"
-        canonical="https://www.zigarettenautomatkarte.de/"
+        title={t('seo.title')}
+        description={t('seo.description')}
+        canonical={`https://www.zigarettenautomatkarte.de/${i18n.language}`}
         aggregateRating={{
           ratingValue: "5",
           ratingCount: "94",
         }}
         datePublished="2024-02-03"
-        keywords="zigarettenautomat, zigarettenautomaten, zigarettenautomat finden, zigarettenautomaten finden, zigarettenautomat suche, zigarettenautomat karte, zigarettenautomat karte deutschland, zigarettenautomaten karte, zigarettenautomaten karte de"
+        keywords={t('seo.keywords')}
         openGraph={{
-          url: "https://www.zigarettenautomatkarte.de/",
-          title: "Zigarettenautomat in der Nähe finden",
-          description: "Zigarettenautomat in der Nähe finden auf der Zigarettenautomat Karte",
+          url: `https://www.zigarettenautomatkarte.de/${i18n.language}`,
+          title: t('seo.ogTitle'),
+          description: t('seo.ogDescription'),
           images: [
             {
               url: "https://www.zigarettenautomatkarte.de/screenshot.png",
@@ -29,7 +36,7 @@ function App({ Component, pageProps }) {
               alt: "Zigarettenautomatkarte.de - OG Image",
             },
           ],
-          locale: "de_DE",
+          locale: i18n.language,
           site_name: "Zigarettenautomatkarte",
         }}
       />
