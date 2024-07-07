@@ -7,5 +7,10 @@
   "cigarette_machine_nearby": "Máquina expendedora de cigarrillos cercana",
   "find_cigarette_machines_nearby": "Una forma conveniente y confiable de encontrar máquinas expendedoras de cigarrillos cerca de ti",
   "cigarette_machine_map": "Mapa de máquinas expendedoras de cigarrillos",
-  "more_information": "Más información"
+  "more_information": "Más información",
+  "default_location": "Ubicación predeterminada",
+  "locate_me": "Localízame",
+  "start_route_planning": "Iniciar planificación de ruta",
+  "enter_address": "Ingrese la dirección...",
+  "not_found": "No encontrado"
 }

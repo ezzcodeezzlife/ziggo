@@ -7,5 +7,10 @@
   "cigarette_machine_nearby": "Máquina de cigarros nas proximidades",
   "find_cigarette_machines_nearby": "Uma maneira conveniente e confiável de encontrar máquinas de cigarros perto de você",
   "cigarette_machine_map": "Mapa das máquinas de cigarros",
-  "more_information": "Mais informações"
+  "more_information": "Mais informações",
+  "default_location": "Localização padrão",
+  "locate_me": "Localize-me",
+  "start_route_planning": "Iniciar planejamento de rota",
+  "enter_address": "Digite o endereço...",
+  "not_found": "Não encontrado"
 }

@@ -7,5 +7,10 @@
   "cigarette_machine_nearby": "Sigarettenautomaat in de buurt",
   "find_cigarette_machines_nearby": "Een handige en betrouwbare manier om sigarettenautomaten bij jou in de buurt te vinden",
   "cigarette_machine_map": "Kaart van sigarettenautomaten",
-  "more_information": "Meer informatie"
+  "more_information": "Meer informatie",
+  "default_location": "Standaardlocatie",
+  "locate_me": "Vind mij",
+  "start_route_planning": "Routeplanning starten",
+  "enter_address": "Voer adres in...",
+  "not_found": "Niet gevonden"
 }

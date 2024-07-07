@@ -7,5 +7,10 @@
   "cigarette_machine_nearby": "Distributeur de cigarettes à proximité",
   "find_cigarette_machines_nearby": "Un moyen pratique et fiable de trouver des distributeurs de cigarettes près de chez vous",
   "cigarette_machine_map": "Carte des distributeurs de cigarettes",
-  "more_information": "Plus d'informations"
+  "more_information": "Plus d'informations",
+  "default_location": "Emplacement par défaut",
+  "locate_me": "Localisez-moi",
+  "start_route_planning": "Commencer la planification de l'itinéraire",
+  "enter_address": "Entrez l'adresse...",
+  "not_found": "Non trouvé"
 }

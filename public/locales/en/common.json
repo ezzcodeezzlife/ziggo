@@ -7,5 +7,10 @@
   "cigarette_machine_nearby": "Cigarette Machine Nearby",
   "find_cigarette_machines_nearby": "A convenient and reliable way to find cigarette machines near you",
   "cigarette_machine_map": "Cigarette Machine Map",
-  "more_information": "More Information"
+  "more_information": "More Information",
+  "default_location": "Default Location",
+  "locate_me": "Locate me",
+  "start_route_planning": "Start route planning",
+  "enter_address": "Enter address...",
+  "not_found": "Not found"
 }

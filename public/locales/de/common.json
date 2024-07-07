@@ -7,5 +7,10 @@
   "cigarette_machine_nearby": "Zigarettenautomat in der Nähe",
   "find_cigarette_machines_nearby": "Eine bequeme und zuverlässige Möglichkeit, Zigarettenautomaten in Ihrer Nähe zu finden",
   "cigarette_machine_map": "Zigarettenautomaten Karte",
-  "more_information": "Mehr Informationen"
+  "more_information": "Mehr Informationen",
+  "default_location": "Standardstandort",
+  "locate_me": "Finde mich",
+  "start_route_planning": "Routenplanung starten",
+  "enter_address": "Adresse eingeben...",
+  "not_found": "Nicht gefunden"
 }
