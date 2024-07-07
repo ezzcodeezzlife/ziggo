@@ -1,11 +1,11 @@
 {
-  "welcome_message": "Bienvenue",
-  "map_title": "Carte Ziggo",
-  "search_placeholder": "Rechercher un lieu",
-  "language_selector": "Sélectionner la langue",
-  "find_cigarette_machine": "Trouver un distributeur de cigarettes",
-  "cigarette_machine_nearby": "Distributeur de cigarettes à proximité",
-  "find_cigarette_machines_nearby": "Un moyen pratique et fiable de trouver des distributeurs de cigarettes près de chez vous",
-  "cigarette_machine_map": "Carte des distributeurs de cigarettes",
-  "more_information": "Plus d'informations"
+  "welcome_message": "Καλώς ήρθατε",
+  "map_title": "Χάρτης Ziggo",
+  "search_placeholder": "Αναζήτηση για ένα μέρος",
+  "language_selector": "Επιλογή γλώσσας",
+  "find_cigarette_machine": "Βρείτε μηχάνημα τσιγάρων",
+  "cigarette_machine_nearby": "Μηχάνημα τσιγάρων κοντά",
+  "find_cigarette_machines_nearby": "Ένας βολικός και αξιόπιστος τρόπος για να βρείτε μηχανήματα τσιγάρων κοντά σας",
+  "cigarette_machine_map": "Χάρτης μηχανημάτων τσιγάρων",
+  "more_information": "Περισσότερες πληροφορίες"
 }
