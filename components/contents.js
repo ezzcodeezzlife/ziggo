@@ -11,88 +11,88 @@ import {
 import { CheckIcon } from "@heroicons/react/20/solid";
 import { useTranslation } from "next-i18next";
 
-const { t } = useTranslation();
-
-const navigation = [
-  { name: t("home"), href: "/" },
-  { name: t("cigarette_machine_map"), href: "/karte" },
-];
-
-const features = [
-  {
-    name: t("comprehensive_database"),
-    description: t("comprehensive_database_description"),
-    icon: CloudArrowUpIcon,
-  },
-  {
-    name: t("easy_navigation"),
-    description: t("easy_navigation_description"),
-    icon: ArrowPathIcon,
-  },
-  {
-    name: t("always_up_to_date"),
-    description: t("always_up_to_date_description"),
-    icon: ArrowPathIcon,
-  },
-  {
-    name: t("free_of_charge"),
-    description: t("free_of_charge_description"),
-    icon: LockClosedIcon,
-  },
-];
-
-const faqs = [
-  {
-    id: 1,
-    question: t("faq_question_1"),
-    answer: t("faq_answer_1"),
-  },
-  {
-    id: 2,
-    question: t("faq_question_2"),
-    answer: t("faq_answer_2"),
-  },
-  {
-    id: 3,
-    question: t("faq_question_3"),
-    answer: t("faq_answer_3"),
-  },
-];
-
-const footerNavigation = {
-  solutions: [
-    { name: t("home"), href: "/" },
-    { name: t("map"), href: "/karte" },
-  ],
-  support: [
-    {
-      name: t("contact"),
-      href: "https://www.programming-helper.com/contact-and-privacy",
-    },
-  ],
-  company: [
-    {
-      name: t("appsplosion"),
-      href: "https://www.programming-helper.com/contact-and-privacy",
-    }
-  ],
-  legal: [
-    {
-      name: t("privacy"),
-      href: "https://www.programming-helper.com/contact-and-privacy",
-    },
-    {
-      name: t("terms"),
-      href: "https://www.programming-helper.com/contact-and-privacy",
-    },
-  ],
-};
-
-function classNames(...classes) {
-  return classes.filter(Boolean).join(" ");
-}
-
 export default function Example() {
+  const { t } = useTranslation();
+
+  const navigation = [
+    { name: t("home"), href: "/" },
+    { name: t("cigarette_machine_map"), href: "/karte" },
+  ];
+
+  const features = [
+    {
+      name: t("comprehensive_database"),
+      description: t("comprehensive_database_description"),
+      icon: CloudArrowUpIcon,
+    },
+    {
+      name: t("easy_navigation"),
+      description: t("easy_navigation_description"),
+      icon: ArrowPathIcon,
+    },
+    {
+      name: t("always_up_to_date"),
+      description: t("always_up_to_date_description"),
+      icon: ArrowPathIcon,
+    },
+    {
+      name: t("free_of_charge"),
+      description: t("free_of_charge_description"),
+      icon: LockClosedIcon,
+    },
+  ];
+
+  const faqs = [
+    {
+      id: 1,
+      question: t("faq_question_1"),
+      answer: t("faq_answer_1"),
+    },
+    {
+      id: 2,
+      question: t("faq_question_2"),
+      answer: t("faq_answer_2"),
+    },
+    {
+      id: 3,
+      question: t("faq_question_3"),
+      answer: t("faq_answer_3"),
+    },
+  ];
+
+  const footerNavigation = {
+    solutions: [
+      { name: t("home"), href: "/" },
+      { name: t("map"), href: "/karte" },
+    ],
+    support: [
+      {
+        name: t("contact"),
+        href: "https://www.programming-helper.com/contact-and-privacy",
+      },
+    ],
+    company: [
+      {
+        name: t("appsplosion"),
+        href: "https://www.programming-helper.com/contact-and-privacy",
+      }
+    ],
+    legal: [
+      {
+        name: t("privacy"),
+        href: "https://www.programming-helper.com/contact-and-privacy",
+      },
+      {
+        name: t("terms"),
+        href: "https://www.programming-helper.com/contact-and-privacy",
+      },
+    ],
+  };
+
+  function classNames(...classes) {
+    return classes.filter(Boolean).join(" ");
+  }
+
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   return (
