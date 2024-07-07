@@ -2,11 +2,11 @@ import "@/styles/globals.css";
 import Script from "next/script";
 import { NextSeo } from "next-seo";
 import { Head } from "next/document";
+import { appWithTranslation } from "next-i18next";
 
-export default function App({ Component, pageProps }) {
+function App({ Component, pageProps }) {
   return (
     <>
-   
       <NextSeo
         title="Zigarettenautomat in der Nähe finden"
         description="Zigarettenautomat in der Nähe finden auf der Zigarettenautomat Karte"
@@ -15,14 +15,12 @@ export default function App({ Component, pageProps }) {
           ratingValue: "5",
           ratingCount: "94",
         }}
-        datePublished="2024-02-03" 
+        datePublished="2024-02-03"
         keywords="zigarettenautomat, zigarettenautomaten, zigarettenautomat finden, zigarettenautomaten finden, zigarettenautomat suche, zigarettenautomat karte, zigarettenautomat karte deutschland, zigarettenautomaten karte, zigarettenautomaten karte de"
         openGraph={{
           url: "https://www.zigarettenautomatkarte.de/",
-          title:
-            "Zigarettenautomat in der Nähe finden",
-          description:
-            "Zigarettenautomat in der Nähe finden auf der Zigarettenautomat Karte",
+          title: "Zigarettenautomat in der Nähe finden",
+          description: "Zigarettenautomat in der Nähe finden auf der Zigarettenautomat Karte",
           images: [
             {
               url: "https://www.zigarettenautomatkarte.de/screenshot.png",
@@ -52,8 +50,6 @@ export default function App({ Component, pageProps }) {
       <Script strategy="afterInteractive">
         {`
 (function() {
-
-
   // load leaflet.css
   var cssLeaflet = document.createElement('link');
   cssLeaflet.href = 'https://unpkg.com/leaflet@1.7.1/dist/leaflet.css';
@@ -67,3 +63,5 @@ export default function App({ Component, pageProps }) {
     </>
   );
 }
+
+export default appWithTranslation(App);
