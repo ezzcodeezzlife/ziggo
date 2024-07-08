@@ -166,7 +166,7 @@ export async function getServerSideProps(appContext) {
       throw new Error("Translations object is undefined or null before serialization.");
     }
     serializableTranslations = JSON.parse(JSON.stringify(translations));
-    console.log("Translations object is serializable.");
+    console.log("Translations object is serializable:", serializableTranslations);
   } catch (error) {
     console.error("Translations object is not serializable:", error);
     serializableTranslations = { seo: { title: "Default Title", description: "Default Description", keywords: "default, keywords", ogTitle: "Default OG Title", ogDescription: "Default OG Description" } };
