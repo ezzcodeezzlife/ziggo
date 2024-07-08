@@ -152,28 +152,12 @@ export async function getServerSideProps(appContext) {
     };
   }
 
-  // Ensure the translations object is serializable
-  let serializedTranslations;
-  try {
-    console.log("Serializing translations object:", translations);
-    serializedTranslations = JSON.parse(JSON.stringify(translations));
-    console.log("Translations object is serializable:", serializedTranslations);
-  } catch (error) {
-    console.error("Error serializing translations object:", error);
-    return {
-      props: {
-        translations: null,
-      },
-    };
-  }
-
-  console.log("Translations object before returning from getServerSideProps:", JSON.stringify(serializedTranslations, null, 2));
-  console.log("Final state of serialized translations before returning from getServerSideProps:", JSON.stringify(serializedTranslations, null, 2));
-  console.log("Returning serialized translations from getServerSideProps");
-  console.log("getServerSideProps is returning props:", { translations: serializedTranslations });
+  console.log("Translations object before returning from getServerSideProps:", JSON.stringify(translations, null, 2));
+  console.log("Returning translations from getServerSideProps");
+  console.log("getServerSideProps is returning props:", { translations });
   return {
     props: {
-      translations: serializedTranslations, // Pass the serialized translations object
+      translations, // Pass the translations object directly
     },
   };
 }
