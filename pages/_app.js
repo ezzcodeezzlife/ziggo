@@ -37,20 +37,22 @@ const initializeI18next = (translations, language) => {
 function App({ Component, pageProps, translations }) {
   console.log("App component received translations prop:", translations);
 
-  const [parsedTranslations, setParsedTranslations] = useState({});
+  const [localTranslations, setLocalTranslations] = useState(translations || {});
 
   useEffect(() => {
-    let parsed = {};
     if (translations) {
-      try {
-        parsed = JSON.parse(translations);
-        setParsedTranslations(parsed);
-      } catch (error) {
-        console.error("Error parsing translations string:", error);
+      console.log("Translations prop received:", translations);
+      setLocalTranslations(translations);
+
+      if (i18nInitialized) {
+        initializeI18next(translations, i18n.language);
+        console.log("i18next initialized and translations set.");
+      } else {
+        console.error("i18n is not initialized. Cannot initialize i18next.");
       }
     } else {
       console.error("Translations prop is null. Falling back to default translations.");
-      parsed = {
+      const defaultTranslations = {
         seo: {
           title: "Default Title",
           description: "Default Description",
@@ -59,55 +61,41 @@ function App({ Component, pageProps, translations }) {
           ogDescription: "Default OG Description"
         }
       };
-      setParsedTranslations(parsed);
-    }
+      setLocalTranslations(defaultTranslations);
 
-    if (i18nInitialized) {
-      if (parsed && Object.keys(parsed).length > 0) {
-        initializeI18next(parsed, i18n.language);
-        console.log("i18next initialized and translations set.");
-      } else {
-        console.error("Translations are empty in useEffect. Falling back to default translations.");
-        initializeI18next({
-          seo: {
-            title: "Default Title",
-            description: "Default Description",
-            keywords: "default, keywords",
-            ogTitle: "Default OG Title",
-            ogDescription: "Default OG Description"
-          }
-        }, 'en'); // Fallback to default translations
+      if (i18nInitialized) {
+        initializeI18next(defaultTranslations, 'en'); // Fallback to default translations
         console.log("Fallback translations initialized.");
+      } else {
+        console.error("i18n is not initialized. Cannot initialize i18next.");
       }
-    } else {
-      console.error("i18n is not initialized. Cannot initialize i18next.");
     }
   }, [translations, i18nInitialized]);
 
-  if (!i18n.isInitialized || Object.keys(parsedTranslations).length === 0) {
+  if (!i18n.isInitialized || Object.keys(localTranslations).length === 0) {
     console.log("Rendering Loading component due to missing translations or uninitialized i18n");
     return <Loading />;
   }
 
   // Log the translations received by the App component
-  console.log("Translations in App component:", parsedTranslations);
+  console.log("Translations in App component:", localTranslations);
 
   return (
     <>
       <NextSeo
-        title={parsedTranslations.seo ? parsedTranslations.seo.title : "Default Title"}
-        description={parsedTranslations.seo ? parsedTranslations.seo.description : "Default Description"}
+        title={localTranslations.seo ? localTranslations.seo.title : "Default Title"}
+        description={localTranslations.seo ? localTranslations.seo.description : "Default Description"}
         canonical={`https://www.zigarettenautomatkarte.de/${i18n.language}`}
         aggregateRating={{
           ratingValue: "5",
           ratingCount: "94",
         }}
         datePublished="2024-02-03"
-        keywords={parsedTranslations.seo ? parsedTranslations.seo.keywords : "default, keywords"}
+        keywords={localTranslations.seo ? localTranslations.seo.keywords : "default, keywords"}
         openGraph={{
           url: `https://www.zigarettenautomatkarte.de/${i18n.language}`,
-          title: parsedTranslations.seo ? parsedTranslations.seo.ogTitle : "Default OG Title",
-          description: parsedTranslations.seo ? parsedTranslations.seo.ogDescription : "Default OG Description",
+          title: localTranslations.seo ? localTranslations.seo.ogTitle : "Default OG Title",
+          description: localTranslations.seo ? localTranslations.seo.ogDescription : "Default OG Description",
           images: [
             {
               url: "https://www.zigarettenautomatkarte.de/screenshot.png",
@@ -189,20 +177,9 @@ export async function getServerSideProps(appContext) {
   // Log the translations object before returning
   console.log("Translations object before returning from getServerSideProps:", translations);
 
-  let serializedTranslations;
-  try {
-    serializedTranslations = JSON.stringify(translations);
-    console.log("Serialized translations:", serializedTranslations);
-  } catch (error) {
-    console.error("Error serializing translations object:", error);
-    serializedTranslations = JSON.stringify({});
-  }
-
-  console.log("Serialized translations before returning from getServerSideProps:", serializedTranslations);
-
   return {
     props: {
-      translations: serializedTranslations || null,
+      translations: translations || null,
     },
   };
 }
