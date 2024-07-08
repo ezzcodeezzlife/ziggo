@@ -138,8 +138,13 @@ export async function getServerSideProps(appContext) {
     }
 
     console.log("Returning translations from getServerSideProps:", translations);
-    if (!translations) {
-      console.error("Translations are undefined before returning from getServerSideProps");
+    if (!translations || Object.keys(translations).length === 0) {
+      console.error("Translations are undefined or empty before returning from getServerSideProps");
+      return {
+        props: {
+          translations: null,
+        },
+      };
     }
     return {
       props: {
