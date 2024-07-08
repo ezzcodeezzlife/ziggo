@@ -86,8 +86,8 @@ function App({ Component, pageProps, translations, originalTranslations }) {
     return <Loading />;
   }
 
-  // Log the translations received by the App component
-  console.log("Translations in App component:", localTranslations);
+  // Log the translations received by the App component before rendering
+  console.log("Translations in App component before rendering:", localTranslations);
 
   return (
     <>
