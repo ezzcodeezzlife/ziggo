@@ -78,7 +78,7 @@ function App({ Component, pageProps, translations, originalTranslations, current
     };
 
     initialize();
-  }, [translations, currentLanguage]);
+  }, [currentLanguage]);
 
   if (!i18n.isInitialized) {
     console.log("Rendering Loading component due to missing translations or uninitialized i18n");
