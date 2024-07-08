@@ -76,19 +76,19 @@ function App({ Component, pageProps, translations, originalTranslations, current
   return (
     <>
       <NextSeo
-        title={translations.seo ? translations.seo.title : "Default Title"}
-        description={translations.seo ? translations.seo.description : "Default Description"}
+        title={translations && translations.seo ? translations.seo.title : "Default Title"}
+        description={translations && translations.seo ? translations.seo.description : "Default Description"}
         canonical={`https://www.zigarettenautomatkarte.de/${i18n.language}`}
         aggregateRating={{
           ratingValue: "5",
           ratingCount: "94",
         }}
         datePublished="2024-02-03"
-        keywords={translations.seo ? translations.seo.keywords : "default, keywords"}
+        keywords={translations && translations.seo ? translations.seo.keywords : "default, keywords"}
         openGraph={{
           url: `https://www.zigarettenautomatkarte.de/${i18n.language}`,
-          title: translations.seo ? translations.seo.ogTitle : "Default OG Title",
-          description: translations.seo ? translations.seo.ogDescription : "Default OG Description",
+          title: translations && translations.seo ? translations.seo.ogTitle : "Default OG Title",
+          description: translations && translations.seo ? translations.seo.ogDescription : "Default OG Description",
           images: [
             {
               url: "https://www.zigarettenautomatkarte.de/screenshot.png",
