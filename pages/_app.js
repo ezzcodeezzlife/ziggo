@@ -45,11 +45,18 @@ function App({ Component, pageProps, translations }) {
 
   useEffect(() => {
     console.log("Initial translations in useEffect:", translations);
+    let parsedTranslations = {};
+    try {
+      parsedTranslations = JSON.parse(translations);
+    } catch (error) {
+      console.error("Error parsing translations string:", error);
+    }
+
     // Wait for i18n to be initialized before calling initializeI18next
     if (i18nInitialized) {
       // Initialize i18next directly with the translations
-      if (translations && Object.keys(translations).length > 0) {
-        initializeI18next(translations, i18n.language);
+      if (parsedTranslations && Object.keys(parsedTranslations).length > 0) {
+        initializeI18next(parsedTranslations, i18n.language);
         console.log("i18next initialized and translations set.");
       } else {
         console.error("Translations are empty in useEffect. Falling back to default translations.");
@@ -59,11 +66,18 @@ function App({ Component, pageProps, translations }) {
     } else {
       console.error("i18n is not initialized. Cannot initialize i18next.");
     }
-    console.log("Translations in App component after useEffect:", translations);
+    console.log("Translations in App component after useEffect:", parsedTranslations);
   }, [translations, i18nInitialized]);
 
   // Ensure i18n is initialized and translations are available before rendering
-  if (!i18n.isInitialized || Object.keys(translations).length === 0) {
+  let parsedTranslations = {};
+  try {
+    parsedTranslations = JSON.parse(translations);
+  } catch (error) {
+    console.error("Error parsing translations string:", error);
+  }
+
+  if (!i18n.isInitialized || Object.keys(parsedTranslations).length === 0) {
     console.log("Rendering Loading component due to missing translations or uninitialized i18n");
     return <Loading />;
   }
@@ -74,19 +88,19 @@ function App({ Component, pageProps, translations }) {
   return (
     <>
       <NextSeo
-        title={translations ? translations.seo.title : "Default Title"}
-        description={translations ? translations.seo.description : "Default Description"}
+        title={parsedTranslations ? parsedTranslations.seo.title : "Default Title"}
+        description={parsedTranslations ? parsedTranslations.seo.description : "Default Description"}
         canonical={`https://www.zigarettenautomatkarte.de/${i18n.language}`}
         aggregateRating={{
           ratingValue: "5",
           ratingCount: "94",
         }}
         datePublished="2024-02-03"
-        keywords={translations ? translations.seo.keywords : "default, keywords"}
+        keywords={parsedTranslations ? parsedTranslations.seo.keywords : "default, keywords"}
         openGraph={{
           url: `https://www.zigarettenautomatkarte.de/${i18n.language}`,
-          title: translations ? translations.seo.ogTitle : "Default OG Title",
-          description: translations ? translations.seo.ogDescription : "Default OG Description",
+          title: parsedTranslations ? parsedTranslations.seo.ogTitle : "Default OG Title",
+          description: parsedTranslations ? parsedTranslations.seo.ogDescription : "Default OG Description",
           images: [
             {
               url: "https://www.zigarettenautomatkarte.de/screenshot.png",
@@ -159,9 +173,18 @@ export async function getServerSideProps(appContext) {
   // Log the translations object before returning
   console.log("Translations object before returning from getServerSideProps:", translations);
 
+  let serializedTranslations;
+  try {
+    serializedTranslations = JSON.stringify(translations);
+    console.log("Serialized translations:", serializedTranslations);
+  } catch (error) {
+    console.error("Error serializing translations object:", error);
+    serializedTranslations = JSON.stringify({});
+  }
+
   return {
     props: {
-      translations,
+      translations: serializedTranslations,
     },
   };
 }
