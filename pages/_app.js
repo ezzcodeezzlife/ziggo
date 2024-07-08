@@ -21,6 +21,10 @@ function App({ Component, pageProps, translations }) {
   console.log("Structure of translations prop in App component:", JSON.stringify(translations, null, 2));
   console.log("Translations prop immediately upon receiving in App component:", translations);
 
+  if (!translations) {
+    console.error("Translations prop is undefined in App component");
+  }
+
   const memoizedTranslations = useMemo(() => translations, [translations]);
   const [initialized, setInitialized] = useState(false);
 
