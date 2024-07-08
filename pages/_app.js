@@ -160,21 +160,25 @@ export async function getServerSideProps(appContext) {
     const fileTranslations = JSON.parse(fs.readFileSync(translationsFilePath, 'utf-8'));
     console.log("Type of fileTranslations:", typeof fileTranslations);
     console.log("File translations read from filesystem:", fileTranslations);
-    translations = { ...translations, ...fileTranslations };
+    if (typeof fileTranslations === 'object' && fileTranslations !== null) {
+      translations = { ...translations, ...fileTranslations };
+    } else {
+      console.error("Invalid fileTranslations object. Falling back to default translations.");
+    }
+
+    console.log("Final translations object to be passed as prop:", translations);
+
+    // Check if the translations object is serializable
+    try {
+      JSON.stringify(translations);
+    } catch (error) {
+      console.error("Translations object is not serializable:", error);
+      translations = {}; // Fallback to an empty object if serialization fails
+    }
   } catch (error) {
     if (error.code !== 'ENOENT') {
       console.error("Error reading translations file:", error);
     }
-  }
-
-  console.log("Final translations object to be passed as prop:", translations);
-
-  // Check if the translations object is serializable
-  try {
-    JSON.stringify(translations);
-  } catch (error) {
-    console.error("Translations object is not serializable:", error);
-    translations = {}; // Fallback to an empty object if serialization fails
   }
 
   return {
