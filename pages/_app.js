@@ -210,11 +210,16 @@ export async function getServerSideProps(appContext) {
     originalTranslations: translations,
   });
 
+  const propsToReturn = {
+    translations, // Pass translations directly
+    originalTranslations: translations, // Add original translations for comparison
+  };
+
+  // Additional logging to confirm props before returning
+  console.log("Props to return from getServerSideProps:", JSON.stringify(propsToReturn, null, 2));
+
   return {
-    props: {
-      translations, // Pass translations directly
-      originalTranslations: translations, // Add original translations for comparison
-    },
+    props: propsToReturn,
   };
 }
 
