@@ -185,14 +185,14 @@ export async function getServerSideProps(appContext) {
     console.log("Translations object structure before returning:", JSON.stringify(translations, null, 2));
     return {
       props: {
-        translations: JSON.parse(JSON.stringify(translations)), // Ensure the translations object is serializable
+        translations,
       },
     };
   } else {
     console.error("Translations object is empty. Falling back to default translations.");
     return {
       props: {
-        translations: JSON.parse(JSON.stringify({})), // Ensure the translations object is serializable
+        translations,
       },
     };
   }
