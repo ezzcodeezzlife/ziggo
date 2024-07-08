@@ -5,15 +5,23 @@ let Backend;
 let backendOptions;
 
 if (typeof window === 'undefined') {
-  Backend = require('i18next-fs-backend');
-  backendOptions = {
-    loadPath: `${process.cwd()}/public/locales/{{lng}}/{{ns}}.json`,
-  };
+  try {
+    Backend = require('i18next-fs-backend');
+    backendOptions = {
+      loadPath: `${process.cwd()}/public/locales/{{lng}}/{{ns}}.json`,
+    };
+  } catch (error) {
+    console.error('Error loading i18next-fs-backend:', error);
+  }
 } else {
-  Backend = require('i18next-http-backend');
-  backendOptions = {
-    loadPath: '/locales/{{lng}}/{{ns}}.json',
-  };
+  try {
+    Backend = require('i18next-http-backend');
+    backendOptions = {
+      loadPath: '/locales/{{lng}}/{{ns}}.json',
+    };
+  } catch (error) {
+    console.error('Error loading i18next-http-backend:', error);
+  }
 }
 
 let i18nInitialized = false;
