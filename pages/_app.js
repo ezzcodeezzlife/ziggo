@@ -158,6 +158,7 @@ export async function getServerSideProps(appContext) {
 
   try {
     const fileTranslations = JSON.parse(fs.readFileSync(translationsFilePath, 'utf-8'));
+    console.log("Type of fileTranslations:", typeof fileTranslations);
     console.log("File translations read from filesystem:", fileTranslations);
     translations = { ...translations, ...fileTranslations };
   } catch (error) {
