@@ -42,8 +42,7 @@ function App({ Component, pageProps, translations, originalTranslations, current
     console.error("Translations prop is undefined or null.");
   }
 
-  const [localTranslations, setLocalTranslations] = useState({});
-  console.log("Initial state of localTranslations:", localTranslations);
+  const [localTranslations, setLocalTranslations] = useState(translations || {});
 
   const initializeTranslations = async () => {
     await i18nInitPromise;
