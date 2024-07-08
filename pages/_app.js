@@ -153,7 +153,7 @@ export async function getServerSideProps(appContext) {
       };
     }
 
-    console.log("Returning translations from getServerSideProps:", translations);
+    console.log("Translations object before returning from getServerSideProps:", translations);
     return {
       props: {
         translations, // Pass the translations object directly
