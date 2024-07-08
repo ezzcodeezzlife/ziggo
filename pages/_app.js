@@ -173,9 +173,19 @@ export async function getServerSideProps(appContext) {
     console.error("Translations object is undefined or empty before returning.");
   }
 
+  // Check if translations object is serializable
+  let serializableTranslations;
+  try {
+    serializableTranslations = JSON.parse(JSON.stringify(translations));
+    console.log("Translations object is serializable.");
+  } catch (error) {
+    console.error("Translations object is not serializable:", error);
+    serializableTranslations = {};
+  }
+
   const props = {
-    translations,
-    originalTranslations: translations,
+    translations: serializableTranslations,
+    originalTranslations: serializableTranslations,
     currentLanguage,
   };
 
