@@ -6,7 +6,7 @@ const Loading = () => {
 
   return (
     <div style={{ textAlign: 'center', marginTop: '20%' }}>
-      <h1>{ready ? t('loading_message') : 'Loading translations, please wait...'}</h1>
+      <h1>Loading translations, please wait...</h1>
     </div>
   );
 };
