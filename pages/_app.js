@@ -35,6 +35,7 @@ function App({ Component, pageProps, translations, originalTranslations }) {
   console.log("App component received originalTranslations prop:", originalTranslations);
 
   const [localTranslations, setLocalTranslations] = useState(translations || {});
+  console.log("Initial state of localTranslations:", localTranslations);
 
   useEffect(() => {
     console.log("Type of translations prop:", typeof translations);
