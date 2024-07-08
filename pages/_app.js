@@ -101,112 +101,23 @@ function App({ Component, pageProps, translations, originalTranslations, current
 }
 
 export async function getServerSideProps(appContext) {
-  const fs = require('fs');
-  const path = require('path');
   const currentLanguage = appContext.req.language || 'en';
 
   // Ensure i18next is initialized before reading translations
   await i18nInitPromise;
 
-  const translationsFilePath = path.resolve(process.cwd(), 'public/locales', currentLanguage, 'common.json');
-
-  console.log("Resolved translations file path:", translationsFilePath);
-
-  let translations = {
+  // Hardcoded translations object for testing
+  const translations = {
     seo: {
-      title: "Default Title",
-      description: "Default Description",
-      keywords: "default, keywords",
-      ogTitle: "Default OG Title",
-      ogDescription: "Default OG Description"
+      title: "Hardcoded Title",
+      description: "Hardcoded Description",
+      keywords: "hardcoded, keywords",
+      ogTitle: "Hardcoded OG Title",
+      ogDescription: "Hardcoded OG Description"
     }
   };
 
-  // Ensure translations always contains at least the default values
-  try {
-    console.log("Attempting to read translations file...");
-    const fileTranslations = JSON.parse(fs.readFileSync(translationsFilePath, 'utf-8'));
-    console.log("Type of fileTranslations:", typeof fileTranslations);
-    console.log("File translations read from filesystem:", fileTranslations);
-    if (typeof fileTranslations === 'object' && fileTranslations !== null) {
-      translations = { ...translations, ...fileTranslations };
-    } else {
-      console.error("Invalid fileTranslations object. Falling back to default translations.");
-    }
-
-    console.log("Final translations object to be passed as prop:", translations);
-
-    // Check if the translations object is serializable
-    console.log("Translations object before serialization attempt:", translations);
-    try {
-      console.log("Attempting to serialize translations object...");
-      JSON.stringify(translations);
-      console.log("Translations object is serializable:", translations);
-    } catch (error) {
-      console.error("Translations object is not serializable:", error);
-      translations = { // Fallback to default translations if serialization fails
-        seo: {
-          title: "Default Title",
-          description: "Default Description",
-          keywords: "default, keywords",
-          ogTitle: "Default OG Title",
-          ogDescription: "Default OG Description"
-        }
-      };
-    }
-    console.log("Translations object after serialization attempt:", translations);
-  } catch (error) {
-    if (error.code !== 'ENOENT') {
-      console.error("Error reading translations file:", error);
-    }
-    // Ensure translations always contains at least the default values in case of error
-    translations = {
-      seo: {
-        title: "Default Title",
-        description: "Default Description",
-        keywords: "default, keywords",
-        ogTitle: "Default OG Title",
-        ogDescription: "Default OG Description"
-      }
-    };
-  }
-
-  console.log("Translations object before serialization check:", translations);
-
-  // Log the type of each key-value pair within the translations object
-  Object.keys(translations).forEach(key => {
-    console.log(`Type of translations[${key}]:`, typeof translations[key]);
-  });
-
-  // Ensure translations object contains expected keys
-  const requiredKeys = ['seo'];
-  const hasRequiredKeys = requiredKeys.every(key => key in translations);
-
-  if (!hasRequiredKeys) {
-    console.error("Translations object is missing required keys. Falling back to default translations.");
-    translations = {
-      seo: {
-        title: "Default Title",
-        description: "Default Description",
-        keywords: "default, keywords",
-        ogTitle: "Default OG Title",
-        ogDescription: "Default OG Description"
-      }
-    };
-  }
-
-  // Initialize i18next with the translations
-  try {
-    await i18n.changeLanguage(currentLanguage);
-    console.log("i18next language changed to:", currentLanguage);
-    await i18n.addResources(currentLanguage, 'common', translations);
-    console.log("i18next resources added for language:", currentLanguage, "with translations:", translations);
-  } catch (error) {
-    console.error("Error during i18next initialization:", error);
-  }
-
-  console.log("Translations object right before returning from getServerSideProps:", translations);
-  console.log("Props object to be returned from getServerSideProps:", { translations, originalTranslations: translations, currentLanguage });
+  console.log("Hardcoded translations object:", translations);
 
   return {
     props: {
