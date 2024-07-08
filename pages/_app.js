@@ -4,33 +4,29 @@ import Script from "next/script";
 import { NextSeo } from "next-seo";
 import i18n from '../i18n'; // Import the initialized i18next instance
 import Loading from '../components/Loading'; // Import the Loading component
-import { i18nInitialized } from '../i18n'; // Import the i18nInitialized flag
+import { i18nInitPromise } from '../i18n'; // Import the i18nInitPromise for initialization
+import { initReactI18next } from 'react-i18next';
+
+// Ensure initReactI18next is used with i18next instance
+i18n.use(initReactI18next);
 
 // Function to initialize i18next with server-side translations
 const initializeI18next = (translations, language) => {
   console.log("Initializing i18next with translations:", translations, "and language:", language);
   if (translations && Object.keys(translations).length > 0) {
-    if (i18nInitialized) {
-      i18n.changeLanguage(language); // Set the language before adding resources
-      i18n.addResources(language, 'common', translations);
-    } else {
-      console.error("i18next is not initialized. Cannot change language.");
-    }
+    i18n.changeLanguage(language); // Set the language before adding resources
+    i18n.addResources(language, 'common', translations);
   } else {
     console.error("Invalid or empty translations object passed to initializeI18next. Falling back to default translations.");
     // Fallback to default translations if the provided translations are null or empty
-    if (i18nInitialized) {
-      i18n.changeLanguage('en'); // Default to English
-      i18n.addResources('en', 'common', {
-        welcome_message: "Welcome",
-        map_title: "Ziggo Map",
-        search_placeholder: "Search for a place",
-        language_selector: "Select Language",
-        find_cigarette_machine: "Find Cigarette Machine"
-      });
-    } else {
-      console.error("i18next is not initialized. Cannot change language.");
-    }
+    i18n.changeLanguage('en'); // Default to English
+    i18n.addResources('en', 'common', {
+      welcome_message: "Welcome",
+      map_title: "Ziggo Map",
+      search_placeholder: "Search for a place",
+      language_selector: "Select Language",
+      find_cigarette_machine: "Find Cigarette Machine"
+    });
   }
 };
 
@@ -42,40 +38,37 @@ function App({ Component, pageProps, translations }) {
   useEffect(() => {
     console.log("Type of translations prop:", typeof translations);
 
-    if (translations) {
-      console.log("Translations prop received:", translations);
-      setLocalTranslations(translations);
+    const initializeTranslations = async () => {
+      await i18nInitPromise;
+      if (translations) {
+        console.log("Translations prop received:", translations);
+        setLocalTranslations(translations);
 
-      if (i18nInitialized) {
         initializeI18next(translations, i18n.language);
         console.log("i18next initialized and translations set.");
       } else {
-        console.error("i18n is not initialized. Cannot initialize i18next.");
-      }
-    } else {
-      console.error("Translations prop is null or undefined. Falling back to default translations.");
-      const defaultTranslations = {
-        seo: {
-          title: "Default Title",
-          description: "Default Description",
-          keywords: "default, keywords",
-          ogTitle: "Default OG Title",
-          ogDescription: "Default OG Description"
-        }
-      };
-      setLocalTranslations(defaultTranslations);
+        console.error("Translations prop is null or undefined. Falling back to default translations.");
+        const defaultTranslations = {
+          seo: {
+            title: "Default Title",
+            description: "Default Description",
+            keywords: "default, keywords",
+            ogTitle: "Default OG Title",
+            ogDescription: "Default OG Description"
+          }
+        };
+        setLocalTranslations(defaultTranslations);
 
-      if (i18nInitialized) {
         initializeI18next(defaultTranslations, 'en'); // Fallback to default translations
         console.log("Fallback translations initialized.");
-      } else {
-        console.error("i18n is not initialized. Cannot initialize i18next.");
       }
-    }
 
-    // Additional logging to check the state of localTranslations
-    console.log("State of localTranslations after useEffect:", localTranslations);
-  }, [translations, i18nInitialized]);
+      // Additional logging to check the state of localTranslations
+      console.log("State of localTranslations after useEffect:", localTranslations);
+    };
+
+    initializeTranslations();
+  }, [translations]);
 
   if (!i18n.isInitialized || Object.keys(localTranslations).length === 0) {
     console.log("Rendering Loading component due to missing translations or uninitialized i18n");
@@ -192,14 +185,14 @@ export async function getServerSideProps(appContext) {
     console.log("Translations object structure before returning:", JSON.stringify(translations, null, 2));
     return {
       props: {
-        translations: translations,
+        translations: JSON.parse(JSON.stringify(translations)), // Ensure the translations object is serializable
       },
     };
   } else {
     console.error("Translations object is empty. Falling back to default translations.");
     return {
       props: {
-        translations: {},
+        translations: JSON.parse(JSON.stringify({})), // Ensure the translations object is serializable
       },
     };
   }
