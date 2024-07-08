@@ -40,6 +40,8 @@ function App({ Component, pageProps, translations }) {
   const [localTranslations, setLocalTranslations] = useState(translations || {});
 
   useEffect(() => {
+    console.log("Type of translations prop:", typeof translations);
+
     if (translations) {
       console.log("Translations prop received:", translations);
       setLocalTranslations(translations);
@@ -151,7 +153,7 @@ export async function getServerSideProps(appContext) {
   console.log("Determined current language:", currentLanguage);
 
   console.log("Fetching translations for language:", currentLanguage);
-  const translationsFilePath = path.resolve('./public/locales', currentLanguage, 'common.json');
+  const translationsFilePath = path.resolve(process.cwd(), 'public/locales', currentLanguage, 'common.json');
   console.log("Translations file path:", translationsFilePath);
 
   let translations = {
@@ -168,7 +170,11 @@ export async function getServerSideProps(appContext) {
     translations = { ...translations, ...fileTranslations };
     console.log("Fetched translations:", translations);
   } catch (error) {
-    console.error("Error reading translations file, using default translations:", error);
+    if (error.code === 'ENOENT') {
+      console.error("Translations file not found, using default translations:", error);
+    } else {
+      console.error("Error reading translations file, using default translations:", error);
+    }
   }
 
   // Log the state of the i18n instance
@@ -177,9 +183,15 @@ export async function getServerSideProps(appContext) {
   // Log the translations object before returning
   console.log("Translations object before returning from getServerSideProps:", translations);
 
+  // Additional logging to check the type of translations
+  console.log("Type of translations object:", typeof translations);
+
+  // Ensure translations object is serializable
+  const serializableTranslations = JSON.parse(JSON.stringify(translations));
+
   return {
     props: {
-      translations: translations || {},
+      translations: serializableTranslations || {},
     },
   };
 }
