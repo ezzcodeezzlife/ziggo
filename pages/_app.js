@@ -135,6 +135,7 @@ export async function getServerSideProps(appContext) {
 
   // Ensure i18next is initialized before reading translations
   try {
+    console.log("Awaiting i18nInitPromise...");
     await i18nInitPromise;
     console.log("i18nInitPromise resolved successfully");
   } catch (error) {
@@ -149,6 +150,7 @@ export async function getServerSideProps(appContext) {
     const translationsPath = path.join(process.cwd(), 'public', 'locales', currentLanguage, 'common.json');
     console.log("Resolved translations path:", translationsPath);
     const translationsFile = fs.readFileSync(translationsPath, 'utf8');
+    console.log("Translations file content:", translationsFile);
     translations = JSON.parse(translationsFile);
     console.log("Translations loaded from file:", translations);
   } catch (error) {
