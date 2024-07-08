@@ -164,6 +164,21 @@ export async function getServerSideProps(appContext) {
     translations = null;
   }
 
+  // Ensure translations object is serializable
+  const isSerializable = (obj) => {
+    try {
+      JSON.stringify(obj);
+      return true;
+    } catch (e) {
+      return false;
+    }
+  };
+
+  if (!isSerializable(translations)) {
+    console.error("Translations object is not serializable");
+    translations = null;
+  }
+
   console.log("Translations object before returning from getServerSideProps:", translations);
   return {
     props: {
