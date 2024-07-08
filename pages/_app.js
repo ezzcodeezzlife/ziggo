@@ -1,6 +1,7 @@
 import "@/styles/globals.css";
 import Script from "next/script";
 import { NextSeo } from "next-seo";
+import { useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import i18n, { i18nInitPromise } from '../i18n'; // Import the initialized i18next instance and the i18nInitPromise
 
@@ -14,6 +15,11 @@ const initializeI18next = (translations, language) => {
 
 function App({ Component, pageProps, translations }) {
   const { t } = useTranslation();
+
+  useEffect(() => {
+    // Initialize i18next with server-side translations
+    initializeI18next(translations, i18n.language);
+  }, [translations]);
 
   // Ensure i18n is initialized before rendering
   if (!i18n.isInitialized) {
