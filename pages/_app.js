@@ -230,9 +230,13 @@ export async function getServerSideProps(appContext) {
 
   console.log("Translations object after serialization check:", JSON.parse(serializedTranslations));
 
+  const finalTranslations = JSON.parse(serializedTranslations);
+
+  console.log("Final translations object to be passed as prop:", finalTranslations);
+
   return {
     props: {
-      translations: JSON.parse(serializedTranslations) || {
+      translations: finalTranslations || {
         seo: {
           title: "Default Title",
           description: "Default Description",
@@ -241,7 +245,7 @@ export async function getServerSideProps(appContext) {
           ogDescription: "Default OG Description"
         }
       },
-      originalTranslations: JSON.parse(serializedTranslations) || {
+      originalTranslations: finalTranslations || {
         seo: {
           title: "Default Title",
           description: "Default Description",
