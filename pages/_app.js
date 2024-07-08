@@ -226,6 +226,10 @@ export async function getServerSideProps(appContext) {
     props: propsToReturn,
   });
 
+  // Additional logging to confirm the final state of translations and props
+  console.log("Final state of translations object before returning:", translations);
+  console.log("Final state of props object before returning:", propsToReturn);
+
   return {
     props: propsToReturn,
   };
