@@ -42,7 +42,10 @@ function App({ Component, pageProps, translations }) {
       await i18nInitPromise;
       if (translations) {
         console.log("Translations prop received:", translations);
-        setLocalTranslations(translations);
+        setLocalTranslations((prevTranslations) => ({
+          ...prevTranslations,
+          ...translations,
+        }));
 
         initializeI18next(translations, i18n.language);
         console.log("i18next initialized and translations set.");
@@ -57,7 +60,10 @@ function App({ Component, pageProps, translations }) {
             ogDescription: "Default OG Description"
           }
         };
-        setLocalTranslations(defaultTranslations);
+        setLocalTranslations((prevTranslations) => ({
+          ...prevTranslations,
+          ...defaultTranslations,
+        }));
 
         initializeI18next(defaultTranslations, 'en'); // Fallback to default translations
         console.log("Fallback translations initialized.");
