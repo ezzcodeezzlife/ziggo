@@ -12,27 +12,35 @@ i18n.use(initReactI18next);
 
 // Function to initialize i18next with server-side translations
 const initializeI18next = (translations, language) => {
-  console.log("Initializing i18next with translations:", translations, "and language:", language);
-  if (translations && Object.keys(translations).length > 0) {
-    i18n.changeLanguage(language); // Set the language before adding resources
-    i18n.addResources(language, 'common', translations);
-  } else {
-    console.error("Invalid or empty translations object passed to initializeI18next. Falling back to default translations.");
-    // Fallback to default translations if the provided translations are null or empty
-    i18n.changeLanguage('en'); // Default to English
-    i18n.addResources('en', 'common', {
-      welcome_message: "Welcome",
-      map_title: "Ziggo Map",
-      search_placeholder: "Search for a place",
-      language_selector: "Select Language",
-      find_cigarette_machine: "Find Cigarette Machine"
-    });
+  try {
+    console.log("Initializing i18next with translations:", translations, "and language:", language);
+    if (translations && Object.keys(translations).length > 0) {
+      i18n.changeLanguage(language); // Set the language before adding resources
+      i18n.addResources(language, 'common', translations);
+    } else {
+      console.error("Invalid or empty translations object passed to initializeI18next. Falling back to default translations.");
+      // Fallback to default translations if the provided translations are null or empty
+      i18n.changeLanguage('en'); // Default to English
+      i18n.addResources('en', 'common', {
+        welcome_message: "Welcome",
+        map_title: "Ziggo Map",
+        search_placeholder: "Search for a place",
+        language_selector: "Select Language",
+        find_cigarette_machine: "Find Cigarette Machine"
+      });
+    }
+  } catch (error) {
+    console.error("Error during i18next initialization:", error);
   }
 };
 
 function App({ Component, pageProps, translations, originalTranslations, currentLanguage }) {
   console.log("App component received translations prop:", translations);
   console.log("App component received originalTranslations prop:", originalTranslations);
+
+  if (!translations) {
+    console.error("Translations prop is undefined or null.");
+  }
 
   const [localTranslations, setLocalTranslations] = useState({});
   console.log("Initial state of localTranslations:", localTranslations);
@@ -199,6 +207,8 @@ export async function getServerSideProps(appContext) {
       }
     };
   }
+
+  console.log("Translations object before returning props:", translations);
 
   return {
     props: {
