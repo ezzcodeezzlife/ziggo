@@ -202,8 +202,24 @@ export async function getServerSideProps(appContext) {
 
   return {
     props: {
-      translations,
-      originalTranslations: translations,
+      translations: translations || {
+        seo: {
+          title: "Default Title",
+          description: "Default Description",
+          keywords: "default, keywords",
+          ogTitle: "Default OG Title",
+          ogDescription: "Default OG Description"
+        }
+      },
+      originalTranslations: translations || {
+        seo: {
+          title: "Default Title",
+          description: "Default Description",
+          keywords: "default, keywords",
+          ogTitle: "Default OG Title",
+          ogDescription: "Default OG Description"
+        }
+      },
       currentLanguage,
     },
   };
