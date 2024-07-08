@@ -48,5 +48,6 @@
   "interactive_map_and_comprehensive_database": "Interaktive Karte und umfassende Datenbank",
   "get_started": "Loslegen",
   "solutions": "Lösungen",
-  "support": "Unterstützung"
+  "support": "Unterstützung",
+  "loading_message": "Lade Übersetzungen, bitte warten..."
 }

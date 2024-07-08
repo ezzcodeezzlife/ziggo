@@ -2,11 +2,12 @@ import "@/styles/globals.css";
 import Script from "next/script";
 import { NextSeo } from "next-seo";
 import { useEffect } from "react";
-import { useTranslation } from "react-i18next";
 import i18n, { i18nInitPromise } from '../i18n'; // Import the initialized i18next instance and the i18nInitPromise
+import Loading from '../components/Loading'; // Import the Loading component
 
 // Function to initialize i18next with server-side translations
 const initializeI18next = (translations, language) => {
+  console.log("Initializing i18next with translations:", translations, "and language:", language);
   if (translations) {
     i18n.changeLanguage(language); // Set the language before adding resources
     i18n.addResources(language, 'common', translations[language].common);
@@ -14,26 +15,29 @@ const initializeI18next = (translations, language) => {
 };
 
 function App({ Component, pageProps, translations }) {
-  const { t } = useTranslation();
-
+  console.log("App component received translations prop:", translations);
+  console.log("Structure of translations prop in App component:", JSON.stringify(translations, null, 2));
   useEffect(() => {
+    console.log("Initial translations in useEffect:", translations);
     // Wait for i18next initialization before setting translations
     if (translations) {
       if (!i18n.isInitialized) {
         i18nInitPromise.then(() => {
+          console.log("Translations after i18nInitPromise resolves:", translations);
           initializeI18next(translations, i18n.language);
         });
       } else {
         initializeI18next(translations, i18n.language);
       }
     } else {
-      console.error("Translations are undefined in useEffect");
+      console.error("Translations are null in useEffect");
     }
+    console.log("Translations in App component:", translations);
   }, [translations]);
 
-  // Ensure i18n is initialized before rendering
-  if (!i18n.isInitialized) {
-    return null; // or a loading spinner
+  // Ensure i18n is initialized and translations are available before rendering
+  if (!i18n.isInitialized || !translations) {
+    return <Loading />;
   }
 
   // Log the translations received by the App component
@@ -42,19 +46,19 @@ function App({ Component, pageProps, translations }) {
   return (
     <>
       <NextSeo
-        title={t('seo.title')}
-        description={t('seo.description')}
+        title={translations[i18n.language].common.seo.title}
+        description={translations[i18n.language].common.seo.description}
         canonical={`https://www.zigarettenautomatkarte.de/${i18n.language}`}
         aggregateRating={{
           ratingValue: "5",
           ratingCount: "94",
         }}
         datePublished="2024-02-03"
-        keywords={t('seo.keywords')}
+        keywords={translations[i18n.language].common.seo.keywords}
         openGraph={{
           url: `https://www.zigarettenautomatkarte.de/${i18n.language}`,
-          title: t('seo.ogTitle'),
-          description: t('seo.ogDescription'),
+          title: translations[i18n.language].common.seo.ogTitle,
+          description: translations[i18n.language].common.seo.ogDescription,
           images: [
             {
               url: "https://www.zigarettenautomatkarte.de/screenshot.png",
@@ -98,6 +102,7 @@ function App({ Component, pageProps, translations }) {
 }
 
 export async function getServerSideProps(appContext) {
+  console.log("getServerSideProps called");
   await i18nInitPromise; // Wait for i18next initialization
 
   // Import fs and path modules only in server-side code
@@ -107,21 +112,44 @@ export async function getServerSideProps(appContext) {
   // Determine the current language from the request
   const currentLanguage = appContext.req.language || 'en';
 
-  // Fetch only the translations for the current language and the required namespace(s)
-  const translations = {
-    [currentLanguage]: {
-      common: JSON.parse(fs.readFileSync(path.resolve('./public/locales', currentLanguage, 'common.json'), 'utf-8')),
-    },
-  };
+  try {
+    // Fetch only the translations for the current language and the required namespace(s)
+    const translations = {
+      [currentLanguage]: {
+        common: JSON.parse(fs.readFileSync(path.resolve('./public/locales', currentLanguage, 'common.json'), 'utf-8')),
+      },
+    };
 
-  // Log the translations fetched by getServerSideProps
-  console.log("Translations in getServerSideProps:", translations);
+    try {
+      // Log the translations fetched by getServerSideProps
+      console.log("Translations in getServerSideProps before return:", translations);
+      // Check the structure of the translations object
+      console.log("Structure of translations in getServerSideProps:", JSON.stringify(translations, null, 2));
 
-  return {
-    props: {
-      translations,
-    },
-  };
+      // Check for serialization issues
+      JSON.stringify(translations);
+    } catch (serializationError) {
+      console.error("Serialization error in getServerSideProps:", serializationError);
+      return {
+        props: {
+          translations: null,
+        },
+      };
+    }
+
+    return {
+      props: {
+        translations,
+      },
+    };
+  } catch (error) {
+    console.error("Error fetching translations in getServerSideProps:", error);
+    return {
+      props: {
+        translations: null,
+      },
+    };
+  }
 }
 
 export default App;

@@ -48,5 +48,6 @@
   "interactive_map_and_comprehensive_database": "Interactive map and comprehensive database",
   "get_started": "Get Started",
   "solutions": "Solutions",
-  "support": "Support"
+  "support": "Support",
+  "loading_message": "Loading translations, please wait..."
 }
