@@ -110,9 +110,6 @@ export async function getServerSideProps(appContext) {
     },
   };
 
-  // Initialize i18next with the fetched translations on the server-side
-  initializeI18next(translations, currentLanguage);
-
   // Log the translations fetched by getServerSideProps
   console.log("Translations in getServerSideProps:", translations);
 
