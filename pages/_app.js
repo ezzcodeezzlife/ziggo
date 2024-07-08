@@ -134,7 +134,9 @@ export async function getServerSideProps(appContext) {
     // Ensure all values within the translations object are serializable
     const isSerializable = (obj) => {
       try {
+        console.log("Checking if object is serializable:", obj);
         JSON.stringify(obj);
+        console.log("Object is serializable");
         return true;
       } catch (e) {
         console.error("Serialization error:", e);
