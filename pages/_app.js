@@ -185,17 +185,15 @@ export async function getServerSideProps(appContext) {
   await i18n.changeLanguage(currentLanguage);
   await i18n.addResources(currentLanguage, 'common', translations);
 
-  const props = {
-    translations,
-    originalTranslations: translations,
-    currentLanguage,
-  };
-
   console.log("Translations object right before returning from getServerSideProps:", translations);
-  console.log("Props object to be returned from getServerSideProps:", props);
+  console.log("Props object to be returned from getServerSideProps:", { translations, originalTranslations: translations, currentLanguage });
 
   return {
-    props,
+    props: {
+      translations,
+      originalTranslations: translations,
+      currentLanguage,
+    },
   };
 }
 
