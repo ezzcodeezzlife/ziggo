@@ -179,7 +179,7 @@ export async function getServerSideProps(appContext) {
 
   return {
     props: {
-      translations: translations || null,
+      translations: translations || {},
     },
   };
 }
