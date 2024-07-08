@@ -49,6 +49,14 @@ function App({ Component, pageProps, translations, originalTranslations, current
     }
   }, [translations]);
 
+  // Additional logging to check the state of translations prop
+  useEffect(() => {
+    console.log("Checking translations prop after initial render:", translations);
+    if (!translations) {
+      console.error("Translations prop is still undefined or null after initial render.");
+    }
+  }, []);
+
   useEffect(() => {
     console.log("useEffect triggered with localTranslations:", localTranslations, "and currentLanguage:", currentLanguage);
     if (localTranslations && Object.keys(localTranslations).length > 0) {
