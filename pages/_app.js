@@ -136,6 +136,9 @@ export async function getServerSideProps(appContext) {
     const translations = JSON.parse(fs.readFileSync(translationsFilePath, 'utf-8'));
     console.log("Fetched translations:", translations);
 
+    // Log the state of the i18n instance
+    console.log("i18n instance state before returning translations:", i18n);
+
     return translations;
   }).catch((error) => {
     console.error("Error initializing i18next or fetching translations:", error);
