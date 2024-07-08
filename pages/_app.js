@@ -12,7 +12,16 @@ const initializeI18next = (translations, language) => {
     i18n.changeLanguage(language); // Set the language before adding resources
     i18n.addResources(language, 'common', translations);
   } else {
-    console.error("Invalid translations object passed to initializeI18next");
+    console.error("Invalid translations object passed to initializeI18next. Falling back to default translations.");
+    // Fallback to default translations if the provided translations are null
+    i18n.changeLanguage('en'); // Default to English
+    i18n.addResources('en', 'common', {
+      welcome_message: "Welcome",
+      map_title: "Ziggo Map",
+      search_placeholder: "Search for a place",
+      language_selector: "Select Language",
+      find_cigarette_machine: "Find Cigarette Machine"
+    });
   }
 };
 
@@ -36,7 +45,9 @@ function App({ Component, pageProps, translations }) {
       setInitialized(true);
       console.log("i18next initialized and translations set. State of initialized:", true);
     } else {
-      console.error("Translations are null or invalid in useEffect");
+      console.error("Translations are null or invalid in useEffect. Falling back to default translations.");
+      initializeI18next(null, 'en'); // Fallback to default translations
+      setInitialized(true);
     }
     console.log("Translations in App component after useEffect:", translations);
     console.log("State of initialized after useEffect:", initialized);
@@ -125,8 +136,13 @@ export async function getServerSideProps(appContext) {
   const translationsFilePath = path.resolve('./public/locales', currentLanguage, 'common.json');
   console.log("Translations file path:", translationsFilePath);
 
-  const translations = JSON.parse(fs.readFileSync(translationsFilePath, 'utf-8'));
-  console.log("Fetched translations:", translations);
+  let translations = null;
+  try {
+    translations = JSON.parse(fs.readFileSync(translationsFilePath, 'utf-8'));
+    console.log("Fetched translations:", translations);
+  } catch (error) {
+    console.error("Error reading translations file:", error);
+  }
 
   // Log the state of the i18n instance
   console.log("i18n instance state before returning translations:", i18n);
@@ -137,21 +153,13 @@ export async function getServerSideProps(appContext) {
     console.log("Serialized translations object:", serializedTranslations);
   } catch (error) {
     console.error("Error serializing translations object:", error);
-    return {
-      props: {
-        translations: null,
-      },
-    };
+    translations = null;
   }
 
   // Additional check to ensure translations are correctly fetched
   if (!translations || Object.keys(translations).length === 0) {
     console.error("Translations are undefined or empty after fetching");
-    return {
-      props: {
-        translations: null,
-      },
-    };
+    translations = null;
   }
 
   console.log("Returning translations from getServerSideProps");
