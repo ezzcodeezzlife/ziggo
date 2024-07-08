@@ -53,7 +53,7 @@ function App({ Component, pageProps, translations }) {
         console.error("i18n is not initialized. Cannot initialize i18next.");
       }
     } else {
-      console.error("Translations prop is null. Falling back to default translations.");
+      console.error("Translations prop is null or undefined. Falling back to default translations.");
       const defaultTranslations = {
         seo: {
           title: "Default Title",
@@ -72,6 +72,9 @@ function App({ Component, pageProps, translations }) {
         console.error("i18n is not initialized. Cannot initialize i18next.");
       }
     }
+
+    // Additional logging to check the state of localTranslations
+    console.log("State of localTranslations after useEffect:", localTranslations);
   }, [translations, i18nInitialized]);
 
   if (!i18n.isInitialized || Object.keys(localTranslations).length === 0) {
