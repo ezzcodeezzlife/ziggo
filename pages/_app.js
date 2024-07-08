@@ -161,6 +161,7 @@ export async function getServerSideProps(appContext) {
       };
     }
 
+    console.log("Returning translations from i18nInitPromise");
     return {
       props: {
         translations: translations,
