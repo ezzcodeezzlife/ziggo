@@ -210,6 +210,9 @@ export async function getServerSideProps(appContext) {
 
   console.log("Translations object before returning props:", translations);
 
+  // Additional logging to confirm the state of translations before returning props
+  console.log("Translations object before serialization check:", translations);
+
   return {
     props: {
       translations: translations || {
