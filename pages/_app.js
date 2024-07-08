@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import "@/styles/globals.css";
 import Script from "next/script";
 import { NextSeo } from "next-seo";
-import i18n, { i18nInitPromise } from '../i18n'; // Import the initialized i18next instance and the i18nInitPromise
+import i18n from '../i18n'; // Import the initialized i18next instance
 import Loading from '../components/Loading'; // Import the Loading component
 
 // Function to initialize i18next with server-side translations
@@ -29,17 +29,12 @@ function App({ Component, pageProps, translations }) {
 
   useEffect(() => {
     console.log("Initial translations in useEffect:", translations);
-    // Wait for i18next initialization before setting translations
+    // Initialize i18next directly with the translations
     if (translations && Object.keys(translations).length > 0) {
-      i18nInitPromise.then(() => {
-        console.log("Translations after i18nInitPromise resolves:", translations);
-        initializeI18next(translations, i18n.language);
-        // Trigger a re-render once translations are initialized
-        setInitialized(true);
-        console.log("i18next initialized and translations set. State of initialized:", true);
-      }).catch((error) => {
-        console.error("Error initializing i18next:", error);
-      });
+      initializeI18next(translations, i18n.language);
+      // Trigger a re-render once translations are initialized
+      setInitialized(true);
+      console.log("i18next initialized and translations set. State of initialized:", true);
     } else {
       console.error("Translations are null or invalid in useEffect");
     }
@@ -118,67 +113,30 @@ export async function getServerSideProps(appContext) {
   console.log("getServerSideProps called");
   console.log("appContext:", JSON.stringify(appContext, null, 2));
 
-  // Wait for i18next initialization and fetch translations
-  const translations = await i18nInitPromise.then(() => {
-    // Import fs and path modules only in server-side code
-    const fs = require('fs');
-    const path = require('path');
+  // Import fs and path modules only in server-side code
+  const fs = require('fs');
+  const path = require('path');
 
-    // Determine the current language from the request
-    const currentLanguage = appContext.req.language || 'en';
-    console.log("Determined current language:", currentLanguage);
+  // Determine the current language from the request
+  const currentLanguage = appContext.req.language || 'en';
+  console.log("Determined current language:", currentLanguage);
 
-    console.log("Fetching translations for language:", currentLanguage);
-    const translationsFilePath = path.resolve('./public/locales', currentLanguage, 'common.json');
-    console.log("Translations file path:", translationsFilePath);
+  console.log("Fetching translations for language:", currentLanguage);
+  const translationsFilePath = path.resolve('./public/locales', currentLanguage, 'common.json');
+  console.log("Translations file path:", translationsFilePath);
 
-    const translations = JSON.parse(fs.readFileSync(translationsFilePath, 'utf-8'));
-    console.log("Fetched translations:", translations);
+  const translations = JSON.parse(fs.readFileSync(translationsFilePath, 'utf-8'));
+  console.log("Fetched translations:", translations);
 
-    // Log the state of the i18n instance
-    console.log("i18n instance state before returning translations:", i18n);
+  // Log the state of the i18n instance
+  console.log("i18n instance state before returning translations:", i18n);
 
-    // Verify the structure and serializability of the translations object
-    try {
-      const serializedTranslations = JSON.stringify(translations);
-      console.log("Serialized translations object:", serializedTranslations);
-    } catch (error) {
-      console.error("Error serializing translations object:", error);
-      return {
-        props: {
-          translations: null,
-        },
-      };
-    }
-
-    // Additional check to ensure translations are correctly fetched
-    if (!translations || Object.keys(translations).length === 0) {
-      console.error("Translations are undefined or empty after fetching");
-      return {
-        props: {
-          translations: null,
-        },
-      };
-    }
-
-    console.log("Returning translations from i18nInitPromise");
-    return {
-      props: {
-        translations: translations,
-      },
-    };
-  }).catch((error) => {
-    console.error("Error initializing i18next or fetching translations:", error);
-    return {
-      props: {
-        translations: null,
-      },
-    };
-  });
-
-  // Check for empty or undefined translations
-  if (!translations || Object.keys(translations).length === 0) {
-    console.error("Translations are undefined or empty before returning from getServerSideProps");
+  // Verify the structure and serializability of the translations object
+  try {
+    const serializedTranslations = JSON.stringify(translations);
+    console.log("Serialized translations object:", serializedTranslations);
+  } catch (error) {
+    console.error("Error serializing translations object:", error);
     return {
       props: {
         translations: null,
@@ -186,12 +144,20 @@ export async function getServerSideProps(appContext) {
     };
   }
 
-  console.log("Translations object before returning from getServerSideProps:", JSON.stringify(translations, null, 2));
+  // Additional check to ensure translations are correctly fetched
+  if (!translations || Object.keys(translations).length === 0) {
+    console.error("Translations are undefined or empty after fetching");
+    return {
+      props: {
+        translations: null,
+      },
+    };
+  }
+
   console.log("Returning translations from getServerSideProps");
-  console.log("getServerSideProps is returning props:", { translations });
   return {
     props: {
-      translations: translations || null,
+      translations: translations,
     },
   };
 }
