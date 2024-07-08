@@ -2,37 +2,12 @@ import React, { useEffect, useState } from 'react';
 import "@/styles/globals.css";
 import Script from "next/script";
 import { NextSeo } from "next-seo";
-import i18n from '../i18n'; // Import the initialized i18next instance
+import i18n, { i18nInitPromise } from '../i18n'; // Import the initialized i18next instance and initialization functions
 import Loading from '../components/Loading'; // Import the Loading component
-import { i18nInitPromise } from '../i18n'; // Import the i18nInitPromise for initialization
-import { initReactI18next } from 'react-i18next';
+import { initReactI18next } from 'react-i18next'; // Reintroduce initReactI18next import
 
 // Ensure initReactI18next is used with i18next instance
 i18n.use(initReactI18next);
-
-// Function to initialize i18next with server-side translations
-const initializeI18next = (translations, language) => {
-  try {
-    console.log("Initializing i18next with translations:", translations, "and language:", language);
-    if (translations && Object.keys(translations).length > 0) {
-      i18n.changeLanguage(language); // Set the language before adding resources
-      i18n.addResources(language, 'common', translations);
-    } else {
-      console.error("Invalid or empty translations object passed to initializeI18next. Falling back to default translations.");
-      // Fallback to default translations if the provided translations are null or empty
-      i18n.changeLanguage('en'); // Default to English
-      i18n.addResources('en', 'common', {
-        welcome_message: "Welcome",
-        map_title: "Ziggo Map",
-        search_placeholder: "Search for a place",
-        language_selector: "Select Language",
-        find_cigarette_machine: "Find Cigarette Machine"
-      });
-    }
-  } catch (error) {
-    console.error("Error during i18next initialization:", error);
-  }
-};
 
 function App({ Component, pageProps, translations, originalTranslations, currentLanguage }) {
   console.log("App component received translations prop:", translations);
@@ -43,27 +18,26 @@ function App({ Component, pageProps, translations, originalTranslations, current
   }
 
   // Ensure i18next is initialized before rendering the App component
-  (async () => {
-    await i18nInitPromise;
-    if (translations && Object.keys(translations).length > 0) {
-      console.log("Translations prop received:", translations);
-      initializeI18next(translations, currentLanguage);
-      console.log("i18next initialized and translations set.");
-    } else {
-      console.error("Translations prop is null or undefined. Falling back to default translations.");
-      const defaultTranslations = {
-        seo: {
-          title: "Default Title",
-          description: "Default Description",
-          keywords: "default, keywords",
-          ogTitle: "Default OG Title",
-          ogDescription: "Default OG Description"
-        }
-      };
-      initializeI18next(defaultTranslations, 'en'); // Fallback to default translations
-      console.log("Fallback translations initialized.");
-    }
-  })();
+  if (translations && Object.keys(translations).length > 0) {
+    console.log("Translations prop received:", translations);
+    i18n.changeLanguage(currentLanguage); // Set the language before adding resources
+    i18n.addResources(currentLanguage, 'common', translations);
+    console.log("i18next initialized and translations set.");
+  } else {
+    console.error("Translations prop is null or undefined. Falling back to default translations.");
+    const defaultTranslations = {
+      seo: {
+        title: "Default Title",
+        description: "Default Description",
+        keywords: "default, keywords",
+        ogTitle: "Default OG Title",
+        ogDescription: "Default OG Description"
+      }
+    };
+    i18n.changeLanguage('en'); // Default to English
+    i18n.addResources('en', 'common', defaultTranslations);
+    console.log("Fallback translations initialized.");
+  }
 
   if (!i18n.isInitialized) {
     console.log("Rendering Loading component due to missing translations or uninitialized i18n");
@@ -131,10 +105,9 @@ function App({ Component, pageProps, translations, originalTranslations, current
   );
 }
 
-import fs from 'fs';
-import path from 'path';
-
 export async function getServerSideProps(appContext) {
+  const fs = require('fs');
+  const path = require('path');
   const currentLanguage = appContext.req.language || 'en';
   const translationsFilePath = path.resolve(process.cwd(), 'public/locales', currentLanguage, 'common.json');
 
@@ -152,6 +125,7 @@ export async function getServerSideProps(appContext) {
 
   // Ensure translations always contains at least the default values
   try {
+    console.log("Attempting to read translations file...");
     const fileTranslations = JSON.parse(fs.readFileSync(translationsFilePath, 'utf-8'));
     console.log("Type of fileTranslations:", typeof fileTranslations);
     console.log("File translations read from filesystem:", fileTranslations);
@@ -165,6 +139,7 @@ export async function getServerSideProps(appContext) {
 
     // Check if the translations object is serializable
     try {
+      console.log("Attempting to serialize translations object...");
       JSON.stringify(translations);
     } catch (error) {
       console.error("Translations object is not serializable:", error);
@@ -198,6 +173,7 @@ export async function getServerSideProps(appContext) {
 
   let serializedTranslations;
   try {
+    console.log("Attempting to serialize translations object...");
     serializedTranslations = JSON.stringify(translations);
     console.log("Serialized translations object:", serializedTranslations);
   } catch (error) {
@@ -242,6 +218,8 @@ export async function getServerSideProps(appContext) {
   };
 
   console.log("Props object before returning from getServerSideProps:", props);
+
+  await i18nInitPromise; // Ensure i18next is initialized before returning props
 
   return {
     props,
