@@ -14,9 +14,13 @@ function App({ Component, pageProps, translations, originalTranslations, current
 
   useEffect(() => {
     i18nInitPromise.then(() => {
+      if (translations && Object.keys(translations).length > 0) {
+        i18n.changeLanguage(currentLanguage);
+        i18n.addResources(currentLanguage, 'common', translations);
+      }
       setIsInitialized(true);
     });
-  }, []);
+  }, [translations, currentLanguage]);
 
   console.log("App component received translations prop:", translations);
   console.log("App component received originalTranslations prop:", originalTranslations);
@@ -25,38 +29,11 @@ function App({ Component, pageProps, translations, originalTranslations, current
     console.error("Translations prop is undefined or null.");
   }
 
-  // Ensure i18next is initialized before rendering the App component
-  if (i18n && i18n.isInitialized && translations && Object.keys(translations).length > 0) {
-    console.log("Translations prop received:", translations);
-    i18n.changeLanguage(currentLanguage); // Set the language before adding resources
-    i18n.addResources(currentLanguage, 'common', translations);
-    console.log("i18next initialized and translations set.");
-  } else {
-    console.error("Translations prop is null or undefined. Falling back to default translations.");
-    const defaultTranslations = {
-      seo: {
-        title: "Default Title",
-        description: "Default Description",
-        keywords: "default, keywords",
-        ogTitle: "Default OG Title",
-        ogDescription: "Default OG Description"
-      }
-    };
-    if (i18n && i18n.isInitialized) {
-      i18n.changeLanguage('en'); // Default to English
-      i18n.addResources('en', 'common', defaultTranslations);
-      console.log("Fallback translations initialized.");
-    } else {
-      console.error("i18n is not initialized. Unable to set fallback translations.");
-    }
-  }
-
   if (!isInitialized) {
     console.log("Rendering Loading component due to missing translations or uninitialized i18n");
     return <Loading />;
   }
 
-  // Log the translations received by the App component before rendering
   console.log("Translations in App component before rendering:", translations);
 
   return (
