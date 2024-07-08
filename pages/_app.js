@@ -137,21 +137,9 @@ export async function getServerSideProps(appContext) {
     };
   }
 
-  // Ensure all values within the translations object are serializable
-  const isSerializable = (obj) => {
-    try {
-      console.log("Checking if object is serializable:", obj);
-      JSON.stringify(obj);
-      console.log("Object is serializable");
-      return true;
-    } catch (e) {
-      console.error("Serialization error:", e);
-      return false;
-    }
-  };
-
-  if (!isSerializable(translations)) {
-    console.error("Translations object contains non-serializable values:", translations);
+  // Check for empty or undefined translations
+  if (!translations || Object.keys(translations).length === 0) {
+    console.error("Translations are undefined or empty before returning from getServerSideProps");
     return {
       props: {
         translations: null,
