@@ -68,7 +68,15 @@ function App({ Component, pageProps, translations }) {
         console.log("i18next initialized and translations set.");
       } else {
         console.error("Translations are empty in useEffect. Falling back to default translations.");
-        initializeI18next({}, 'en'); // Fallback to default translations
+        initializeI18next({
+          seo: {
+            title: "Default Title",
+            description: "Default Description",
+            keywords: "default, keywords",
+            ogTitle: "Default OG Title",
+            ogDescription: "Default OG Description"
+          }
+        }, 'en'); // Fallback to default translations
         console.log("Fallback translations initialized.");
       }
     } else {
