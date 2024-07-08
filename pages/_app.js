@@ -205,6 +205,7 @@ export async function getServerSideProps(appContext) {
   console.log("Type of translations object before returning:", typeof translations);
   console.log("Keys of translations object before returning:", Object.keys(translations));
   console.log("Translations object before returning from getServerSideProps:", translations);
+  console.log("Serialized translations object before returning:", JSON.stringify(translations, null, 2));
 
   console.log("Returning props from getServerSideProps:", {
     translations,
