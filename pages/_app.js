@@ -137,21 +137,12 @@ function App({ Component, pageProps, translations, originalTranslations }) {
   );
 }
 
+import fs from 'fs';
+import path from 'path';
+
 export async function getServerSideProps(appContext) {
-  console.log("getServerSideProps called");
-  console.log("appContext:", JSON.stringify(appContext, null, 2));
-
-  // Import fs and path modules only in server-side code
-  const fs = require('fs');
-  const path = require('path');
-
-  // Determine the current language from the request
   const currentLanguage = appContext.req.language || 'en';
-  console.log("Determined current language:", currentLanguage);
-
-  console.log("Fetching translations for language:", currentLanguage);
   const translationsFilePath = path.resolve(process.cwd(), 'public/locales', currentLanguage, 'common.json');
-  console.log("Translations file path:", translationsFilePath);
 
   let translations = {
     seo: {
@@ -162,76 +153,21 @@ export async function getServerSideProps(appContext) {
       ogDescription: "Default OG Description"
     }
   };
+
   try {
-    console.log("Reading translations file...");
     const fileTranslations = JSON.parse(fs.readFileSync(translationsFilePath, 'utf-8'));
     translations = { ...translations, ...fileTranslations };
-    console.log("Fetched translations:", translations);
   } catch (error) {
-    if (error.code === 'ENOENT') {
-      console.error("Translations file not found, using default translations:", error);
-    } else {
-      console.error("Error reading translations file, using default translations:", error);
+    if (error.code !== 'ENOENT') {
+      console.error("Error reading translations file:", error);
     }
   }
 
-  // Log the state of the i18n instance
-  console.log("i18n instance state before returning translations:", i18n);
-
-  // Log the translations object before returning
-  console.log("Translations object before returning from getServerSideProps:", translations);
-
-  // Ensure translations object is serializable
-  try {
-    // Ensure all values in the translations object are serializable
-    const serializableTranslations = JSON.parse(JSON.stringify(translations));
-    console.log("Translations object is serializable:", serializableTranslations);
-    translations = serializableTranslations;
-  } catch (error) {
-    console.error("Translations object is not serializable:", error);
-    // Fallback to default translations if serialization fails
-    translations = {
-      seo: {
-        title: "Default Title",
-        description: "Default Description",
-        keywords: "default, keywords",
-        ogTitle: "Default OG Title",
-        ogDescription: "Default OG Description"
-      }
-    };
-  }
-
-  // Additional logging to track the state of translations object
-  console.log("Type of translations object before returning:", typeof translations);
-  console.log("Keys of translations object before returning:", Object.keys(translations));
-  console.log("Translations object before returning from getServerSideProps:", translations);
-  console.log("Serialized translations object before returning:", JSON.stringify(translations, null, 2));
-
-  console.log("Returning props from getServerSideProps:", {
-    translations,
-    originalTranslations: translations,
-  });
-
-  const propsToReturn = {
-    translations, // Pass translations directly
-    originalTranslations: translations, // Add original translations for comparison
-  };
-
-  // Additional logging to confirm props before returning
-  console.log("Props to return from getServerSideProps:", JSON.stringify(propsToReturn, null, 2));
-  console.log("Serialized translations object before returning:", JSON.stringify(translations, null, 2));
-
-  // Log the structure and content of the props object
-  console.log("Structure of props object before returning:", {
-    props: propsToReturn,
-  });
-
-  // Additional logging to confirm the final state of translations and props
-  console.log("Final state of translations object before returning:", translations);
-  console.log("Final state of props object before returning:", propsToReturn);
-
   return {
-    props: propsToReturn,
+    props: {
+      translations,
+      originalTranslations: translations,
+    },
   };
 }
 
