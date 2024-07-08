@@ -54,6 +54,9 @@ function App({ Component, pageProps, translations, originalTranslations, current
           console.error("No translations found in local storage.");
         }
       }
+    } else {
+      console.log("Setting localTranslations state with translations prop:", translations);
+      setLocalTranslations(translations);
     }
     i18nInitPromise.then(() => {
       console.log("i18nInitPromise resolved");
