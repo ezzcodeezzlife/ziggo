@@ -201,6 +201,8 @@ export async function getServerSideProps(appContext) {
   }
 
   // Additional logging to track the state of translations object
+  console.log("Type of translations object before returning:", typeof translations);
+  console.log("Keys of translations object before returning:", Object.keys(translations));
   console.log("Translations object before returning from getServerSideProps:", translations);
 
   console.log("Returning props from getServerSideProps:", {
