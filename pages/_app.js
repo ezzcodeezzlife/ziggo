@@ -8,19 +8,22 @@ import Loading from '../components/Loading'; // Import the Loading component
 // Function to initialize i18next with server-side translations
 const initializeI18next = (translations, language) => {
   console.log("Initializing i18next with translations:", translations, "and language:", language);
-  if (translations) {
+  if (translations && translations[language] && translations[language].common) {
     i18n.changeLanguage(language); // Set the language before adding resources
     i18n.addResources(language, 'common', translations[language].common);
+  } else {
+    console.error("Invalid translations object passed to initializeI18next");
   }
 };
 
 function App({ Component, pageProps, translations }) {
   console.log("App component received translations prop:", translations);
   console.log("Structure of translations prop in App component:", JSON.stringify(translations, null, 2));
+
   useEffect(() => {
     console.log("Initial translations in useEffect:", translations);
     // Wait for i18next initialization before setting translations
-    if (translations) {
+    if (translations && translations[i18n.language] && translations[i18n.language].common) {
       if (!i18n.isInitialized) {
         i18nInitPromise.then(() => {
           console.log("Translations after i18nInitPromise resolves:", translations);
@@ -30,13 +33,15 @@ function App({ Component, pageProps, translations }) {
         initializeI18next(translations, i18n.language);
       }
     } else {
-      console.error("Translations are null in useEffect");
+      console.error("Translations are null or invalid in useEffect");
     }
-    console.log("Translations in App component:", translations);
+    console.log("Translations in App component after useEffect:", translations);
   }, [translations]);
 
+  console.log("Translations in App component before return:", translations);
+
   // Ensure i18n is initialized and translations are available before rendering
-  if (!i18n.isInitialized || !translations) {
+  if (!i18n.isInitialized || !translations || !translations[i18n.language] || !translations[i18n.language].common) {
     return <Loading />;
   }
 
@@ -120,13 +125,13 @@ export async function getServerSideProps(appContext) {
       },
     };
 
-    try {
-      // Log the translations fetched by getServerSideProps
-      console.log("Translations in getServerSideProps before return:", translations);
-      // Check the structure of the translations object
-      console.log("Structure of translations in getServerSideProps:", JSON.stringify(translations, null, 2));
+    // Log the translations fetched by getServerSideProps
+    console.log("Translations in getServerSideProps before return:", translations);
+    // Check the structure of the translations object
+    console.log("Structure of translations in getServerSideProps:", JSON.stringify(translations, null, 2));
 
-      // Check for serialization issues
+    // Check for serialization issues
+    try {
       JSON.stringify(translations);
     } catch (serializationError) {
       console.error("Serialization error in getServerSideProps:", serializationError);
