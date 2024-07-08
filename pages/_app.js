@@ -191,25 +191,30 @@ export async function getServerSideProps(appContext) {
   // Log the translations object before returning
   console.log("Translations object before returning from getServerSideProps:", translations);
 
-  // Ensure translations object is not empty before serialization
-  if (translations && Object.keys(translations).length > 0) {
-    // Log the structure of the translations object
-    console.log("Translations object structure before returning:", JSON.stringify(translations, null, 2));
-
-    return {
-      props: {
-        translations, // Pass translations directly
-        originalTranslations: translations, // Add original translations for comparison
-      },
-    };
-  } else {
-    console.error("Translations object is empty. Falling back to default translations.");
-    return {
-      props: {
-        translations,
-      },
+  // Ensure translations object is serializable
+  try {
+    JSON.stringify(translations);
+    console.log("Translations object is serializable.");
+  } catch (error) {
+    console.error("Translations object is not serializable:", error);
+    // Fallback to default translations if serialization fails
+    translations = {
+      seo: {
+        title: "Default Title",
+        description: "Default Description",
+        keywords: "default, keywords",
+        ogTitle: "Default OG Title",
+        ogDescription: "Default OG Description"
+      }
     };
   }
+
+  return {
+    props: {
+      translations, // Pass translations directly
+      originalTranslations: translations, // Add original translations for comparison
+    },
+  };
 }
 
 export default App;
