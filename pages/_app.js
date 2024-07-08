@@ -183,17 +183,23 @@ export async function getServerSideProps(appContext) {
   // Log the translations object before returning
   console.log("Translations object before returning from getServerSideProps:", translations);
 
-  // Additional logging to check the type of translations
-  console.log("Type of translations object:", typeof translations);
-
-  // Ensure translations object is serializable
-  const serializableTranslations = JSON.parse(JSON.stringify(translations));
-
-  return {
-    props: {
-      translations: serializableTranslations || {},
-    },
-  };
+  // Ensure translations object is not empty before serialization
+  if (translations && Object.keys(translations).length > 0) {
+    // Ensure translations object is serializable
+    const serializableTranslations = JSON.parse(JSON.stringify(translations));
+    return {
+      props: {
+        translations: serializableTranslations,
+      },
+    };
+  } else {
+    console.error("Translations object is empty. Falling back to default translations.");
+    return {
+      props: {
+        translations: {},
+      },
+    };
+  }
 }
 
 export default App;
