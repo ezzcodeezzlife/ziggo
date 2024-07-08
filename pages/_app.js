@@ -171,6 +171,7 @@ export async function getServerSideProps(appContext) {
 
   if (!translations || Object.keys(translations).length === 0) {
     console.error("Translations object is undefined or empty before returning.");
+    translations = { seo: { title: "Default Title", description: "Default Description", keywords: "default, keywords", ogTitle: "Default OG Title", ogDescription: "Default OG Description" } };
   }
 
   // Check if translations object is serializable
@@ -180,7 +181,7 @@ export async function getServerSideProps(appContext) {
     console.log("Translations object is serializable.");
   } catch (error) {
     console.error("Translations object is not serializable:", error);
-    serializableTranslations = {};
+    serializableTranslations = { seo: { title: "Default Title", description: "Default Description", keywords: "default, keywords", ogTitle: "Default OG Title", ogDescription: "Default OG Description" } };
   }
 
   const props = {
