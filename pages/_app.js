@@ -220,6 +220,11 @@ export async function getServerSideProps(appContext) {
   console.log("Props to return from getServerSideProps:", JSON.stringify(propsToReturn, null, 2));
   console.log("Serialized translations object before returning:", JSON.stringify(translations, null, 2));
 
+  // Log the structure and content of the props object
+  console.log("Structure of props object before returning:", {
+    props: propsToReturn,
+  });
+
   return {
     props: propsToReturn,
   };
