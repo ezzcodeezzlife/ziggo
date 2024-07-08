@@ -200,6 +200,9 @@ export async function getServerSideProps(appContext) {
     };
   }
 
+  // Additional logging to track the state of translations object
+  console.log("Translations object before returning from getServerSideProps:", translations);
+
   console.log("Returning props from getServerSideProps:", {
     translations,
     originalTranslations: translations,
