@@ -133,6 +133,7 @@ export async function getServerSideProps(appContext) {
     // Check for serialization issues
     try {
       JSON.stringify(translations);
+      console.log("Translations object is serializable:", JSON.stringify(translations, null, 2));
     } catch (serializationError) {
       console.error("Serialization error in getServerSideProps:", serializationError);
       return {
@@ -142,7 +143,7 @@ export async function getServerSideProps(appContext) {
       };
     }
 
-    console.log("Returning translations from getServerSideProps:", translations);
+    console.log("Returning translations from getServerSideProps:", JSON.stringify(translations, null, 2));
     if (!translations || Object.keys(translations).length === 0) {
       console.error("Translations are undefined or empty before returning from getServerSideProps");
       return {
