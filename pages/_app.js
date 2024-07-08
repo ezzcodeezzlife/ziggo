@@ -185,11 +185,11 @@ export async function getServerSideProps(appContext) {
 
   // Ensure translations object is not empty before serialization
   if (translations && Object.keys(translations).length > 0) {
-    // Ensure translations object is serializable
-    const serializableTranslations = JSON.parse(JSON.stringify(translations));
+    // Log the structure of the translations object
+    console.log("Translations object structure before returning:", JSON.stringify(translations, null, 2));
     return {
       props: {
-        translations: serializableTranslations,
+        translations: translations,
       },
     };
   } else {
