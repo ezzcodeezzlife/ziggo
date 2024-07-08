@@ -72,10 +72,12 @@ function App({ Component, pageProps, translations, originalTranslations, current
   };
 
   useEffect(() => {
-    console.log("Type of translations prop:", typeof translations);
-    console.log("Translations prop at the start of useEffect:", translations);
+    const initialize = async () => {
+      await i18nInitPromise;
+      initializeTranslations();
+    };
 
-    initializeTranslations();
+    initialize();
   }, [translations, currentLanguage]);
 
   if (!i18n.isInitialized) {
