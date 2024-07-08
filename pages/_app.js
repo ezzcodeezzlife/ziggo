@@ -30,48 +30,48 @@ const initializeI18next = (translations, language) => {
   }
 };
 
-function App({ Component, pageProps, translations, originalTranslations }) {
+function App({ Component, pageProps, translations, originalTranslations, currentLanguage }) {
   console.log("App component received translations prop:", translations);
   console.log("App component received originalTranslations prop:", originalTranslations);
 
-  const [localTranslations, setLocalTranslations] = useState(translations || {});
+  const [localTranslations, setLocalTranslations] = useState({});
   console.log("Initial state of localTranslations:", localTranslations);
+
+  const initializeTranslations = async () => {
+    await i18nInitPromise;
+    if (translations && Object.keys(translations).length > 0) {
+      console.log("Translations prop received:", translations);
+      setLocalTranslations(translations);
+      initializeI18next(translations, currentLanguage);
+      console.log("i18next initialized and translations set.");
+    } else {
+      console.error("Translations prop is null or undefined. Falling back to default translations.");
+      const defaultTranslations = {
+        seo: {
+          title: "Default Title",
+          description: "Default Description",
+          keywords: "default, keywords",
+          ogTitle: "Default OG Title",
+          ogDescription: "Default OG Description"
+        }
+      };
+      setLocalTranslations(defaultTranslations);
+      initializeI18next(defaultTranslations, 'en'); // Fallback to default translations
+      console.log("Fallback translations initialized.");
+    }
+
+    // Additional logging to check the state of localTranslations
+    console.log("State of localTranslations after useEffect:", localTranslations);
+  };
 
   useEffect(() => {
     console.log("Type of translations prop:", typeof translations);
     console.log("Translations prop at the start of useEffect:", translations);
 
-    const initializeTranslations = async () => {
-      await i18nInitPromise;
-      if (translations && Object.keys(translations).length > 0) {
-        console.log("Translations prop received:", translations);
-        setLocalTranslations(translations);
-        initializeI18next(translations, i18n.language);
-        console.log("i18next initialized and translations set.");
-      } else {
-        console.error("Translations prop is null or undefined. Falling back to default translations.");
-        const defaultTranslations = {
-          seo: {
-            title: "Default Title",
-            description: "Default Description",
-            keywords: "default, keywords",
-            ogTitle: "Default OG Title",
-            ogDescription: "Default OG Description"
-          }
-        };
-        setLocalTranslations(defaultTranslations);
-        initializeI18next(defaultTranslations, 'en'); // Fallback to default translations
-        console.log("Fallback translations initialized.");
-      }
-
-      // Additional logging to check the state of localTranslations
-      console.log("State of localTranslations after useEffect:", localTranslations);
-    };
-
     initializeTranslations();
-  }, [translations]);
+  }, [translations, currentLanguage]);
 
-  if (!i18n.isInitialized || Object.keys(localTranslations || {}).length === 0) {
+  if (!i18n.isInitialized) {
     console.log("Rendering Loading component due to missing translations or uninitialized i18n");
     return <Loading />;
   }
@@ -167,6 +167,7 @@ export async function getServerSideProps(appContext) {
     props: {
       translations,
       originalTranslations: translations,
+      currentLanguage,
     },
   };
 }
