@@ -31,12 +31,13 @@ function App({ Component, pageProps, translations }) {
   useEffect(() => {
     console.log("Initial translations in useEffect:", memoizedTranslations);
     // Wait for i18next initialization before setting translations
-    if (memoizedTranslations) {
+    if (memoizedTranslations && Object.keys(memoizedTranslations).length > 0) {
       i18nInitPromise.then(() => {
         console.log("Translations after i18nInitPromise resolves:", memoizedTranslations);
         initializeI18next(memoizedTranslations, i18n.language);
         // Trigger a re-render once translations are initialized
         setInitialized(true);
+        console.log("i18next initialized and translations set. State of initialized:", true);
       }).catch((error) => {
         console.error("Error initializing i18next:", error);
       });
@@ -44,6 +45,7 @@ function App({ Component, pageProps, translations }) {
       console.error("Translations are null or invalid in useEffect");
     }
     console.log("Translations in App component after useEffect:", memoizedTranslations);
+    console.log("State of initialized after useEffect:", initialized);
   }, [memoizedTranslations, setInitialized]);
 
   // Ensure i18n is initialized and translations are available before rendering
@@ -115,6 +117,7 @@ function App({ Component, pageProps, translations }) {
 
 export async function getServerSideProps(appContext) {
   console.log("getServerSideProps called");
+  console.log("appContext:", JSON.stringify(appContext, null, 2));
 
   // Wait for i18next initialization and fetch translations
   const translations = await i18nInitPromise.then(() => {
@@ -124,9 +127,13 @@ export async function getServerSideProps(appContext) {
 
     // Determine the current language from the request
     const currentLanguage = appContext.req.language || 'en';
+    console.log("Determined current language:", currentLanguage);
 
     console.log("Fetching translations for language:", currentLanguage);
-    const translations = JSON.parse(fs.readFileSync(path.resolve('./public/locales', currentLanguage, 'common.json'), 'utf-8'));
+    const translationsFilePath = path.resolve('./public/locales', currentLanguage, 'common.json');
+    console.log("Translations file path:", translationsFilePath);
+
+    const translations = JSON.parse(fs.readFileSync(translationsFilePath, 'utf-8'));
     console.log("Fetched translations:", translations);
 
     return translations;
@@ -148,6 +155,7 @@ export async function getServerSideProps(appContext) {
   // Ensure the translations object is serializable
   let serializedTranslations;
   try {
+    console.log("Serializing translations object:", translations);
     serializedTranslations = JSON.parse(JSON.stringify(translations));
     console.log("Translations object is serializable:", serializedTranslations);
   } catch (error) {
@@ -160,7 +168,9 @@ export async function getServerSideProps(appContext) {
   }
 
   console.log("Translations object before returning from getServerSideProps:", JSON.stringify(serializedTranslations, null, 2));
+  console.log("Final state of serialized translations before returning from getServerSideProps:", JSON.stringify(serializedTranslations, null, 2));
   console.log("Returning serialized translations from getServerSideProps");
+  console.log("getServerSideProps is returning props:", { translations: serializedTranslations });
   return {
     props: {
       translations: serializedTranslations, // Pass the serialized translations object
