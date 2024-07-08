@@ -43,11 +43,7 @@ function App({ Component, pageProps, translations, originalTranslations }) {
       await i18nInitPromise;
       if (translations && Object.keys(translations).length > 0) {
         console.log("Translations prop received:", translations);
-        setLocalTranslations((prevTranslations) => ({
-          ...prevTranslations,
-          ...translations,
-        }));
-
+        setLocalTranslations(translations);
         initializeI18next(translations, i18n.language);
         console.log("i18next initialized and translations set.");
       } else {
@@ -61,11 +57,7 @@ function App({ Component, pageProps, translations, originalTranslations }) {
             ogDescription: "Default OG Description"
           }
         };
-        setLocalTranslations((prevTranslations) => ({
-          ...prevTranslations,
-          ...defaultTranslations,
-        }));
-
+        setLocalTranslations(defaultTranslations);
         initializeI18next(defaultTranslations, 'en'); // Fallback to default translations
         console.log("Fallback translations initialized.");
       }
@@ -74,11 +66,7 @@ function App({ Component, pageProps, translations, originalTranslations }) {
       console.log("State of localTranslations after useEffect:", localTranslations);
     };
 
-    if (translations && Object.keys(translations).length > 0) {
-      initializeTranslations();
-    } else {
-      console.log("Waiting for translations prop to be defined...");
-    }
+    initializeTranslations();
   }, [translations]);
 
   if (!i18n.isInitialized || Object.keys(localTranslations).length === 0) {
