@@ -164,7 +164,7 @@ export async function getServerSideProps(appContext) {
     translations = null;
   }
 
-  console.log("Returning translations from getServerSideProps");
+  console.log("Translations object before returning from getServerSideProps:", translations);
   return {
     props: {
       translations: translations,
