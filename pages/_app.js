@@ -144,6 +144,8 @@ export async function getServerSideProps(appContext) {
   const currentLanguage = appContext.req.language || 'en';
   const translationsFilePath = path.resolve(process.cwd(), 'public/locales', currentLanguage, 'common.json');
 
+  console.log("Resolved translations file path:", translationsFilePath);
+
   let translations = {
     seo: {
       title: "Default Title",
@@ -156,12 +158,15 @@ export async function getServerSideProps(appContext) {
 
   try {
     const fileTranslations = JSON.parse(fs.readFileSync(translationsFilePath, 'utf-8'));
+    console.log("File translations read from filesystem:", fileTranslations);
     translations = { ...translations, ...fileTranslations };
   } catch (error) {
     if (error.code !== 'ENOENT') {
       console.error("Error reading translations file:", error);
     }
   }
+
+  console.log("Final translations object to be passed as prop:", translations);
 
   return {
     props: {
