@@ -9,11 +9,37 @@ import { initReactI18next } from 'react-i18next'; // Reintroduce initReactI18nex
 // Ensure initReactI18next is used with i18next instance
 i18n.use(initReactI18next);
 
+class ErrorBoundary extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { hasError: false };
+  }
+
+  static getDerivedStateFromError(error) {
+    return { hasError: true };
+  }
+
+  componentDidCatch(error, errorInfo) {
+    console.error("Error caught by ErrorBoundary:", error, errorInfo);
+  }
+
+  render() {
+    if (this.state.hasError) {
+      return <h1>Something went wrong.</h1>;
+    }
+
+    return this.props.children;
+  }
+}
+
 function App({ Component, pageProps, translations, originalTranslations, currentLanguage }) {
   const [isInitialized, setIsInitialized] = useState(false);
 
   useEffect(() => {
     console.log("useEffect triggered with translations:", translations, "and currentLanguage:", currentLanguage);
+    if (!translations) {
+      console.error("Translations prop is undefined or null inside useEffect.");
+    }
     i18nInitPromise.then(() => {
       console.log("i18nInitPromise resolved");
       if (translations && Object.keys(translations).length > 0) {
@@ -25,6 +51,10 @@ function App({ Component, pageProps, translations, originalTranslations, current
       console.error("Error resolving i18nInitPromise:", error);
     });
   }, [translations, currentLanguage]);
+
+  useEffect(() => {
+    console.log("App component mounted");
+  }, []);
 
   console.log("App component received props:", { Component, pageProps, translations, originalTranslations, currentLanguage });
 
@@ -43,7 +73,7 @@ function App({ Component, pageProps, translations, originalTranslations, current
   console.log("Translations in App component before rendering:", translations);
 
   return (
-    <>
+    <ErrorBoundary>
       <NextSeo
         title={translations && translations.seo ? translations.seo.title : "Default Title"}
         description={translations && translations.seo ? translations.seo.description : "Default Description"}
@@ -96,7 +126,7 @@ function App({ Component, pageProps, translations, originalTranslations, current
         `}
       </Script>
       <Component {...pageProps} />
-    </>
+    </ErrorBoundary>
   );
 }
 
@@ -119,18 +149,16 @@ export async function getServerSideProps(appContext) {
 
   console.log("Hardcoded translations object:", translations);
 
-  console.log("Returning props from getServerSideProps:", {
+  const props = {
     translations,
     originalTranslations: translations,
     currentLanguage,
-  });
+  };
+
+  console.log("Returning props from getServerSideProps:", props);
 
   return {
-    props: {
-      translations,
-      originalTranslations: translations,
-      currentLanguage,
-    },
+    props,
   };
 }
 
