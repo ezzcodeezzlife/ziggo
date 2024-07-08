@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import "@/styles/globals.css";
 import Script from "next/script";
 import { NextSeo } from "next-seo";
@@ -25,16 +25,15 @@ function App({ Component, pageProps, translations }) {
     console.error("Translations prop is undefined in App component");
   }
 
-  const memoizedTranslations = useMemo(() => translations, [translations]);
   const [initialized, setInitialized] = useState(false);
 
   useEffect(() => {
-    console.log("Initial translations in useEffect:", memoizedTranslations);
+    console.log("Initial translations in useEffect:", translations);
     // Wait for i18next initialization before setting translations
-    if (memoizedTranslations && Object.keys(memoizedTranslations).length > 0) {
+    if (translations && Object.keys(translations).length > 0) {
       i18nInitPromise.then(() => {
-        console.log("Translations after i18nInitPromise resolves:", memoizedTranslations);
-        initializeI18next(memoizedTranslations, i18n.language);
+        console.log("Translations after i18nInitPromise resolves:", translations);
+        initializeI18next(translations, i18n.language);
         // Trigger a re-render once translations are initialized
         setInitialized(true);
         console.log("i18next initialized and translations set. State of initialized:", true);
@@ -44,35 +43,35 @@ function App({ Component, pageProps, translations }) {
     } else {
       console.error("Translations are null or invalid in useEffect");
     }
-    console.log("Translations in App component after useEffect:", memoizedTranslations);
+    console.log("Translations in App component after useEffect:", translations);
     console.log("State of initialized after useEffect:", initialized);
-  }, [memoizedTranslations, setInitialized]);
+  }, [translations, setInitialized]);
 
   // Ensure i18n is initialized and translations are available before rendering
-  if (!i18n.isInitialized || !memoizedTranslations || !initialized) {
+  if (!i18n.isInitialized || !translations || !initialized) {
     console.log("Rendering Loading component due to missing translations or uninitialized i18n");
     return <Loading />;
   }
 
   // Log the translations received by the App component
-  console.log("Translations in App component:", memoizedTranslations);
+  console.log("Translations in App component:", translations);
 
   return (
     <>
       <NextSeo
-        title={memoizedTranslations ? memoizedTranslations.seo.title : "Default Title"}
-        description={memoizedTranslations ? memoizedTranslations.seo.description : "Default Description"}
+        title={translations ? translations.seo.title : "Default Title"}
+        description={translations ? translations.seo.description : "Default Description"}
         canonical={`https://www.zigarettenautomatkarte.de/${i18n.language}`}
         aggregateRating={{
           ratingValue: "5",
           ratingCount: "94",
         }}
         datePublished="2024-02-03"
-        keywords={memoizedTranslations ? memoizedTranslations.seo.keywords : "default, keywords"}
+        keywords={translations ? translations.seo.keywords : "default, keywords"}
         openGraph={{
           url: `https://www.zigarettenautomatkarte.de/${i18n.language}`,
-          title: memoizedTranslations ? memoizedTranslations.seo.ogTitle : "Default OG Title",
-          description: memoizedTranslations ? memoizedTranslations.seo.ogDescription : "Default OG Description",
+          title: translations ? translations.seo.ogTitle : "Default OG Title",
+          description: translations ? translations.seo.ogDescription : "Default OG Description",
           images: [
             {
               url: "https://www.zigarettenautomatkarte.de/screenshot.png",
@@ -152,10 +151,28 @@ export async function getServerSideProps(appContext) {
       };
     }
 
-    return translations;
+    // Additional check to ensure translations are correctly fetched
+    if (!translations || Object.keys(translations).length === 0) {
+      console.error("Translations are undefined or empty after fetching");
+      return {
+        props: {
+          translations: null,
+        },
+      };
+    }
+
+    return {
+      props: {
+        translations: translations,
+      },
+    };
   }).catch((error) => {
     console.error("Error initializing i18next or fetching translations:", error);
-    return null;
+    return {
+      props: {
+        translations: null,
+      },
+    };
   });
 
   // Check for empty or undefined translations
@@ -173,7 +190,7 @@ export async function getServerSideProps(appContext) {
   console.log("getServerSideProps is returning props:", { translations });
   return {
     props: {
-      translations, // Pass the translations object directly
+      translations: translations || null,
     },
   };
 }
