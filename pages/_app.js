@@ -18,9 +18,13 @@ function App({ Component, pageProps, translations }) {
 
   useEffect(() => {
     // Wait for i18next initialization before setting translations
-    i18nInitPromise.then(() => {
+    if (!i18n.isInitialized) {
+      i18nInitPromise.then(() => {
+        initializeI18next(translations, i18n.language);
+      });
+    } else {
       initializeI18next(translations, i18n.language);
-    });
+    }
   }, [translations]);
 
   // Ensure i18n is initialized before rendering
@@ -69,7 +73,6 @@ function App({ Component, pageProps, translations }) {
           window.dataLayer = window.dataLayer || [];
           function gtag(){window.dataLayer.push(arguments);}
           gtag('js', new Date());
-
           gtag('config', 'G-LDCLSV0XN9');
         `}
       </Script>
@@ -106,6 +109,9 @@ export async function getServerSideProps(appContext) {
       common: JSON.parse(fs.readFileSync(path.resolve('./public/locales', currentLanguage, 'common.json'), 'utf-8')),
     },
   };
+
+  // Initialize i18next with the fetched translations on the server-side
+  initializeI18next(translations, currentLanguage);
 
   // Log the translations fetched by getServerSideProps
   console.log("Translations in getServerSideProps:", translations);
