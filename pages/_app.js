@@ -53,6 +53,9 @@ function App({ Component, pageProps, translations, originalTranslations, current
     }
   }, [translations, currentLanguage]);
 
+  console.log("App component received props after useEffect:", { Component, pageProps, translations, originalTranslations, currentLanguage });
+  console.log("isInitialized state after useEffect:", isInitialized);
+
   useEffect(() => {
     console.log("App component mounted");
   }, []);
