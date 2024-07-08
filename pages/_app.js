@@ -185,7 +185,8 @@ export async function getServerSideProps(appContext) {
     // Log the structure of the translations object
     console.log("Translations object structure before returning:", JSON.stringify(translations, null, 2));
 
-    const deserializedTranslations = translations;
+    const serializedTranslations = JSON.stringify(translations);
+    const deserializedTranslations = JSON.parse(serializedTranslations);
 
     console.log("Serialized and deserialized translations object:", deserializedTranslations);
 
