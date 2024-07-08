@@ -32,7 +32,7 @@ class ErrorBoundary extends React.Component {
   }
 }
 
-function App({ Component, pageProps, translations, originalTranslations, currentLanguage }) {
+function App({ Component, pageProps, translations = {}, originalTranslations = {}, currentLanguage = 'en' }) {
   console.log("App component received props on initial render:", { Component, pageProps, translations, originalTranslations, currentLanguage });
   const [isInitialized, setIsInitialized] = useState(false);
   console.log("Initial isInitialized state:", isInitialized);
@@ -55,18 +55,16 @@ function App({ Component, pageProps, translations, originalTranslations, current
           setIsInitialized(true);
           console.log("i18next initialization complete, isInitialized set to true.");
         } else {
-          console.error("Translations prop is undefined or null inside useEffect.");
+          console.error("Translations prop is undefined or null inside useEffect. Falling back to default translations.");
+          setIsInitialized(true); // Allow rendering with default translations
         }
       } catch (error) {
         console.error("Error resolving i18nInitPromise inside useEffect:", error);
+        setIsInitialized(true); // Allow rendering with default translations
       }
     };
 
-    if (translations && currentLanguage) {
-      initializeI18n();
-    } else {
-      console.error("Translations or currentLanguage prop is missing.");
-    }
+    initializeI18n();
   }, [translations, currentLanguage]);
 
   console.log("App component received props after useEffect:", { Component, pageProps, translations, originalTranslations, currentLanguage });
