@@ -140,20 +140,13 @@ export async function getServerSideProps(appContext) {
     };
   }
 
-  // Check for empty or undefined translations
-  if (!translations || Object.keys(translations).length === 0) {
-    console.error("Translations are undefined or empty before returning from getServerSideProps");
-    return {
-      props: {
-        translations: null,
-      },
-    };
-  }
+  // Ensure the translations object is serializable
+  const serializedTranslations = JSON.parse(JSON.stringify(translations));
 
-  console.log("Translations object before returning from getServerSideProps:", JSON.stringify(translations, null, 2));
+  console.log("Translations object before returning from getServerSideProps:", JSON.stringify(serializedTranslations, null, 2));
   return {
     props: {
-      translations, // Pass the actual translations object
+      translations: serializedTranslations, // Pass the serialized translations object
     },
   };
 }
