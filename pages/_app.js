@@ -202,7 +202,8 @@ export async function getServerSideProps(appContext) {
   return {
     props: {
       ...props,
-      debug: "This is a debug message to trace props"
+      debug: "This is a debug message to trace props",
+      serializedTranslations: JSON.stringify(serializableTranslations), // Add serialized translations for debugging
     },
   };
 }

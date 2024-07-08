@@ -175,3 +175,301 @@ App component received props: {
   currentLanguage: [90mundefined[39m
 }
 Rendering Loading component due to missing translations or uninitialized i18n
+- [36mwait[39m compiling...
+- [35mevent[39m compiled client and server successfully in 3.5s (930 modules)
+i18next::backendConnector: loaded namespace common for language en {
+  welcome_message: [32m'Welcome'[39m,
+  map_title: [32m'Ziggo Map'[39m,
+  search_placeholder: [32m'Search for a place'[39m,
+  language_selector: [32m'Select Language'[39m,
+  find_cigarette_machine: [32m'Find Cigarette Machine'[39m,
+  cigarette_machine_nearby: [32m'Cigarette Machine Nearby'[39m,
+  find_cigarette_machines_nearby: [32m'A convenient and reliable way to find cigarette machines near you'[39m,
+  cigarette_machine_map: [32m'Cigarette Machine Map'[39m,
+  more_information: [32m'More Information'[39m,
+  default_location: [32m'Default Location'[39m,
+  locate_me: [32m'Locate me'[39m,
+  start_route_planning: [32m'Start route planning'[39m,
+  enter_address: [32m'Enter address...'[39m,
+  not_found: [32m'Not found'[39m,
+  seo: {
+    title: [32m'Find Cigarette Machine Nearby'[39m,
+    description: [32m'Find cigarette machines nearby on the Cigarette Machine Map'[39m,
+    keywords: [32m'cigarette machine, cigarette machines, find cigarette machine, find cigarette machines, cigarette machine search, cigarette machine map, cigarette machine map Germany, cigarette machines map, cigarette machines map de'[39m,
+    ogTitle: [32m'Find Cigarette Machine Nearby'[39m,
+    ogDescription: [32m'Find cigarette machines nearby on the Cigarette Machine Map'[39m
+  },
+  home: [32m'Home'[39m,
+  comprehensive_database: [32m'Comprehensive Database'[39m,
+  comprehensive_database_description: [32m'A comprehensive database of cigarette machines'[39m,
+  easy_navigation: [32m'Easy Navigation'[39m,
+  easy_navigation_description: [32m'Easily navigate to find cigarette machines'[39m,
+  always_up_to_date: [32m'Always Up-to-Date'[39m,
+  always_up_to_date_description: [32m'Our database is always up-to-date'[39m,
+  free_of_charge: [32m'Free of Charge'[39m,
+  free_of_charge_description: [32m'Our service is free of charge'[39m,
+  faq_question_1: [32m'What is this service?'[39m,
+  faq_answer_1: [32m'This service helps you find cigarette machines nearby.'[39m,
+  faq_question_2: [32m'How do I use it?'[39m,
+  faq_answer_2: [32m'Simply enter your location and find nearby cigarette machines.'[39m,
+  faq_question_3: [32m'Is it free?'[39m,
+  faq_answer_3: [32m'Yes, this service is completely free.'[39m,
+  map: [32m'Map'[39m,
+  contact: [32m'Contact'[39m,
+  appsplosion: [32m'Appsplosion'[39m,
+  privacy: [32m'Privacy'[39m,
+  terms: [32m'Terms'[39m,
+  everything_you_need_to_find: [32m'Everything you need to find'[39m,
+  comprehensive_database_and_interactive_map: [32m'Comprehensive database and interactive map'[39m,
+  frequently_asked_questions: [32m'Frequently Asked Questions'[39m,
+  simplify_your_search: [32m'Simplify your search'[39m,
+  start_using_our_map_today: [32m'Start using our map today'[39m,
+  interactive_map_and_comprehensive_database: [32m'Interactive map and comprehensive database'[39m,
+  get_started: [32m'Get Started'[39m,
+  solutions: [32m'Solutions'[39m,
+  support: [32m'Support'[39m,
+  loading_message: [32m'Loading translations, please wait...'[39m
+}
+i18next: languageChanged en
+i18next: init: i18next is already initialized. You should call init just once!
+i18next: initialized {
+  debug: [33mtrue[39m,
+  initImmediate: [33mfalse[39m,
+  ns: [ [32m'common'[39m ],
+  defaultNS: [32m'common'[39m,
+  fallbackLng: [ [32m'en'[39m ],
+  fallbackNS: [33mfalse[39m,
+  supportedLngs: [
+    [32m'en'[39m, [32m'de'[39m, [32m'fr'[39m,
+    [32m'it'[39m, [32m'es'[39m, [32m'nl'[39m,
+    [32m'pt'[39m, [32m'el'[39m, [32m'hr'[39m,
+    [32m'cs'[39m, [32m'da'[39m, [32m'et'[39m,
+    [32m'fi'[39m, [32m'fy'[39m, [32m'cimode'[39m
+  ],
+  nonExplicitSupportedLngs: [33mfalse[39m,
+  load: [32m'all'[39m,
+  preload: [33mfalse[39m,
+  simplifyPluralSuffix: [33mtrue[39m,
+  keySeparator: [32m'.'[39m,
+  nsSeparator: [32m':'[39m,
+  pluralSeparator: [32m'_'[39m,
+  contextSeparator: [32m'_'[39m,
+  partialBundledLanguages: [33mfalse[39m,
+  saveMissing: [33mfalse[39m,
+  updateMissing: [33mfalse[39m,
+  saveMissingTo: [32m'fallback'[39m,
+  saveMissingPlurals: [33mtrue[39m,
+  missingKeyHandler: [33mfalse[39m,
+  missingInterpolationHandler: [33mfalse[39m,
+  postProcess: [33mfalse[39m,
+  postProcessPassResolved: [33mfalse[39m,
+  returnNull: [33mfalse[39m,
+  returnEmptyString: [33mtrue[39m,
+  returnObjects: [33mfalse[39m,
+  joinArrays: [33mfalse[39m,
+  returnedObjectHandler: [33mfalse[39m,
+  parseMissingKeyHandler: [33mfalse[39m,
+  appendNamespaceToMissingKey: [33mfalse[39m,
+  appendNamespaceToCIMode: [33mfalse[39m,
+  overloadTranslationOptionHandler: [36m[Function: handle][39m,
+  interpolation: {
+    escapeValue: [33mtrue[39m,
+    format: [36m[Function: bound format][39m,
+    prefix: [32m'{{'[39m,
+    suffix: [32m'}}'[39m,
+    formatSeparator: [32m','[39m,
+    unescapePrefix: [32m'-'[39m,
+    nestingPrefix: [32m'$t('[39m,
+    nestingSuffix: [32m')'[39m,
+    nestingOptionsSeparator: [32m','[39m,
+    maxReplaces: [33m1000[39m,
+    skipOnVariables: [33mtrue[39m
+  },
+  backend: {
+    loadPath: [32m'/home/ubuntu/ziggo/public/locales/{{lng}}/{{ns}}.json'[39m,
+    addPath: [32m'/locales/{{lng}}/{{ns}}.missing.json'[39m,
+    ident: [33m2[39m,
+    parse: [36m[Function: parse][39m,
+    stringify: [36m[Function: stringify][39m
+  },
+  ignoreJSONStructure: [33mtrue[39m,
+  lng: [32m'en'[39m
+}
+App component received props on initial render: {
+  Component: [36m[Function: Example][39m,
+  pageProps: {},
+  translations: [90mundefined[39m,
+  originalTranslations: [90mundefined[39m,
+  currentLanguage: [90mundefined[39m
+}
+Initial isInitialized state: [33mfalse[39m
+App component received props after useEffect: {
+  Component: [36m[Function: Example][39m,
+  pageProps: {},
+  translations: [90mundefined[39m,
+  originalTranslations: [90mundefined[39m,
+  currentLanguage: [90mundefined[39m
+}
+isInitialized state after useEffect: [33mfalse[39m
+App component received props: {
+  Component: [36m[Function: Example][39m,
+  pageProps: {},
+  translations: [90mundefined[39m,
+  originalTranslations: [90mundefined[39m,
+  currentLanguage: [90mundefined[39m
+}
+Rendering Loading component due to missing translations or uninitialized i18n
+<w> [webpack.cache.PackFileCacheStrategy] Caching failed for pack: Error: ENOENT: no such file or directory, rename '/home/ubuntu/ziggo/.next/cache/webpack/client-development/2.pack.gz_' -> '/home/ubuntu/ziggo/.next/cache/webpack/client-development/2.pack.gz'
+- [36mwait[39m compiling...
+- [35mevent[39m compiled client and server successfully in 3.1s (930 modules)
+- [36mwait[39m compiling /_error (client and server)...
+- [35mevent[39m compiled client and server successfully in 513 ms (932 modules)
+- [36mwait[39m compiling...
+- [35mevent[39m compiled client and server successfully in 2.6s (932 modules)
+- [36mwait[39m compiling...
+- [35mevent[39m compiled client and server successfully in 2.4s (932 modules)
+<w> [webpack.cache.PackFileCacheStrategy] Caching failed for pack: Error: ENOENT: no such file or directory, rename '/home/ubuntu/ziggo/.next/cache/webpack/client-development/1.pack.gz_' -> '/home/ubuntu/ziggo/.next/cache/webpack/client-development/1.pack.gz'
+i18next::backendConnector: loaded namespace common for language en {
+  welcome_message: [32m'Welcome'[39m,
+  map_title: [32m'Ziggo Map'[39m,
+  search_placeholder: [32m'Search for a place'[39m,
+  language_selector: [32m'Select Language'[39m,
+  find_cigarette_machine: [32m'Find Cigarette Machine'[39m,
+  cigarette_machine_nearby: [32m'Cigarette Machine Nearby'[39m,
+  find_cigarette_machines_nearby: [32m'A convenient and reliable way to find cigarette machines near you'[39m,
+  cigarette_machine_map: [32m'Cigarette Machine Map'[39m,
+  more_information: [32m'More Information'[39m,
+  default_location: [32m'Default Location'[39m,
+  locate_me: [32m'Locate me'[39m,
+  start_route_planning: [32m'Start route planning'[39m,
+  enter_address: [32m'Enter address...'[39m,
+  not_found: [32m'Not found'[39m,
+  seo: {
+    title: [32m'Find Cigarette Machine Nearby'[39m,
+    description: [32m'Find cigarette machines nearby on the Cigarette Machine Map'[39m,
+    keywords: [32m'cigarette machine, cigarette machines, find cigarette machine, find cigarette machines, cigarette machine search, cigarette machine map, cigarette machine map Germany, cigarette machines map, cigarette machines map de'[39m,
+    ogTitle: [32m'Find Cigarette Machine Nearby'[39m,
+    ogDescription: [32m'Find cigarette machines nearby on the Cigarette Machine Map'[39m
+  },
+  home: [32m'Home'[39m,
+  comprehensive_database: [32m'Comprehensive Database'[39m,
+  comprehensive_database_description: [32m'A comprehensive database of cigarette machines'[39m,
+  easy_navigation: [32m'Easy Navigation'[39m,
+  easy_navigation_description: [32m'Easily navigate to find cigarette machines'[39m,
+  always_up_to_date: [32m'Always Up-to-Date'[39m,
+  always_up_to_date_description: [32m'Our database is always up-to-date'[39m,
+  free_of_charge: [32m'Free of Charge'[39m,
+  free_of_charge_description: [32m'Our service is free of charge'[39m,
+  faq_question_1: [32m'What is this service?'[39m,
+  faq_answer_1: [32m'This service helps you find cigarette machines nearby.'[39m,
+  faq_question_2: [32m'How do I use it?'[39m,
+  faq_answer_2: [32m'Simply enter your location and find nearby cigarette machines.'[39m,
+  faq_question_3: [32m'Is it free?'[39m,
+  faq_answer_3: [32m'Yes, this service is completely free.'[39m,
+  map: [32m'Map'[39m,
+  contact: [32m'Contact'[39m,
+  appsplosion: [32m'Appsplosion'[39m,
+  privacy: [32m'Privacy'[39m,
+  terms: [32m'Terms'[39m,
+  everything_you_need_to_find: [32m'Everything you need to find'[39m,
+  comprehensive_database_and_interactive_map: [32m'Comprehensive database and interactive map'[39m,
+  frequently_asked_questions: [32m'Frequently Asked Questions'[39m,
+  simplify_your_search: [32m'Simplify your search'[39m,
+  start_using_our_map_today: [32m'Start using our map today'[39m,
+  interactive_map_and_comprehensive_database: [32m'Interactive map and comprehensive database'[39m,
+  get_started: [32m'Get Started'[39m,
+  solutions: [32m'Solutions'[39m,
+  support: [32m'Support'[39m,
+  loading_message: [32m'Loading translations, please wait...'[39m
+}
+i18next: languageChanged en
+i18next: initialized {
+  debug: [33mtrue[39m,
+  initImmediate: [33mfalse[39m,
+  ns: [ [32m'common'[39m ],
+  defaultNS: [32m'common'[39m,
+  fallbackLng: [ [32m'en'[39m ],
+  fallbackNS: [33mfalse[39m,
+  supportedLngs: [
+    [32m'en'[39m, [32m'de'[39m, [32m'fr'[39m,
+    [32m'it'[39m, [32m'es'[39m, [32m'nl'[39m,
+    [32m'pt'[39m, [32m'el'[39m, [32m'hr'[39m,
+    [32m'cs'[39m, [32m'da'[39m, [32m'et'[39m,
+    [32m'fi'[39m, [32m'fy'[39m, [32m'cimode'[39m
+  ],
+  nonExplicitSupportedLngs: [33mfalse[39m,
+  load: [32m'all'[39m,
+  preload: [33mfalse[39m,
+  simplifyPluralSuffix: [33mtrue[39m,
+  keySeparator: [32m'.'[39m,
+  nsSeparator: [32m':'[39m,
+  pluralSeparator: [32m'_'[39m,
+  contextSeparator: [32m'_'[39m,
+  partialBundledLanguages: [33mfalse[39m,
+  saveMissing: [33mfalse[39m,
+  updateMissing: [33mfalse[39m,
+  saveMissingTo: [32m'fallback'[39m,
+  saveMissingPlurals: [33mtrue[39m,
+  missingKeyHandler: [33mfalse[39m,
+  missingInterpolationHandler: [33mfalse[39m,
+  postProcess: [33mfalse[39m,
+  postProcessPassResolved: [33mfalse[39m,
+  returnNull: [33mfalse[39m,
+  returnEmptyString: [33mtrue[39m,
+  returnObjects: [33mfalse[39m,
+  joinArrays: [33mfalse[39m,
+  returnedObjectHandler: [33mfalse[39m,
+  parseMissingKeyHandler: [33mfalse[39m,
+  appendNamespaceToMissingKey: [33mfalse[39m,
+  appendNamespaceToCIMode: [33mfalse[39m,
+  overloadTranslationOptionHandler: [36m[Function: handle][39m,
+  interpolation: {
+    escapeValue: [33mtrue[39m,
+    format: [36m[Function: bound format][39m,
+    prefix: [32m'{{'[39m,
+    suffix: [32m'}}'[39m,
+    formatSeparator: [32m','[39m,
+    unescapePrefix: [32m'-'[39m,
+    nestingPrefix: [32m'$t('[39m,
+    nestingSuffix: [32m')'[39m,
+    nestingOptionsSeparator: [32m','[39m,
+    maxReplaces: [33m1000[39m,
+    skipOnVariables: [33mtrue[39m
+  },
+  backend: {
+    loadPath: [32m'/home/ubuntu/ziggo/public/locales/{{lng}}/{{ns}}.json'[39m,
+    addPath: [32m'/locales/{{lng}}/{{ns}}.missing.json'[39m,
+    ident: [33m2[39m,
+    parse: [36m[Function: parse][39m,
+    stringify: [36m[Function: stringify][39m
+  },
+  ignoreJSONStructure: [33mtrue[39m,
+  lng: [32m'en'[39m
+}
+i18next: init: i18next is already initialized. You should call init just once!
+App component received props on initial render: {
+  Component: [36m[Function: Example][39m,
+  pageProps: {},
+  translations: [90mundefined[39m,
+  originalTranslations: [90mundefined[39m,
+  currentLanguage: [90mundefined[39m
+}
+Initial isInitialized state: [33mfalse[39m
+App component received props after useEffect: {
+  Component: [36m[Function: Example][39m,
+  pageProps: {},
+  translations: [90mundefined[39m,
+  originalTranslations: [90mundefined[39m,
+  currentLanguage: [90mundefined[39m
+}
+isInitialized state after useEffect: [33mfalse[39m
+App component received props: {
+  Component: [36m[Function: Example][39m,
+  pageProps: {},
+  translations: [90mundefined[39m,
+  originalTranslations: [90mundefined[39m,
+  currentLanguage: [90mundefined[39m
+}
+Rendering Loading component due to missing translations or uninitialized i18n
+- [36mwait[39m compiling...
+- [35mevent[39m compiled client and server successfully in 3.7s (930 modules)
