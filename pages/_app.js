@@ -156,6 +156,7 @@ export async function getServerSideProps(appContext) {
     }
   };
 
+  // Ensure translations always contains at least the default values
   try {
     const fileTranslations = JSON.parse(fs.readFileSync(translationsFilePath, 'utf-8'));
     console.log("Type of fileTranslations:", typeof fileTranslations);
@@ -173,12 +174,30 @@ export async function getServerSideProps(appContext) {
       JSON.stringify(translations);
     } catch (error) {
       console.error("Translations object is not serializable:", error);
-      translations = {}; // Fallback to an empty object if serialization fails
+      translations = { // Fallback to default translations if serialization fails
+        seo: {
+          title: "Default Title",
+          description: "Default Description",
+          keywords: "default, keywords",
+          ogTitle: "Default OG Title",
+          ogDescription: "Default OG Description"
+        }
+      };
     }
   } catch (error) {
     if (error.code !== 'ENOENT') {
       console.error("Error reading translations file:", error);
     }
+    // Ensure translations always contains at least the default values in case of error
+    translations = {
+      seo: {
+        title: "Default Title",
+        description: "Default Description",
+        keywords: "default, keywords",
+        ogTitle: "Default OG Title",
+        ogDescription: "Default OG Description"
+      }
+    };
   }
 
   return {
