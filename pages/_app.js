@@ -34,11 +34,10 @@ function App({ Component, pageProps, translations, originalTranslations }) {
   console.log("App component received translations prop:", translations);
   console.log("App component received originalTranslations prop:", originalTranslations);
 
-  const [localTranslations, setLocalTranslations] = useState(translations || {});
+  const [localTranslations, setLocalTranslations] = useState(translations);
 
   useEffect(() => {
     console.log("Type of translations prop:", typeof translations);
-
     const initializeTranslations = async () => {
       await i18nInitPromise;
       if (translations && Object.keys(translations).length > 0) {
@@ -67,6 +66,8 @@ function App({ Component, pageProps, translations, originalTranslations }) {
     };
 
     initializeTranslations();
+
+    // Remove the duplicate initializeTranslations function
   }, [translations]);
 
   if (!i18n.isInitialized || Object.keys(localTranslations).length === 0) {
