@@ -1,0 +1,26 @@
+{
+  "title": "Distributore di sigarette nelle vicinanze",
+  "subtitle": "Un modo comodo e affidabile per trovare distributori di sigarette vicino a te",
+  "nav": {
+    "home": "Home",
+    "map": "Mappa dei distributori di sigarette"
+  },
+  "cta": {
+    "map": "Mappa dei distributori di sigarette",
+    "more_info": "Maggiori informazioni"
+  },
+  "faq": {
+    "title": "Domande frequenti",
+    "q1": "Cos'è questo servizio?",
+    "a1": "Questo servizio ti aiuta a trovare distributori di sigarette nelle vicinanze.",
+    "q2": "Come lo uso?",
+    "a2": "Inserisci semplicemente la tua posizione e trova distributori di sigarette nelle vicinanze.",
+    "q3": "È gratuito?",
+    "a3": "Sì, questo servizio è completamente gratuito."
+  },
+  "footer": {
+    "solutions": "Soluzioni",
+    "home": "Home",
+    "map": "Mappa"
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "title": "Zigarettenautomat in der Nähe",
+  "subtitle": "Eine bequeme und zuverlässige Möglichkeit, Zigarettenautomaten in Ihrer Nähe zu finden",
+  "nav": {
+    "home": "Startseite",
+    "map": "Zigarettenautomatenkarte"
+  },
+  "cta": {
+    "map": "Zigarettenautomatenkarte",
+    "more_info": "Mehr Informationen"
+  },
+  "faq": {
+    "title": "Häufig gestellte Fragen",
+    "q1": "Was ist dieser Service?",
+    "a1": "Dieser Service hilft Ihnen, Zigarettenautomaten in Ihrer Nähe zu finden.",
+    "q2": "Wie benutze ich es?",
+    "a2": "Geben Sie einfach Ihren Standort ein und finden Sie Zigarettenautomaten in der Nähe.",
+    "q3": "Ist es kostenlos?",
+    "a3": "Ja, dieser Service ist völlig kostenlos."
+  },
+  "footer": {
+    "solutions": "Lösungen",
+    "home": "Startseite",
+    "map": "Karte"
+  }
+}

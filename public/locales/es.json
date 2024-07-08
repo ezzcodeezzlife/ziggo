@@ -1,0 +1,26 @@
+{
+  "title": "Máquina expendedora de cigarrillos cercana",
+  "subtitle": "Una forma conveniente y confiable de encontrar máquinas expendedoras de cigarrillos cerca de ti",
+  "nav": {
+    "home": "Inicio",
+    "map": "Mapa de máquinas expendedoras de cigarrillos"
+  },
+  "cta": {
+    "map": "Mapa de máquinas expendedoras de cigarrillos",
+    "more_info": "Más información"
+  },
+  "faq": {
+    "title": "Preguntas frecuentes",
+    "q1": "¿Qué es este servicio?",
+    "a1": "Este servicio te ayuda a encontrar máquinas expendedoras de cigarrillos cercanas.",
+    "q2": "¿Cómo lo uso?",
+    "a2": "Simplemente ingresa tu ubicación y encuentra máquinas expendedoras de cigarrillos cercanas.",
+    "q3": "¿Es gratis?",
+    "a3": "Sí, este servicio es completamente gratuito."
+  },
+  "footer": {
+    "solutions": "Soluciones",
+    "home": "Inicio",
+    "map": "Mapa"
+  }
+}

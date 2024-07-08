@@ -1,0 +1,26 @@
+{
+  "title": "Distributeur de cigarettes à proximité",
+  "subtitle": "Un moyen pratique et fiable de trouver des distributeurs de cigarettes près de chez vous",
+  "nav": {
+    "home": "Accueil",
+    "map": "Carte des distributeurs de cigarettes"
+  },
+  "cta": {
+    "map": "Carte des distributeurs de cigarettes",
+    "more_info": "Plus d'informations"
+  },
+  "faq": {
+    "title": "Questions fréquemment posées",
+    "q1": "Qu'est-ce que ce service?",
+    "a1": "Ce service vous aide à trouver des distributeurs de cigarettes à proximité.",
+    "q2": "Comment l'utiliser?",
+    "a2": "Entrez simplement votre emplacement et trouvez des distributeurs de cigarettes à proximité.",
+    "q3": "Est-ce gratuit?",
+    "a3": "Oui, ce service est entièrement gratuit."
+  },
+  "footer": {
+    "solutions": "Solutions",
+    "home": "Accueil",
+    "map": "Carte"
+  }
+}
