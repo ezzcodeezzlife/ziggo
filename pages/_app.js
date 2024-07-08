@@ -146,6 +146,7 @@ export async function getServerSideProps(appContext) {
     const translationsPath = path.join(process.cwd(), 'public', 'locales', currentLanguage, 'common.json');
     const translationsFile = fs.readFileSync(translationsPath, 'utf8');
     translations = JSON.parse(translationsFile);
+    console.log("Translations loaded from file:", translations);
   } catch (error) {
     console.error(`Error loading translations for language ${currentLanguage}:`, error);
   }
@@ -156,6 +157,7 @@ export async function getServerSideProps(appContext) {
   let serializableTranslations = {};
   try {
     serializableTranslations = JSON.parse(JSON.stringify(translations));
+    console.log("Serializable translations object:", serializableTranslations);
   } catch (error) {
     console.error("Error serializing translations object:", error);
   }
