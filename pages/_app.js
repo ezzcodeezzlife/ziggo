@@ -139,6 +139,19 @@ export async function getServerSideProps(appContext) {
     // Log the state of the i18n instance
     console.log("i18n instance state before returning translations:", i18n);
 
+    // Verify the structure and serializability of the translations object
+    try {
+      const serializedTranslations = JSON.stringify(translations);
+      console.log("Serialized translations object:", serializedTranslations);
+    } catch (error) {
+      console.error("Error serializing translations object:", error);
+      return {
+        props: {
+          translations: null,
+        },
+      };
+    }
+
     return translations;
   }).catch((error) => {
     console.error("Error initializing i18next or fetching translations:", error);
