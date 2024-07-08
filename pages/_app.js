@@ -42,13 +42,11 @@ function App({ Component, pageProps, translations, originalTranslations, current
     console.error("Translations prop is undefined or null.");
   }
 
-  const [localTranslations, setLocalTranslations] = useState(translations || {});
-
-  const initializeTranslations = async () => {
+  // Ensure i18next is initialized before rendering the App component
+  (async () => {
     await i18nInitPromise;
     if (translations && Object.keys(translations).length > 0) {
       console.log("Translations prop received:", translations);
-      setLocalTranslations(translations);
       initializeI18next(translations, currentLanguage);
       console.log("i18next initialized and translations set.");
     } else {
@@ -62,23 +60,10 @@ function App({ Component, pageProps, translations, originalTranslations, current
           ogDescription: "Default OG Description"
         }
       };
-      setLocalTranslations(defaultTranslations);
       initializeI18next(defaultTranslations, 'en'); // Fallback to default translations
       console.log("Fallback translations initialized.");
     }
-
-    // Additional logging to check the state of localTranslations
-    console.log("State of localTranslations after useEffect:", localTranslations);
-  };
-
-  useEffect(() => {
-    const initialize = async () => {
-      await i18nInitPromise;
-      initializeTranslations();
-    };
-
-    initialize();
-  }, [currentLanguage]);
+  })();
 
   if (!i18n.isInitialized) {
     console.log("Rendering Loading component due to missing translations or uninitialized i18n");
@@ -86,24 +71,24 @@ function App({ Component, pageProps, translations, originalTranslations, current
   }
 
   // Log the translations received by the App component before rendering
-  console.log("Translations in App component before rendering:", localTranslations);
+  console.log("Translations in App component before rendering:", translations);
 
   return (
     <>
       <NextSeo
-        title={localTranslations.seo ? localTranslations.seo.title : "Default Title"}
-        description={localTranslations.seo ? localTranslations.seo.description : "Default Description"}
+        title={translations.seo ? translations.seo.title : "Default Title"}
+        description={translations.seo ? translations.seo.description : "Default Description"}
         canonical={`https://www.zigarettenautomatkarte.de/${i18n.language}`}
         aggregateRating={{
           ratingValue: "5",
           ratingCount: "94",
         }}
         datePublished="2024-02-03"
-        keywords={localTranslations.seo ? localTranslations.seo.keywords : "default, keywords"}
+        keywords={translations.seo ? translations.seo.keywords : "default, keywords"}
         openGraph={{
           url: `https://www.zigarettenautomatkarte.de/${i18n.language}`,
-          title: localTranslations.seo ? localTranslations.seo.ogTitle : "Default OG Title",
-          description: localTranslations.seo ? localTranslations.seo.ogDescription : "Default OG Description",
+          title: translations.seo ? translations.seo.ogTitle : "Default OG Title",
+          description: translations.seo ? translations.seo.ogDescription : "Default OG Description",
           images: [
             {
               url: "https://www.zigarettenautomatkarte.de/screenshot.png",
