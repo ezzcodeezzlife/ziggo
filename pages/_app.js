@@ -17,8 +17,10 @@ function App({ Component, pageProps, translations }) {
   const { t } = useTranslation();
 
   useEffect(() => {
-    // Initialize i18next with server-side translations
-    initializeI18next(translations, i18n.language);
+    // Wait for i18next initialization before setting translations
+    i18nInitPromise.then(() => {
+      initializeI18next(translations, i18n.language);
+    });
   }, [translations]);
 
   // Ensure i18n is initialized before rendering
@@ -107,9 +109,6 @@ export async function getServerSideProps(appContext) {
 
   // Log the translations fetched by getServerSideProps
   console.log("Translations in getServerSideProps:", translations);
-
-  // Initialize i18next with server-side translations before rendering
-  initializeI18next(translations, currentLanguage);
 
   return {
     props: {
