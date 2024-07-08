@@ -137,6 +137,7 @@ export async function getServerSideProps(appContext) {
     console.log("Final translations object to be passed as prop:", translations);
 
     // Check if the translations object is serializable
+    console.log("Translations object before serialization attempt:", translations);
     try {
       console.log("Attempting to serialize translations object...");
       JSON.stringify(translations);
@@ -153,6 +154,7 @@ export async function getServerSideProps(appContext) {
         }
       };
     }
+    console.log("Translations object after serialization attempt:", translations);
   } catch (error) {
     if (error.code !== 'ENOENT') {
       console.error("Error reading translations file:", error);
