@@ -33,6 +33,7 @@ class ErrorBoundary extends React.Component {
 }
 
 function App({ Component, pageProps, translations, originalTranslations, currentLanguage }) {
+  console.log("App component received props on initial render:", { Component, pageProps, translations, originalTranslations, currentLanguage });
   const [isInitialized, setIsInitialized] = useState(false);
 
   useEffect(() => {
@@ -150,9 +151,12 @@ export async function getServerSideProps(appContext) {
 
   console.log("Loaded translations object:", translations);
 
+  // Ensure translations object is serializable
+  const serializableTranslations = JSON.parse(JSON.stringify(translations));
+
   const props = {
-    translations,
-    originalTranslations: translations,
+    translations: serializableTranslations,
+    originalTranslations: serializableTranslations,
     currentLanguage,
   };
 
