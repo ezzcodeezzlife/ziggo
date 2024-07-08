@@ -119,6 +119,12 @@ export async function getServerSideProps(appContext) {
 
   console.log("Hardcoded translations object:", translations);
 
+  console.log("Returning props from getServerSideProps:", {
+    translations,
+    originalTranslations: translations,
+    currentLanguage,
+  });
+
   return {
     props: {
       translations,
