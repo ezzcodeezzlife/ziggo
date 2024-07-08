@@ -180,8 +180,10 @@ export async function getServerSideProps(appContext) {
 
   // Ensure translations object is serializable
   try {
-    JSON.stringify(translations);
-    console.log("Translations object is serializable.");
+    // Ensure all values in the translations object are serializable
+    const serializableTranslations = JSON.parse(JSON.stringify(translations));
+    console.log("Translations object is serializable:", serializableTranslations);
+    translations = serializableTranslations;
   } catch (error) {
     console.error("Translations object is not serializable:", error);
     // Fallback to default translations if serialization fails
@@ -195,6 +197,8 @@ export async function getServerSideProps(appContext) {
       }
     };
   }
+
+  console.log("Returning translations from getServerSideProps:", translations);
 
   return {
     props: {
