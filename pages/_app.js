@@ -10,6 +10,14 @@ import { initReactI18next } from 'react-i18next'; // Reintroduce initReactI18nex
 i18n.use(initReactI18next);
 
 function App({ Component, pageProps, translations, originalTranslations, currentLanguage }) {
+  const [isInitialized, setIsInitialized] = useState(false);
+
+  useEffect(() => {
+    i18nInitPromise.then(() => {
+      setIsInitialized(true);
+    });
+  }, []);
+
   console.log("App component received translations prop:", translations);
   console.log("App component received originalTranslations prop:", originalTranslations);
 
@@ -43,7 +51,7 @@ function App({ Component, pageProps, translations, originalTranslations, current
     }
   }
 
-  if (!i18n.isInitialized) {
+  if (!isInitialized) {
     console.log("Rendering Loading component due to missing translations or uninitialized i18n");
     return <Loading />;
   }
