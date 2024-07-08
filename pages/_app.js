@@ -47,11 +47,13 @@ function App({ Component, pageProps, translations }) {
     } else {
       console.error("Translations are null or invalid in useEffect. Falling back to default translations.");
       initializeI18next(null, 'en'); // Fallback to default translations
+      // Trigger a re-render once fallback translations are initialized
       setInitialized(true);
+      console.log("Fallback translations initialized. State of initialized:", true);
     }
     console.log("Translations in App component after useEffect:", translations);
     console.log("State of initialized after useEffect:", initialized);
-  }, [translations, setInitialized]);
+  }, [translations]);
 
   // Ensure i18n is initialized and translations are available before rendering
   if (!i18n.isInitialized || !translations || !initialized) {
