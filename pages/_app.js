@@ -172,27 +172,7 @@ export async function getServerSideProps(appContext) {
 
   console.log("Translations object before serialization check:", translations);
 
-  let serializedTranslations;
-  try {
-    console.log("Attempting to serialize translations object...");
-    serializedTranslations = JSON.stringify(translations);
-    console.log("Serialized translations object:", serializedTranslations);
-  } catch (error) {
-    console.error("Translations object is not serializable:", error);
-    serializedTranslations = JSON.stringify({
-      seo: {
-        title: "Default Title",
-        description: "Default Description",
-        keywords: "default, keywords",
-        ogTitle: "Default OG Title",
-        ogDescription: "Default OG Description"
-      }
-    });
-  }
-
-  console.log("Translations object after serialization check:", JSON.parse(serializedTranslations));
-
-  const finalTranslations = JSON.parse(serializedTranslations);
+  const finalTranslations = translations;
 
   console.log("Final translations object to be passed as prop:", finalTranslations);
 
