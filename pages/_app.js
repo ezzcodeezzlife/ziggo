@@ -18,12 +18,16 @@ function App({ Component, pageProps, translations }) {
 
   useEffect(() => {
     // Wait for i18next initialization before setting translations
-    if (!i18n.isInitialized) {
-      i18nInitPromise.then(() => {
+    if (translations) {
+      if (!i18n.isInitialized) {
+        i18nInitPromise.then(() => {
+          initializeI18next(translations, i18n.language);
+        });
+      } else {
         initializeI18next(translations, i18n.language);
-      });
+      }
     } else {
-      initializeI18next(translations, i18n.language);
+      console.error("Translations are undefined in useEffect");
     }
   }, [translations]);
 
