@@ -195,6 +195,8 @@ export async function getServerSideProps(appContext) {
 
   console.log("Final translations object to be passed as prop:", finalTranslations);
 
+  await i18nInitPromise; // Ensure i18next is initialized before creating props
+
   const props = {
     translations: finalTranslations || {
       seo: {
@@ -218,8 +220,6 @@ export async function getServerSideProps(appContext) {
   };
 
   console.log("Props object before returning from getServerSideProps:", props);
-
-  await i18nInitPromise; // Ensure i18next is initialized before returning props
 
   return {
     props,
