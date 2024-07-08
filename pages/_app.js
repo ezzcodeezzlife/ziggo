@@ -41,7 +41,7 @@ function App({ Component, pageProps, translations, originalTranslations }) {
 
     const initializeTranslations = async () => {
       await i18nInitPromise;
-      if (translations) {
+      if (translations && Object.keys(translations).length > 0) {
         console.log("Translations prop received:", translations);
         setLocalTranslations((prevTranslations) => ({
           ...prevTranslations,
@@ -74,7 +74,11 @@ function App({ Component, pageProps, translations, originalTranslations }) {
       console.log("State of localTranslations after useEffect:", localTranslations);
     };
 
-    initializeTranslations();
+    if (translations && Object.keys(translations).length > 0) {
+      initializeTranslations();
+    } else {
+      console.log("Waiting for translations prop to be defined...");
+    }
   }, [translations]);
 
   if (!i18n.isInitialized || Object.keys(localTranslations).length === 0) {
