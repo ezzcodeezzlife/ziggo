@@ -188,24 +188,13 @@ export async function getServerSideProps(appContext) {
 
   console.log("Loaded translations object:", translations);
 
-  // Ensure translations object is defined and not empty before serializing
   if (!translations || Object.keys(translations).length === 0) {
-    console.error("Translations object is undefined or empty before serialization.");
+    console.error("Translations object is undefined or empty before returning.");
   }
-
-  let serializableTranslations = {};
-  try {
-    serializableTranslations = JSON.parse(JSON.stringify(translations));
-    console.log("Serializable translations object:", serializableTranslations);
-  } catch (error) {
-    console.error("Error serializing translations object:", error);
-  }
-
-  console.log("Serializable translations object before returning:", serializableTranslations);
 
   const props = {
-    translations: serializableTranslations,
-    originalTranslations: serializableTranslations,
+    translations,
+    originalTranslations: translations,
     currentLanguage,
   };
 
