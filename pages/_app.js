@@ -133,8 +133,8 @@ export async function getServerSideProps(appContext) {
 
     // Check for serialization issues
     try {
-      JSON.stringify(translations);
-      console.log("Translations object is serializable:", JSON.stringify(translations, null, 2));
+      const serializedTranslations = JSON.stringify(translations);
+      console.log("Translations object is serializable:", serializedTranslations);
     } catch (serializationError) {
       console.error("Serialization error in getServerSideProps:", serializationError);
       return {
