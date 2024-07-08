@@ -36,14 +36,10 @@ function App({ Component, pageProps, translations, originalTranslations, current
   console.log("App component received props on initial render:", { Component, pageProps, translations, originalTranslations, currentLanguage });
   const [isInitialized, setIsInitialized] = useState(false);
   console.log("Initial isInitialized state:", isInitialized);
-  const [localTranslations, setLocalTranslations] = useState(translations);
-  console.log("Initial localTranslations state:", localTranslations);
 
   useEffect(() => {
     console.log("useEffect triggered with translations:", translations, "and currentLanguage:", currentLanguage);
     if (translations && Object.keys(translations).length > 0) {
-      setLocalTranslations(translations);
-      console.log("Set localTranslations state with translations prop:", translations);
       i18n.changeLanguage(currentLanguage);
       i18n.addResources(currentLanguage, 'common', translations);
       if (typeof window !== "undefined" && window.localStorage) {
@@ -61,36 +57,32 @@ function App({ Component, pageProps, translations, originalTranslations, current
     console.log("App component mounted");
   }, []);
 
-  console.log("App component received props:", { Component, pageProps, localTranslations, originalTranslations, currentLanguage });
-
-  if (!localTranslations) {
-    console.error("Translations prop is undefined or null.");
-  }
+  console.log("App component received props:", { Component, pageProps, translations, originalTranslations, currentLanguage });
 
   if (!isInitialized) {
     console.log("Rendering Loading component due to missing translations or uninitialized i18n");
     return <Loading />;
   }
 
-  console.log("Translations in App component before rendering:", localTranslations);
-  console.log("Rendering App component with translations:", localTranslations);
+  console.log("Translations in App component before rendering:", translations);
+  console.log("Rendering App component with translations:", translations);
 
   return (
     <ErrorBoundary>
       <NextSeo
-        title={localTranslations && localTranslations.seo ? localTranslations.seo.title : "Default Title"}
-        description={localTranslations && localTranslations.seo ? localTranslations.seo.description : "Default Description"}
+        title={translations && translations.seo ? translations.seo.title : "Default Title"}
+        description={translations && translations.seo ? translations.seo.description : "Default Description"}
         canonical={`https://www.zigarettenautomatkarte.de/${i18n.language}`}
         aggregateRating={{
           ratingValue: "5",
           ratingCount: "94",
         }}
         datePublished="2024-02-03"
-        keywords={localTranslations && localTranslations.seo ? localTranslations.seo.keywords : "default, keywords"}
+        keywords={translations && translations.seo ? translations.seo.keywords : "default, keywords"}
         openGraph={{
           url: `https://www.zigarettenautomatkarte.de/${i18n.language}`,
-          title: localTranslations && localTranslations.seo ? localTranslations.seo.ogTitle : "Default OG Title",
-          description: localTranslations && localTranslations.seo ? localTranslations.seo.ogDescription : "Default OG Description",
+          title: translations && translations.seo ? translations.seo.ogTitle : "Default OG Title",
+          description: translations && translations.seo ? translations.seo.ogDescription : "Default OG Description",
           images: [
             {
               url: "https://www.zigarettenautomatkarte.de/screenshot.png",
