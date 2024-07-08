@@ -30,8 +30,9 @@ const initializeI18next = (translations, language) => {
   }
 };
 
-function App({ Component, pageProps, translations }) {
+function App({ Component, pageProps, translations, originalTranslations }) {
   console.log("App component received translations prop:", translations);
+  console.log("App component received originalTranslations prop:", originalTranslations);
 
   const [localTranslations, setLocalTranslations] = useState(translations || {});
 
@@ -199,6 +200,7 @@ export async function getServerSideProps(appContext) {
     return {
       props: {
         translations: deserializedTranslations,
+        originalTranslations: translations, // Add original translations for comparison
       },
     };
   } else {
