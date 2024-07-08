@@ -41,8 +41,10 @@ function App({ Component, pageProps, translations, originalTranslations, current
     console.log("useEffect triggered with translations:", translations, "and currentLanguage:", currentLanguage);
     const initializeI18n = async () => {
       try {
+        console.log("Awaiting i18nInitPromise inside useEffect...");
         await i18nInitPromise;
         console.log("i18nInitPromise resolved successfully inside useEffect.");
+        console.log("i18next instance after i18nInitPromise resolution:", i18n);
         if (translations && Object.keys(translations).length > 0) {
           i18n.changeLanguage(currentLanguage);
           i18n.addResources(currentLanguage, 'common', translations);
