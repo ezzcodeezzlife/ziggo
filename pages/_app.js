@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import "@/styles/globals.css";
 import Script from "next/script";
 import { NextSeo } from "next-seo";
@@ -21,6 +21,7 @@ function App({ Component, pageProps, translations }) {
   console.log("Structure of translations prop in App component:", JSON.stringify(translations, null, 2));
 
   const memoizedTranslations = useMemo(() => translations, [translations]);
+  const [initialized, setInitialized] = useState(false);
 
   useEffect(() => {
     console.log("Initial translations in useEffect:", memoizedTranslations);
@@ -29,6 +30,8 @@ function App({ Component, pageProps, translations }) {
       i18nInitPromise.then(() => {
         console.log("Translations after i18nInitPromise resolves:", memoizedTranslations);
         initializeI18next(memoizedTranslations, i18n.language);
+        // Trigger a re-render once translations are initialized
+        setInitialized(true);
       }).catch((error) => {
         console.error("Error initializing i18next:", error);
       });
@@ -36,10 +39,10 @@ function App({ Component, pageProps, translations }) {
       console.error("Translations are null or invalid in useEffect");
     }
     console.log("Translations in App component after useEffect:", memoizedTranslations);
-  }, [memoizedTranslations]);
+  }, [memoizedTranslations, setInitialized]);
 
   // Ensure i18n is initialized and translations are available before rendering
-  if (!i18n.isInitialized || !memoizedTranslations) {
+  if (!i18n.isInitialized || !memoizedTranslations || !initialized) {
     console.log("Rendering Loading component due to missing translations or uninitialized i18n");
     return <Loading />;
   }
