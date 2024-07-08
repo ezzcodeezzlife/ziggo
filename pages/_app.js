@@ -142,7 +142,18 @@ export async function getServerSideProps(appContext) {
   }
 
   // Ensure the translations object is serializable
-  const serializedTranslations = JSON.parse(JSON.stringify(translations));
+  let serializedTranslations;
+  try {
+    serializedTranslations = JSON.parse(JSON.stringify(translations));
+    console.log("Translations object is serializable:", serializedTranslations);
+  } catch (error) {
+    console.error("Error serializing translations object:", error);
+    return {
+      props: {
+        translations: null,
+      },
+    };
+  }
 
   console.log("Translations object before returning from getServerSideProps:", JSON.stringify(serializedTranslations, null, 2));
   console.log("Returning serialized translations from getServerSideProps");
