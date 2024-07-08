@@ -208,14 +208,30 @@ export async function getServerSideProps(appContext) {
     };
   }
 
-  console.log("Translations object before returning props:", translations);
-
-  // Additional logging to confirm the state of translations before returning props
   console.log("Translations object before serialization check:", translations);
+
+  let serializedTranslations;
+  try {
+    serializedTranslations = JSON.stringify(translations);
+    console.log("Serialized translations object:", serializedTranslations);
+  } catch (error) {
+    console.error("Translations object is not serializable:", error);
+    serializedTranslations = JSON.stringify({
+      seo: {
+        title: "Default Title",
+        description: "Default Description",
+        keywords: "default, keywords",
+        ogTitle: "Default OG Title",
+        ogDescription: "Default OG Description"
+      }
+    });
+  }
+
+  console.log("Translations object after serialization check:", JSON.parse(serializedTranslations));
 
   return {
     props: {
-      translations: translations || {
+      translations: JSON.parse(serializedTranslations) || {
         seo: {
           title: "Default Title",
           description: "Default Description",
@@ -224,7 +240,7 @@ export async function getServerSideProps(appContext) {
           ogDescription: "Default OG Description"
         }
       },
-      originalTranslations: translations || {
+      originalTranslations: JSON.parse(serializedTranslations) || {
         seo: {
           title: "Default Title",
           description: "Default Description",
