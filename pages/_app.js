@@ -156,6 +156,14 @@ export async function getServerSideProps(appContext) {
     console.log("i18nInitPromise resolved successfully");
   } catch (error) {
     console.error("Error resolving i18nInitPromise:", error);
+    return {
+      props: {
+        translations: {},
+        originalTranslations: {},
+        currentLanguage,
+        error: "i18n initialization failed",
+      },
+    };
   }
 
   const fs = require('fs');
