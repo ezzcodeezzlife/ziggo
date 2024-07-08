@@ -168,6 +168,14 @@ export async function getServerSideProps(appContext) {
 
   console.log("Final translations object to be passed as prop:", translations);
 
+  // Check if the translations object is serializable
+  try {
+    JSON.stringify(translations);
+  } catch (error) {
+    console.error("Translations object is not serializable:", error);
+    translations = {}; // Fallback to an empty object if serialization fails
+  }
+
   return {
     props: {
       translations,
