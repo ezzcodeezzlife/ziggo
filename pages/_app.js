@@ -175,43 +175,6 @@ export async function getServerSideProps(appContext) {
 
   console.log("Loaded translations object before serialization:", translations);
 
-  if (!translations || Object.keys(translations).length === 0) {
-    console.error("Translations object is undefined or empty before returning.");
-    translations = {
-      seo: {
-        title: "Default Title",
-        description: "Default Description",
-        keywords: "default, keywords",
-        ogTitle: "Default OG Title",
-        ogDescription: "Default OG Description"
-      },
-      title: "Default Title",
-      subtitle: "Default Subtitle",
-      nav: {
-        home: "Home",
-        map: "Map"
-      },
-      cta: {
-        map: "Map",
-        more_info: "More Info"
-      },
-      faq: {
-        title: "Frequently Asked Questions",
-        q1: "What is this service?",
-        a1: "This service helps you find cigarette machines nearby.",
-        q2: "How do I use it?",
-        a2: "Simply enter your location and find cigarette machines nearby.",
-        q3: "Is it free?",
-        a3: "Yes, this service is completely free."
-      },
-      footer: {
-        solutions: "Solutions",
-        home: "Home",
-        map: "Map"
-      }
-    };
-  }
-
   // Check if translations object is serializable
   let serializableTranslations;
   try {
