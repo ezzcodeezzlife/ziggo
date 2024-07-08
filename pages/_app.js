@@ -110,7 +110,8 @@ export async function getServerSideProps(appContext) {
   const path = require('path');
   const currentLanguage = appContext.req.language || 'en';
 
-  await i18nInitPromise; // Ensure i18next is initialized before reading translations
+  // Ensure i18next is initialized before reading translations
+  await i18nInitPromise;
 
   const translationsFilePath = path.resolve(process.cwd(), 'public/locales', currentLanguage, 'common.json');
 
@@ -174,35 +175,17 @@ export async function getServerSideProps(appContext) {
 
   console.log("Translations object before serialization check:", translations);
 
-  const finalTranslations = translations;
-
-  console.log("Final translations object to be passed as prop:", finalTranslations);
-
-  console.log("Translations object after i18nInitPromise:", finalTranslations);
+  // Initialize i18next with the translations
+  i18n.changeLanguage(currentLanguage);
+  i18n.addResources(currentLanguage, 'common', translations);
 
   const props = {
-    translations: finalTranslations || {
-      seo: {
-        title: "Default Title",
-        description: "Default Description",
-        keywords: "default, keywords",
-        ogTitle: "Default OG Title",
-        ogDescription: "Default OG Description"
-      }
-    },
-    originalTranslations: finalTranslations || {
-      seo: {
-        title: "Default Title",
-        description: "Default Description",
-        keywords: "default, keywords",
-        ogTitle: "Default OG Title",
-        ogDescription: "Default OG Description"
-      }
-    },
+    translations,
+    originalTranslations: translations,
     currentLanguage,
   };
 
-  console.log("Translations object right before returning from getServerSideProps:", finalTranslations);
+  console.log("Translations object right before returning from getServerSideProps:", translations);
 
   return {
     props,
