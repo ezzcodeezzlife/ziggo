@@ -42,6 +42,7 @@ function App({ Component, pageProps, translations }) {
 
   // Ensure i18n is initialized and translations are available before rendering
   if (!i18n.isInitialized || !memoizedTranslations || !memoizedTranslations[i18n.language] || !memoizedTranslations[i18n.language].common) {
+    console.log("Rendering Loading component due to missing translations or uninitialized i18n");
     return <Loading />;
   }
 
@@ -152,6 +153,7 @@ export async function getServerSideProps(appContext) {
         },
       };
     }
+    console.log("Translations are being returned from getServerSideProps:", JSON.stringify(translations, null, 2));
     return {
       props: {
         translations: JSON.parse(JSON.stringify(translations)), // Ensure deep serialization
