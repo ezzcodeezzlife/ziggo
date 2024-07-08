@@ -18,7 +18,7 @@ function App({ Component, pageProps, translations, originalTranslations, current
   }
 
   // Ensure i18next is initialized before rendering the App component
-  if (translations && Object.keys(translations).length > 0) {
+  if (i18n && i18n.isInitialized && translations && Object.keys(translations).length > 0) {
     console.log("Translations prop received:", translations);
     i18n.changeLanguage(currentLanguage); // Set the language before adding resources
     i18n.addResources(currentLanguage, 'common', translations);
@@ -34,9 +34,13 @@ function App({ Component, pageProps, translations, originalTranslations, current
         ogDescription: "Default OG Description"
       }
     };
-    i18n.changeLanguage('en'); // Default to English
-    i18n.addResources('en', 'common', defaultTranslations);
-    console.log("Fallback translations initialized.");
+    if (i18n && i18n.isInitialized) {
+      i18n.changeLanguage('en'); // Default to English
+      i18n.addResources('en', 'common', defaultTranslations);
+      console.log("Fallback translations initialized.");
+    } else {
+      console.error("i18n is not initialized. Unable to set fallback translations.");
+    }
   }
 
   if (!i18n.isInitialized) {
