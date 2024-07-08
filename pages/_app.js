@@ -43,8 +43,6 @@ function App({ Component, pageProps, translations }) {
     console.error("Translations prop is undefined in App component");
   }
 
-  const [initialized, setInitialized] = useState(false);
-
   useEffect(() => {
     console.log("Initial translations in useEffect:", translations);
     // Wait for i18n to be initialized before calling initializeI18next
@@ -52,25 +50,20 @@ function App({ Component, pageProps, translations }) {
       // Initialize i18next directly with the translations
       if (translations && Object.keys(translations).length > 0) {
         initializeI18next(translations, i18n.language);
-        // Trigger a re-render once translations are initialized
-        setInitialized(true);
-        console.log("i18next initialized and translations set. State of initialized:", true);
+        console.log("i18next initialized and translations set.");
       } else {
         console.error("Translations are null or invalid in useEffect. Falling back to default translations.");
         initializeI18next(null, 'en'); // Fallback to default translations
-        // Trigger a re-render once fallback translations are initialized
-        setInitialized(true);
-        console.log("Fallback translations initialized. State of initialized:", true);
+        console.log("Fallback translations initialized.");
       }
     } else {
       console.error("i18n is not initialized. Cannot initialize i18next.");
     }
     console.log("Translations in App component after useEffect:", translations);
-    console.log("State of initialized after useEffect:", initialized);
   }, [translations, i18nInitialized]);
 
   // Ensure i18n is initialized and translations are available before rendering
-  if (!i18n.isInitialized || !translations || !initialized) {
+  if (!i18n.isInitialized || !translations) {
     console.log("Rendering Loading component due to missing translations or uninitialized i18n");
     return <Loading />;
   }
@@ -196,12 +189,8 @@ export async function getServerSideProps(appContext) {
   // Log the translations object before returning
   console.log("Translations object before returning from getServerSideProps:", translations);
 
-  // Ensure translations object is not mutated
-  const finalTranslations = JSON.parse(JSON.stringify(translations));
-  console.log("Final translations object before returning from getServerSideProps:", finalTranslations);
-
   const props = {
-    translations: finalTranslations || {}, // Ensure translations is always an object
+    translations: translations || {}, // Ensure translations is always an object
   };
   console.log("Props object before returning from getServerSideProps:", props);
 
