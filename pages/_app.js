@@ -22,6 +22,8 @@ function App({ Component, pageProps, translations, originalTranslations, current
     });
   }, [translations, currentLanguage]);
 
+  console.log("App component received props:", { Component, pageProps, translations, originalTranslations, currentLanguage });
+
   console.log("App component received translations prop:", translations);
   console.log("App component received originalTranslations prop:", originalTranslations);
 
