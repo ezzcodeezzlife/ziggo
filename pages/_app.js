@@ -72,6 +72,7 @@ function App({ Component, pageProps, translations, originalTranslations, current
   }
 
   console.log("Translations in App component before rendering:", translations);
+  console.log("Rendering App component with translations:", translations);
 
   return (
     <ErrorBoundary>
