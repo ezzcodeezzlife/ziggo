@@ -186,7 +186,9 @@ export async function getServerSideProps(appContext) {
 
   // Initialize i18next with the translations
   await i18n.changeLanguage(currentLanguage);
+  console.log("i18next language changed to:", currentLanguage);
   await i18n.addResources(currentLanguage, 'common', translations);
+  console.log("i18next resources added for language:", currentLanguage, "with translations:", translations);
 
   console.log("Translations object right before returning from getServerSideProps:", translations);
   console.log("Props object to be returned from getServerSideProps:", { translations, originalTranslations: translations, currentLanguage });
