@@ -13,12 +13,16 @@ function App({ Component, pageProps, translations, originalTranslations, current
   const [isInitialized, setIsInitialized] = useState(false);
 
   useEffect(() => {
+    console.log("useEffect triggered with translations:", translations, "and currentLanguage:", currentLanguage);
     i18nInitPromise.then(() => {
+      console.log("i18nInitPromise resolved");
       if (translations && Object.keys(translations).length > 0) {
         i18n.changeLanguage(currentLanguage);
         i18n.addResources(currentLanguage, 'common', translations);
       }
       setIsInitialized(true);
+    }).catch(error => {
+      console.error("Error resolving i18nInitPromise:", error);
     });
   }, [translations, currentLanguage]);
 
