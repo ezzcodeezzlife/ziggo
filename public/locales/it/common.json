@@ -1,0 +1,23 @@
+{
+  "welcome_message": "Benvenuto",
+  "map_title": "Mappa Ziggo",
+  "search_placeholder": "Cerca un luogo",
+  "language_selector": "Seleziona lingua",
+  "find_cigarette_machine": "Trova distributore di sigarette",
+  "cigarette_machine_nearby": "Distributore di sigarette nelle vicinanze",
+  "find_cigarette_machines_nearby": "Un modo comodo e affidabile per trovare distributori di sigarette vicino a te",
+  "cigarette_machine_map": "Mappa dei distributori di sigarette",
+  "more_information": "Maggiori informazioni",
+  "default_location": "Posizione predefinita",
+  "locate_me": "Localizzami",
+  "start_route_planning": "Inizia la pianificazione del percorso",
+  "enter_address": "Inserisci l'indirizzo...",
+  "not_found": "Non trovato",
+  "seo": {
+    "title": "Trova distributore di sigarette nelle vicinanze",
+    "description": "Trova distributori di sigarette nelle vicinanze sulla mappa dei distributori di sigarette",
+    "keywords": "distributore di sigarette, distributori di sigarette, trova distributore di sigarette, trova distributori di sigarette, ricerca distributore di sigarette, mappa dei distributori di sigarette, mappa dei distributori di sigarette Italia, mappa dei distributori di sigarette it",
+    "ogTitle": "Trova distributore di sigarette nelle vicinanze",
+    "ogDescription": "Trova distributori di sigarette nelle vicinanze sulla mappa dei distributori di sigarette"
+  }
+}

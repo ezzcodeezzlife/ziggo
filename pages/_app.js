@@ -1,28 +1,101 @@
+import React, { useEffect, useState } from 'react';
 import "@/styles/globals.css";
 import Script from "next/script";
 import { NextSeo } from "next-seo";
-import { Head } from "next/document";
+import i18n from '../i18n'; // Import the initialized i18next instance
+import Loading from '../components/Loading'; // Import the Loading component
+import { i18nInitialized } from '../i18n'; // Import the i18nInitialized flag
 
-export default function App({ Component, pageProps }) {
+// Function to initialize i18next with server-side translations
+const initializeI18next = (translations, language) => {
+  console.log("Initializing i18next with translations:", translations, "and language:", language);
+  if (translations && Object.keys(translations).length > 0) {
+    if (i18nInitialized) {
+      i18n.changeLanguage(language); // Set the language before adding resources
+      i18n.addResources(language, 'common', translations);
+    } else {
+      console.error("i18next is not initialized. Cannot change language.");
+    }
+  } else {
+    console.error("Invalid or empty translations object passed to initializeI18next. Falling back to default translations.");
+    // Fallback to default translations if the provided translations are null or empty
+    if (i18nInitialized) {
+      i18n.changeLanguage('en'); // Default to English
+      i18n.addResources('en', 'common', {
+        welcome_message: "Welcome",
+        map_title: "Ziggo Map",
+        search_placeholder: "Search for a place",
+        language_selector: "Select Language",
+        find_cigarette_machine: "Find Cigarette Machine"
+      });
+    } else {
+      console.error("i18next is not initialized. Cannot change language.");
+    }
+  }
+};
+
+function App({ Component, pageProps, translations }) {
+  console.log("App component received translations prop:", translations);
+
+  const [localTranslations, setLocalTranslations] = useState(translations || {});
+
+  useEffect(() => {
+    if (translations) {
+      console.log("Translations prop received:", translations);
+      setLocalTranslations(translations);
+
+      if (i18nInitialized) {
+        initializeI18next(translations, i18n.language);
+        console.log("i18next initialized and translations set.");
+      } else {
+        console.error("i18n is not initialized. Cannot initialize i18next.");
+      }
+    } else {
+      console.error("Translations prop is null. Falling back to default translations.");
+      const defaultTranslations = {
+        seo: {
+          title: "Default Title",
+          description: "Default Description",
+          keywords: "default, keywords",
+          ogTitle: "Default OG Title",
+          ogDescription: "Default OG Description"
+        }
+      };
+      setLocalTranslations(defaultTranslations);
+
+      if (i18nInitialized) {
+        initializeI18next(defaultTranslations, 'en'); // Fallback to default translations
+        console.log("Fallback translations initialized.");
+      } else {
+        console.error("i18n is not initialized. Cannot initialize i18next.");
+      }
+    }
+  }, [translations, i18nInitialized]);
+
+  if (!i18n.isInitialized || Object.keys(localTranslations).length === 0) {
+    console.log("Rendering Loading component due to missing translations or uninitialized i18n");
+    return <Loading />;
+  }
+
+  // Log the translations received by the App component
+  console.log("Translations in App component:", localTranslations);
+
   return (
     <>
-   
       <NextSeo
-        title="Zigarettenautomat in der Nähe finden"
-        description="Zigarettenautomat in der Nähe finden auf der Zigarettenautomat Karte"
-        canonical="https://www.zigarettenautomatkarte.de/"
+        title={localTranslations.seo ? localTranslations.seo.title : "Default Title"}
+        description={localTranslations.seo ? localTranslations.seo.description : "Default Description"}
+        canonical={`https://www.zigarettenautomatkarte.de/${i18n.language}`}
         aggregateRating={{
           ratingValue: "5",
           ratingCount: "94",
         }}
-        datePublished="2024-02-03" 
-        keywords="zigarettenautomat, zigarettenautomaten, zigarettenautomat finden, zigarettenautomaten finden, zigarettenautomat suche, zigarettenautomat karte, zigarettenautomat karte deutschland, zigarettenautomaten karte, zigarettenautomaten karte de"
+        datePublished="2024-02-03"
+        keywords={localTranslations.seo ? localTranslations.seo.keywords : "default, keywords"}
         openGraph={{
-          url: "https://www.zigarettenautomatkarte.de/",
-          title:
-            "Zigarettenautomat in der Nähe finden",
-          description:
-            "Zigarettenautomat in der Nähe finden auf der Zigarettenautomat Karte",
+          url: `https://www.zigarettenautomatkarte.de/${i18n.language}`,
+          title: localTranslations.seo ? localTranslations.seo.ogTitle : "Default OG Title",
+          description: localTranslations.seo ? localTranslations.seo.ogDescription : "Default OG Description",
           images: [
             {
               url: "https://www.zigarettenautomatkarte.de/screenshot.png",
@@ -31,7 +104,7 @@ export default function App({ Component, pageProps }) {
               alt: "Zigarettenautomatkarte.de - OG Image",
             },
           ],
-          locale: "de_DE",
+          locale: i18n.language,
           site_name: "Zigarettenautomatkarte",
         }}
       />
@@ -45,15 +118,12 @@ export default function App({ Component, pageProps }) {
           window.dataLayer = window.dataLayer || [];
           function gtag(){window.dataLayer.push(arguments);}
           gtag('js', new Date());
-
           gtag('config', 'G-LDCLSV0XN9');
         `}
       </Script>
       <Script strategy="afterInteractive">
         {`
 (function() {
-
-
   // load leaflet.css
   var cssLeaflet = document.createElement('link');
   cssLeaflet.href = 'https://unpkg.com/leaflet@1.7.1/dist/leaflet.css';
@@ -67,3 +137,51 @@ export default function App({ Component, pageProps }) {
     </>
   );
 }
+
+export async function getServerSideProps(appContext) {
+  console.log("getServerSideProps called");
+  console.log("appContext:", JSON.stringify(appContext, null, 2));
+
+  // Import fs and path modules only in server-side code
+  const fs = require('fs');
+  const path = require('path');
+
+  // Determine the current language from the request
+  const currentLanguage = appContext.req.language || 'en';
+  console.log("Determined current language:", currentLanguage);
+
+  console.log("Fetching translations for language:", currentLanguage);
+  const translationsFilePath = path.resolve('./public/locales', currentLanguage, 'common.json');
+  console.log("Translations file path:", translationsFilePath);
+
+  let translations = {
+    seo: {
+      title: "Default Title",
+      description: "Default Description",
+      keywords: "default, keywords",
+      ogTitle: "Default OG Title",
+      ogDescription: "Default OG Description"
+    }
+  };
+  try {
+    const fileTranslations = JSON.parse(fs.readFileSync(translationsFilePath, 'utf-8'));
+    translations = { ...translations, ...fileTranslations };
+    console.log("Fetched translations:", translations);
+  } catch (error) {
+    console.error("Error reading translations file, using default translations:", error);
+  }
+
+  // Log the state of the i18n instance
+  console.log("i18n instance state before returning translations:", i18n);
+
+  // Log the translations object before returning
+  console.log("Translations object before returning from getServerSideProps:", translations);
+
+  return {
+    props: {
+      translations: translations || {},
+    },
+  };
+}
+
+export default App;

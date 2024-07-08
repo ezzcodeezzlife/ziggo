@@ -8,6 +8,7 @@ import "leaflet.locatecontrol/dist/L.Control.Locate.min.css";
 import LocateControl from "leaflet.locatecontrol";
 import "leaflet-control-geocoder/dist/Control.Geocoder.css";
 import "leaflet-control-geocoder/dist/Control.Geocoder.js";
+import { useTranslation } from "next-i18next";
 
 const myIcon = L.icon({
   iconUrl: "./icon.png",
@@ -17,6 +18,7 @@ const myIcon = L.icon({
 });
 
 const MapComponent = () => {
+  const { t } = useTranslation();
   const mapRef = useRef(null);
   const clusterGroupRef = useRef(null);
   const markersRef = useRef({});
@@ -46,7 +48,7 @@ const MapComponent = () => {
 
       // Add marker for default location
       const defaultMarker = L.marker(location, { icon: myIcon }).bindPopup(
-        '<p style="font-family: Arial, sans-serif; font-size: 14px; color: #333;">Default Location</p>'
+        `<p style="font-family: Arial, sans-serif; font-size: 14px; color: #333;">${t('default_location')}</p>`
       );
       clusterGroupRef.current.addLayer(defaultMarker);
 
@@ -58,7 +60,7 @@ const MapComponent = () => {
           position: "topright",
           icon: "fa fa-location-arrow",
           strings: {
-            title: "Locate me",
+            title: t("locate_me"),
           },
         })
         .addTo(mapRef.current);
@@ -118,9 +120,7 @@ const MapComponent = () => {
                     );
                   })
                   .join("") +
-                '<li style="padding: 5px 0; font-family: Arial, sans-serif; font-size: 14px; color: #333;"><a href="https://www.google.com/maps/dir/?api=1&destination=' +
-                encodeURIComponent(node.lat + "," + node.lon) +
-                '" target="_blank">Routenplanung starten</a></li>' +
+                `<li style="padding: 5px 0; font-family: Arial, sans-serif; font-size: 14px; color: #333;"><a href="https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(node.lat + "," + node.lon)}" target="_blank">${t('start_route_planning')}</a></li>` +
                 "</ul>"
             );
 
@@ -151,9 +151,9 @@ const MapComponent = () => {
       // Add the geocoder control only if it hasn't been added before
       geocoderControlRef.current = L.Control.geocoder({
         defaultMarkGeocode: false,
-        placeholder: "Enter address...",
+        placeholder: t("enter_address"),
         collapsed: false,
-        errorMessage: "Not found",
+        errorMessage: t("not_found"),
         position: "topright",
         geocoder: L.Control.Geocoder.nominatim(),
       }).on("markgeocode", function (e) {
