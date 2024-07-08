@@ -164,9 +164,26 @@ export async function getServerSideProps(appContext) {
 
   console.log("Translations object before serialization check:", translations);
 
+  // Ensure translations object contains expected keys
+  const requiredKeys = ['seo'];
+  const hasRequiredKeys = requiredKeys.every(key => key in translations);
+
+  if (!hasRequiredKeys) {
+    console.error("Translations object is missing required keys. Falling back to default translations.");
+    translations = {
+      seo: {
+        title: "Default Title",
+        description: "Default Description",
+        keywords: "default, keywords",
+        ogTitle: "Default OG Title",
+        ogDescription: "Default OG Description"
+      }
+    };
+  }
+
   // Initialize i18next with the translations
-  i18n.changeLanguage(currentLanguage);
-  i18n.addResources(currentLanguage, 'common', translations);
+  await i18n.changeLanguage(currentLanguage);
+  await i18n.addResources(currentLanguage, 'common', translations);
 
   const props = {
     translations,
