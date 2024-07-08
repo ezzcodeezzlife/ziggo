@@ -197,7 +197,10 @@ export async function getServerSideProps(appContext) {
   console.log("Returning props from getServerSideProps:", props);
 
   return {
-    props,
+    props: {
+      ...props,
+      debug: "This is a debug message to trace props"
+    },
   };
 }
 
