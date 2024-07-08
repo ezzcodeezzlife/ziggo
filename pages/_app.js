@@ -109,6 +109,9 @@ export async function getServerSideProps(appContext) {
   const fs = require('fs');
   const path = require('path');
   const currentLanguage = appContext.req.language || 'en';
+
+  await i18nInitPromise; // Ensure i18next is initialized before reading translations
+
   const translationsFilePath = path.resolve(process.cwd(), 'public/locales', currentLanguage, 'common.json');
 
   console.log("Resolved translations file path:", translationsFilePath);
@@ -174,8 +177,6 @@ export async function getServerSideProps(appContext) {
   const finalTranslations = translations;
 
   console.log("Final translations object to be passed as prop:", finalTranslations);
-
-  await i18nInitPromise; // Ensure i18next is initialized before creating props
 
   console.log("Translations object after i18nInitPromise:", finalTranslations);
 
