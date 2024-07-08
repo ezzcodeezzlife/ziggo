@@ -136,18 +136,19 @@ export async function getServerSideProps(appContext) {
   // Ensure i18next is initialized before reading translations
   await i18nInitPromise;
 
-  // Hardcoded translations object for testing
-  const translations = {
-    seo: {
-      title: "Hardcoded Title",
-      description: "Hardcoded Description",
-      keywords: "hardcoded, keywords",
-      ogTitle: "Hardcoded OG Title",
-      ogDescription: "Hardcoded OG Description"
-    }
-  };
+  const fs = require('fs');
+  const path = require('path');
 
-  console.log("Hardcoded translations object:", translations);
+  let translations = {};
+  try {
+    const translationsPath = path.join(process.cwd(), 'public', 'locales', currentLanguage, 'common.json');
+    const translationsFile = fs.readFileSync(translationsPath, 'utf8');
+    translations = JSON.parse(translationsFile);
+  } catch (error) {
+    console.error(`Error loading translations for language ${currentLanguage}:`, error);
+  }
+
+  console.log("Loaded translations object:", translations);
 
   const props = {
     translations,
