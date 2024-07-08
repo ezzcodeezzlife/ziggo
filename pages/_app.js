@@ -107,66 +107,64 @@ function App({ Component, pageProps, translations }) {
 
 export async function getServerSideProps(appContext) {
   console.log("getServerSideProps called");
-  await i18nInitPromise; // Wait for i18next initialization
 
-  // Import fs and path modules only in server-side code
-  const fs = await import('fs');
-  const path = await import('path');
+  // Wait for i18next initialization and fetch translations
+  const translations = await i18nInitPromise.then(() => {
+    // Import fs and path modules only in server-side code
+    const fs = require('fs');
+    const path = require('path');
 
-  // Determine the current language from the request
-  const currentLanguage = appContext.req.language || 'en';
+    // Determine the current language from the request
+    const currentLanguage = appContext.req.language || 'en';
 
-  try {
     console.log("Fetching translations for language:", currentLanguage);
     const translations = JSON.parse(fs.readFileSync(path.resolve('./public/locales', currentLanguage, 'common.json'), 'utf-8'));
     console.log("Fetched translations:", translations);
 
-    // Check for empty or undefined translations
-    if (!translations || Object.keys(translations).length === 0) {
-      console.error("Translations are undefined or empty before returning from getServerSideProps");
-      return {
-        props: {
-          translations: null,
-        },
-      };
-    }
+    return translations;
+  }).catch((error) => {
+    console.error("Error initializing i18next or fetching translations:", error);
+    return null;
+  });
 
-    // Ensure all values within the translations object are serializable
-    const isSerializable = (obj) => {
-      try {
-        console.log("Checking if object is serializable:", obj);
-        JSON.stringify(obj);
-        console.log("Object is serializable");
-        return true;
-      } catch (e) {
-        console.error("Serialization error:", e);
-        return false;
-      }
-    };
-
-    if (!isSerializable(translations)) {
-      console.error("Translations object contains non-serializable values:", translations);
-      return {
-        props: {
-          translations: null,
-        },
-      };
-    }
-
-    console.log("Translations object before returning from getServerSideProps:", JSON.stringify(translations, null, 2));
-    return {
-      props: {
-        translations, // Pass the actual translations object
-      },
-    };
-  } catch (error) {
-    console.error("Error fetching translations in getServerSideProps:", error);
+  // Check for empty or undefined translations
+  if (!translations || Object.keys(translations).length === 0) {
+    console.error("Translations are undefined or empty before returning from getServerSideProps");
     return {
       props: {
         translations: null,
       },
     };
   }
+
+  // Ensure all values within the translations object are serializable
+  const isSerializable = (obj) => {
+    try {
+      console.log("Checking if object is serializable:", obj);
+      JSON.stringify(obj);
+      console.log("Object is serializable");
+      return true;
+    } catch (e) {
+      console.error("Serialization error:", e);
+      return false;
+    }
+  };
+
+  if (!isSerializable(translations)) {
+    console.error("Translations object contains non-serializable values:", translations);
+    return {
+      props: {
+        translations: null,
+      },
+    };
+  }
+
+  console.log("Translations object before returning from getServerSideProps:", JSON.stringify(translations, null, 2));
+  return {
+    props: {
+      translations, // Pass the actual translations object
+    },
+  };
 }
 
 export default App;
