@@ -186,7 +186,7 @@ export async function getServerSideProps(appContext) {
     serializableTranslations = { seo: { title: "Default Title", description: "Default Description", keywords: "default, keywords", ogTitle: "Default OG Title", ogDescription: "Default OG Description" } };
   }
 
-  console.log("Serializable translations object:", serializableTranslations);
+  console.log("Serializable translations object before return:", serializableTranslations);
 
   const props = {
     translations: serializableTranslations,
