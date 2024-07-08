@@ -62,7 +62,11 @@ function App({ Component, pageProps, translations, originalTranslations, current
       }
     };
 
-    initializeI18n();
+    if (translations && currentLanguage) {
+      initializeI18n();
+    } else {
+      console.error("Translations or currentLanguage prop is missing.");
+    }
   }, [translations, currentLanguage]);
 
   console.log("App component received props after useEffect:", { Component, pageProps, translations, originalTranslations, currentLanguage });
