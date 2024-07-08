@@ -178,8 +178,8 @@ export async function getServerSideProps(appContext) {
   // Check if translations object is serializable
   let serializableTranslations;
   try {
-    if (!translations) {
-      throw new Error("Translations object is undefined or null before serialization.");
+    if (!translations || Object.keys(translations).length === 0) {
+      throw new Error("Translations object is undefined, null, or empty before serialization.");
     }
     console.log("Translations object before serialization:", translations);
     serializableTranslations = JSON.parse(JSON.stringify(translations));

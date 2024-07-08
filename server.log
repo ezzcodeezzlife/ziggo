@@ -473,3 +473,7 @@ App component received props: {
 Rendering Loading component due to missing translations or uninitialized i18n
 - [36mwait[39m compiling...
 - [35mevent[39m compiled client and server successfully in 3.7s (930 modules)
+<w> [webpack.cache.PackFileCacheStrategy] Caching failed for pack: Error: ENOENT: no such file or directory, rename '/home/ubuntu/ziggo/.next/cache/webpack/client-development/1.pack.gz_' -> '/home/ubuntu/ziggo/.next/cache/webpack/client-development/1.pack.gz'
+- [36mwait[39m compiling...
+- [35mevent[39m compiled client and server successfully in 3.6s (930 modules)
+<w> [webpack.cache.PackFileCacheStrategy] Caching failed for pack: Error: ENOENT: no such file or directory, rename '/home/ubuntu/ziggo/.next/cache/webpack/client-development/2.pack.gz_' -> '/home/ubuntu/ziggo/.next/cache/webpack/client-development/2.pack.gz'
