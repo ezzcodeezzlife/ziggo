@@ -1,7 +1,7 @@
+import React, { useEffect, useMemo } from 'react';
 import "@/styles/globals.css";
 import Script from "next/script";
 import { NextSeo } from "next-seo";
-import { useEffect } from "react";
 import i18n, { i18nInitPromise } from '../i18n'; // Import the initialized i18next instance and the i18nInitPromise
 import Loading from '../components/Loading'; // Import the Loading component
 
@@ -20,50 +20,50 @@ function App({ Component, pageProps, translations }) {
   console.log("App component received translations prop:", translations);
   console.log("Structure of translations prop in App component:", JSON.stringify(translations, null, 2));
 
+  const memoizedTranslations = useMemo(() => translations, [translations]);
+
   useEffect(() => {
-    console.log("Initial translations in useEffect:", translations);
+    console.log("Initial translations in useEffect:", memoizedTranslations);
     // Wait for i18next initialization before setting translations
-    if (translations && translations[i18n.language] && translations[i18n.language].common) {
-      if (!i18n.isInitialized) {
-        i18nInitPromise.then(() => {
-          console.log("Translations after i18nInitPromise resolves:", translations);
-          initializeI18next(translations, i18n.language);
-        });
-      } else {
-        initializeI18next(translations, i18n.language);
-      }
+    if (memoizedTranslations && memoizedTranslations[i18n.language] && memoizedTranslations[i18n.language].common) {
+      i18nInitPromise.then(() => {
+        console.log("Translations after i18nInitPromise resolves:", memoizedTranslations);
+        initializeI18next(memoizedTranslations, i18n.language);
+      }).catch((error) => {
+        console.error("Error initializing i18next:", error);
+      });
     } else {
       console.error("Translations are null or invalid in useEffect");
     }
-    console.log("Translations in App component after useEffect:", translations);
-  }, [translations]);
+    console.log("Translations in App component after useEffect:", memoizedTranslations);
+  }, [memoizedTranslations]);
 
-  console.log("Translations in App component before return:", translations);
+  console.log("Translations in App component before return:", memoizedTranslations);
 
   // Ensure i18n is initialized and translations are available before rendering
-  if (!i18n.isInitialized || !translations || !translations[i18n.language] || !translations[i18n.language].common) {
+  if (!i18n.isInitialized || !memoizedTranslations || !memoizedTranslations[i18n.language] || !memoizedTranslations[i18n.language].common) {
     return <Loading />;
   }
 
   // Log the translations received by the App component
-  console.log("Translations in App component:", translations);
+  console.log("Translations in App component:", memoizedTranslations);
 
   return (
     <>
       <NextSeo
-        title={translations ? translations[i18n.language].common.seo.title : "Default Title"}
-        description={translations ? translations[i18n.language].common.seo.description : "Default Description"}
+        title={memoizedTranslations ? memoizedTranslations[i18n.language].common.seo.title : "Default Title"}
+        description={memoizedTranslations ? memoizedTranslations[i18n.language].common.seo.description : "Default Description"}
         canonical={`https://www.zigarettenautomatkarte.de/${i18n.language}`}
         aggregateRating={{
           ratingValue: "5",
           ratingCount: "94",
         }}
         datePublished="2024-02-03"
-        keywords={translations ? translations[i18n.language].common.seo.keywords : "default, keywords"}
+        keywords={memoizedTranslations ? memoizedTranslations[i18n.language].common.seo.keywords : "default, keywords"}
         openGraph={{
           url: `https://www.zigarettenautomatkarte.de/${i18n.language}`,
-          title: translations ? translations[i18n.language].common.seo.ogTitle : "Default OG Title",
-          description: translations ? translations[i18n.language].common.seo.ogDescription : "Default OG Description",
+          title: memoizedTranslations ? memoizedTranslations[i18n.language].common.seo.ogTitle : "Default OG Title",
+          description: memoizedTranslations ? memoizedTranslations[i18n.language].common.seo.ogDescription : "Default OG Description",
           images: [
             {
               url: "https://www.zigarettenautomatkarte.de/screenshot.png",
@@ -154,7 +154,7 @@ export async function getServerSideProps(appContext) {
     }
     return {
       props: {
-        translations,
+        translations: JSON.parse(JSON.stringify(translations)), // Ensure deep serialization
       },
     };
   } catch (error) {
