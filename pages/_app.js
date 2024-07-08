@@ -39,32 +39,19 @@ function App({ Component, pageProps, translations = {}, originalTranslations = {
 
   useEffect(() => {
     console.log("useEffect triggered with translations:", translations, "and currentLanguage:", currentLanguage);
-    const initializeI18n = async () => {
-      try {
-        console.log("Awaiting i18nInitPromise inside useEffect...");
-        await i18nInitPromise;
-        console.log("i18nInitPromise resolved successfully inside useEffect.");
-        console.log("i18next instance after i18nInitPromise resolution:", i18n);
-        if (translations && Object.keys(translations).length > 0) {
-          i18n.changeLanguage(currentLanguage);
-          i18n.addResources(currentLanguage, 'common', translations);
-          if (typeof window !== "undefined" && window.localStorage) {
-            localStorage.setItem('translations', JSON.stringify(translations));
-            console.log("Stored translations in local storage:", translations);
-          }
-          setIsInitialized(true);
-          console.log("i18next initialization complete, isInitialized set to true.");
-        } else {
-          console.error("Translations prop is undefined or null inside useEffect. Falling back to default translations.");
-          setIsInitialized(true); // Allow rendering with default translations
-        }
-      } catch (error) {
-        console.error("Error resolving i18nInitPromise inside useEffect:", error);
-        setIsInitialized(true); // Allow rendering with default translations
+    if (translations && Object.keys(translations).length > 0) {
+      i18n.changeLanguage(currentLanguage);
+      i18n.addResources(currentLanguage, 'common', translations);
+      if (typeof window !== "undefined" && window.localStorage) {
+        localStorage.setItem('translations', JSON.stringify(translations));
+        console.log("Stored translations in local storage:", translations);
       }
-    };
-
-    initializeI18n();
+      setIsInitialized(true);
+      console.log("i18next initialization complete, isInitialized set to true.");
+    } else {
+      console.error("Translations prop is undefined or null inside useEffect. Falling back to default translations.");
+      setIsInitialized(true); // Allow rendering with default translations
+    }
   }, [translations, currentLanguage]);
 
   console.log("App component received props after useEffect:", { Component, pageProps, translations, originalTranslations, currentLanguage });
@@ -196,6 +183,15 @@ export async function getServerSideProps(appContext) {
   }
 
   console.log("Serializable translations object before return:", serializableTranslations);
+
+  // Initialize i18next with the loaded translations
+  try {
+    i18n.changeLanguage(currentLanguage);
+    i18n.addResources(currentLanguage, 'common', serializableTranslations);
+    console.log("i18next initialized with translations in getServerSideProps.");
+  } catch (error) {
+    console.error("Error initializing i18next with translations in getServerSideProps:", error);
+  }
 
   const props = {
     translations: serializableTranslations,
