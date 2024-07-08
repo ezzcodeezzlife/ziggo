@@ -219,28 +219,32 @@ export async function getServerSideProps(appContext) {
 
   console.log("Final translations object to be passed as prop:", finalTranslations);
 
-  return {
-    props: {
-      translations: finalTranslations || {
-        seo: {
-          title: "Default Title",
-          description: "Default Description",
-          keywords: "default, keywords",
-          ogTitle: "Default OG Title",
-          ogDescription: "Default OG Description"
-        }
-      },
-      originalTranslations: finalTranslations || {
-        seo: {
-          title: "Default Title",
-          description: "Default Description",
-          keywords: "default, keywords",
-          ogTitle: "Default OG Title",
-          ogDescription: "Default OG Description"
-        }
-      },
-      currentLanguage,
+  const props = {
+    translations: finalTranslations || {
+      seo: {
+        title: "Default Title",
+        description: "Default Description",
+        keywords: "default, keywords",
+        ogTitle: "Default OG Title",
+        ogDescription: "Default OG Description"
+      }
     },
+    originalTranslations: finalTranslations || {
+      seo: {
+        title: "Default Title",
+        description: "Default Description",
+        keywords: "default, keywords",
+        ogTitle: "Default OG Title",
+        ogDescription: "Default OG Description"
+      }
+    },
+    currentLanguage,
+  };
+
+  console.log("Props object before returning from getServerSideProps:", props);
+
+  return {
+    props,
   };
 }
 
