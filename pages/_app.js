@@ -38,6 +38,8 @@ function App({ Component, pageProps, translations, originalTranslations }) {
 
   useEffect(() => {
     console.log("Type of translations prop:", typeof translations);
+    console.log("Translations prop at the start of useEffect:", translations);
+
     const initializeTranslations = async () => {
       await i18nInitPromise;
       if (translations && Object.keys(translations).length > 0) {
@@ -198,7 +200,10 @@ export async function getServerSideProps(appContext) {
     };
   }
 
-  console.log("Returning translations from getServerSideProps:", translations);
+  console.log("Returning props from getServerSideProps:", {
+    translations,
+    originalTranslations: translations,
+  });
 
   return {
     props: {
