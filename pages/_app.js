@@ -19,6 +19,7 @@ const initializeI18next = (translations, language) => {
 function App({ Component, pageProps, translations }) {
   console.log("App component received translations prop:", translations);
   console.log("Structure of translations prop in App component:", JSON.stringify(translations, null, 2));
+  console.log("Translations prop immediately upon receiving in App component:", translations);
 
   const memoizedTranslations = useMemo(() => translations, [translations]);
   const [initialized, setInitialized] = useState(false);
@@ -144,6 +145,7 @@ export async function getServerSideProps(appContext) {
   const serializedTranslations = JSON.parse(JSON.stringify(translations));
 
   console.log("Translations object before returning from getServerSideProps:", JSON.stringify(serializedTranslations, null, 2));
+  console.log("Returning serialized translations from getServerSideProps");
   return {
     props: {
       translations: serializedTranslations, // Pass the serialized translations object
