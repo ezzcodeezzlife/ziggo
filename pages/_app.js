@@ -8,9 +8,9 @@ import Loading from '../components/Loading'; // Import the Loading component
 // Function to initialize i18next with server-side translations
 const initializeI18next = (translations, language) => {
   console.log("Initializing i18next with translations:", translations, "and language:", language);
-  if (translations && translations[language] && translations[language].common) {
+  if (translations) {
     i18n.changeLanguage(language); // Set the language before adding resources
-    i18n.addResources(language, 'common', translations[language].common);
+    i18n.addResources(language, 'common', translations);
   } else {
     console.error("Invalid translations object passed to initializeI18next");
   }
@@ -25,7 +25,7 @@ function App({ Component, pageProps, translations }) {
   useEffect(() => {
     console.log("Initial translations in useEffect:", memoizedTranslations);
     // Wait for i18next initialization before setting translations
-    if (memoizedTranslations && memoizedTranslations[i18n.language] && memoizedTranslations[i18n.language].common) {
+    if (memoizedTranslations) {
       i18nInitPromise.then(() => {
         console.log("Translations after i18nInitPromise resolves:", memoizedTranslations);
         initializeI18next(memoizedTranslations, i18n.language);
@@ -38,10 +38,8 @@ function App({ Component, pageProps, translations }) {
     console.log("Translations in App component after useEffect:", memoizedTranslations);
   }, [memoizedTranslations]);
 
-  console.log("Translations in App component before return:", memoizedTranslations);
-
   // Ensure i18n is initialized and translations are available before rendering
-  if (!i18n.isInitialized || !memoizedTranslations || !memoizedTranslations[i18n.language] || !memoizedTranslations[i18n.language].common) {
+  if (!i18n.isInitialized || !memoizedTranslations) {
     console.log("Rendering Loading component due to missing translations or uninitialized i18n");
     return <Loading />;
   }
@@ -52,19 +50,19 @@ function App({ Component, pageProps, translations }) {
   return (
     <>
       <NextSeo
-        title={memoizedTranslations ? memoizedTranslations[i18n.language].common.seo.title : "Default Title"}
-        description={memoizedTranslations ? memoizedTranslations[i18n.language].common.seo.description : "Default Description"}
+        title={memoizedTranslations ? memoizedTranslations.seo.title : "Default Title"}
+        description={memoizedTranslations ? memoizedTranslations.seo.description : "Default Description"}
         canonical={`https://www.zigarettenautomatkarte.de/${i18n.language}`}
         aggregateRating={{
           ratingValue: "5",
           ratingCount: "94",
         }}
         datePublished="2024-02-03"
-        keywords={memoizedTranslations ? memoizedTranslations[i18n.language].common.seo.keywords : "default, keywords"}
+        keywords={memoizedTranslations ? memoizedTranslations.seo.keywords : "default, keywords"}
         openGraph={{
           url: `https://www.zigarettenautomatkarte.de/${i18n.language}`,
-          title: memoizedTranslations ? memoizedTranslations[i18n.language].common.seo.ogTitle : "Default OG Title",
-          description: memoizedTranslations ? memoizedTranslations[i18n.language].common.seo.ogDescription : "Default OG Description",
+          title: memoizedTranslations ? memoizedTranslations.seo.ogTitle : "Default OG Title",
+          description: memoizedTranslations ? memoizedTranslations.seo.ogDescription : "Default OG Description",
           images: [
             {
               url: "https://www.zigarettenautomatkarte.de/screenshot.png",
@@ -119,32 +117,11 @@ export async function getServerSideProps(appContext) {
   const currentLanguage = appContext.req.language || 'en';
 
   try {
-    // Fetch only the translations for the current language and the required namespace(s)
-    const translations = {
-      [currentLanguage]: {
-        common: JSON.parse(fs.readFileSync(path.resolve('./public/locales', currentLanguage, 'common.json'), 'utf-8')),
-      },
-    };
+    console.log("Fetching translations for language:", currentLanguage);
+    const translations = JSON.parse(fs.readFileSync(path.resolve('./public/locales', currentLanguage, 'common.json'), 'utf-8'));
+    console.log("Fetched translations:", translations);
 
-    // Log the translations fetched by getServerSideProps
-    console.log("Translations in getServerSideProps before return:", translations);
-    // Check the structure of the translations object
-    console.log("Structure of translations in getServerSideProps:", JSON.stringify(translations, null, 2));
-
-    // Check for serialization issues
-    try {
-      const serializedTranslations = JSON.stringify(translations);
-      console.log("Translations object is serializable:", serializedTranslations);
-    } catch (serializationError) {
-      console.error("Serialization error in getServerSideProps:", serializationError);
-      return {
-        props: {
-          translations: null,
-        },
-      };
-    }
-
-    console.log("Returning translations from getServerSideProps:", JSON.stringify(translations, null, 2));
+    // Check for empty or undefined translations
     if (!translations || Object.keys(translations).length === 0) {
       console.error("Translations are undefined or empty before returning from getServerSideProps");
       return {
@@ -153,10 +130,30 @@ export async function getServerSideProps(appContext) {
         },
       };
     }
-    console.log("Translations are being returned from getServerSideProps:", JSON.stringify(translations, null, 2));
+
+    // Ensure all values within the translations object are serializable
+    const isSerializable = (obj) => {
+      try {
+        JSON.stringify(obj);
+        return true;
+      } catch (e) {
+        return false;
+      }
+    };
+
+    if (!isSerializable(translations)) {
+      console.error("Translations object contains non-serializable values:", translations);
+      return {
+        props: {
+          translations: null,
+        },
+      };
+    }
+
+    console.log("Returning translations from getServerSideProps:", translations);
     return {
       props: {
-        translations: JSON.parse(JSON.stringify(translations)), // Ensure deep serialization
+        translations, // Pass the translations object directly
       },
     };
   } catch (error) {
