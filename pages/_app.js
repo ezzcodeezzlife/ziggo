@@ -135,8 +135,15 @@ function App({ Component, pageProps, translations, originalTranslations, current
 export async function getServerSideProps(appContext) {
   const currentLanguage = appContext.req.language || 'en';
 
+  console.log("Starting getServerSideProps with currentLanguage:", currentLanguage);
+
   // Ensure i18next is initialized before reading translations
-  await i18nInitPromise;
+  try {
+    await i18nInitPromise;
+    console.log("i18nInitPromise resolved successfully");
+  } catch (error) {
+    console.error("Error resolving i18nInitPromise:", error);
+  }
 
   const fs = require('fs');
   const path = require('path');
