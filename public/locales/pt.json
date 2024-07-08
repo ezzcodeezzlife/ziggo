@@ -1,0 +1,26 @@
+{
+  "title": "Máquina de cigarros nas proximidades",
+  "subtitle": "Uma maneira conveniente e confiável de encontrar máquinas de cigarros perto de você",
+  "nav": {
+    "home": "Início",
+    "map": "Mapa de máquinas de cigarros"
+  },
+  "cta": {
+    "map": "Mapa de máquinas de cigarros",
+    "more_info": "Mais informações"
+  },
+  "faq": {
+    "title": "Perguntas frequentes",
+    "q1": "O que é este serviço?",
+    "a1": "Este serviço ajuda você a encontrar máquinas de cigarros nas proximidades.",
+    "q2": "Como eu uso?",
+    "a2": "Basta inserir sua localização e encontrar máquinas de cigarros nas proximidades.",
+    "q3": "É gratuito?",
+    "a3": "Sim, este serviço é completamente gratuito."
+  },
+  "footer": {
+    "solutions": "Soluções",
+    "home": "Início",
+    "map": "Mapa"
+  }
+}

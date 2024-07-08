@@ -1,0 +1,26 @@
+{
+  "title": "Automat z papierosami w pobliżu",
+  "subtitle": "Wygodny i niezawodny sposób na znalezienie automatów z papierosami w pobliżu",
+  "nav": {
+    "home": "Strona główna",
+    "map": "Mapa automatów z papierosami"
+  },
+  "cta": {
+    "map": "Mapa automatów z papierosami",
+    "more_info": "Więcej informacji"
+  },
+  "faq": {
+    "title": "Często zadawane pytania",
+    "q1": "Co to za usługa?",
+    "a1": "Ta usługa pomaga znaleźć automaty z papierosami w pobliżu.",
+    "q2": "Jak z niej korzystać?",
+    "a2": "Wystarczy wprowadzić swoją lokalizację i znaleźć automaty z papierosami w pobliżu.",
+    "q3": "Czy to jest darmowe?",
+    "a3": "Tak, ta usługa jest całkowicie darmowa."
+  },
+  "footer": {
+    "solutions": "Rozwiązania",
+    "home": "Strona główna",
+    "map": "Mapa"
+  }
+}

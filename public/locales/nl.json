@@ -1,0 +1,26 @@
+{
+  "title": "Sigarettenautomaat in de buurt",
+  "subtitle": "Een handige en betrouwbare manier om sigarettenautomaten bij u in de buurt te vinden",
+  "nav": {
+    "home": "Home",
+    "map": "Kaart van sigarettenautomaten"
+  },
+  "cta": {
+    "map": "Kaart van sigarettenautomaten",
+    "more_info": "Meer informatie"
+  },
+  "faq": {
+    "title": "Veelgestelde vragen",
+    "q1": "Wat is deze service?",
+    "a1": "Deze service helpt u sigarettenautomaten in de buurt te vinden.",
+    "q2": "Hoe gebruik ik het?",
+    "a2": "Voer gewoon uw locatie in en vind sigarettenautomaten in de buurt.",
+    "q3": "Is het gratis?",
+    "a3": "Ja, deze service is volledig gratis."
+  },
+  "footer": {
+    "solutions": "Oplossingen",
+    "home": "Home",
+    "map": "Kaart"
+  }
+}
