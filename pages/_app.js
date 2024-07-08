@@ -40,39 +40,22 @@ function App({ Component, pageProps, translations, originalTranslations, current
   console.log("Initial localTranslations state:", localTranslations);
 
   useEffect(() => {
-    console.log("useEffect triggered with translations:", translations);
-    if (translations) {
+    console.log("useEffect triggered with translations:", translations, "and currentLanguage:", currentLanguage);
+    if (translations && Object.keys(translations).length > 0) {
       setLocalTranslations(translations);
       console.log("Set localTranslations state with translations prop:", translations);
-    } else {
-      console.error("Translations prop is undefined or null inside useEffect.");
-    }
-  }, [translations]);
-
-  // Additional logging to check the state of translations prop
-  useEffect(() => {
-    console.log("Checking translations prop after initial render:", translations);
-    if (!translations) {
-      console.error("Translations prop is still undefined or null after initial render.");
-    }
-  }, []);
-
-  useEffect(() => {
-    console.log("useEffect triggered with localTranslations:", localTranslations, "and currentLanguage:", currentLanguage);
-    if (localTranslations && Object.keys(localTranslations).length > 0) {
-      console.log("Setting i18n language and adding resources with localTranslations:", localTranslations);
       i18n.changeLanguage(currentLanguage);
-      i18n.addResources(currentLanguage, 'common', localTranslations);
+      i18n.addResources(currentLanguage, 'common', translations);
       if (typeof window !== "undefined" && window.localStorage) {
-        localStorage.setItem('translations', JSON.stringify(localTranslations));
-        console.log("Stored translations in local storage:", localTranslations);
+        localStorage.setItem('translations', JSON.stringify(translations));
+        console.log("Stored translations in local storage:", translations);
       }
       setIsInitialized(true);
       console.log("i18next initialization complete, isInitialized set to true.");
     } else {
-      console.error("localTranslations is undefined or empty inside useEffect.");
+      console.error("Translations prop is undefined or null inside useEffect.");
     }
-  }, [localTranslations, currentLanguage]);
+  }, [translations, currentLanguage]);
 
   useEffect(() => {
     console.log("App component mounted");
