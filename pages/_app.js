@@ -20,6 +20,9 @@ function App({ Component, pageProps, translations }) {
     return null; // or a loading spinner
   }
 
+  // Log the translations received by the App component
+  console.log("Translations in App component:", translations);
+
   return (
     <>
       <NextSeo
@@ -95,6 +98,9 @@ export async function getServerSideProps(appContext) {
       common: JSON.parse(fs.readFileSync(path.resolve('./public/locales', currentLanguage, 'common.json'), 'utf-8')),
     },
   };
+
+  // Log the translations fetched by getServerSideProps
+  console.log("Translations in getServerSideProps:", translations);
 
   // Initialize i18next with server-side translations before rendering
   initializeI18next(translations, currentLanguage);
