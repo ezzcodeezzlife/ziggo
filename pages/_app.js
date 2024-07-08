@@ -136,6 +136,7 @@ export async function getServerSideProps(appContext) {
     try {
       console.log("Attempting to serialize translations object...");
       JSON.stringify(translations);
+      console.log("Translations object is serializable:", translations);
     } catch (error) {
       console.error("Translations object is not serializable:", error);
       translations = { // Fallback to default translations if serialization fails
