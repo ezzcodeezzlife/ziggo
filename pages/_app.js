@@ -36,27 +36,35 @@ const initializeI18next = (translations, language) => {
 
 function App({ Component, pageProps, translations }) {
   console.log("App component received translations prop:", translations);
-  console.log("Structure of translations prop in App component:", JSON.stringify(translations, null, 2));
-  console.log("Translations prop immediately upon receiving in App component:", translations);
 
-  if (!translations) {
-    console.error("Translations prop is undefined in App component");
-  }
+  const [parsedTranslations, setParsedTranslations] = useState({});
 
   useEffect(() => {
-    console.log("Initial translations in useEffect:", translations);
-    let parsedTranslations = {};
-    try {
-      parsedTranslations = JSON.parse(translations);
-    } catch (error) {
-      console.error("Error parsing translations string:", error);
+    let parsed = {};
+    if (translations) {
+      try {
+        parsed = JSON.parse(translations);
+        setParsedTranslations(parsed);
+      } catch (error) {
+        console.error("Error parsing translations string:", error);
+      }
+    } else {
+      console.error("Translations prop is null. Falling back to default translations.");
+      parsed = {
+        seo: {
+          title: "Default Title",
+          description: "Default Description",
+          keywords: "default, keywords",
+          ogTitle: "Default OG Title",
+          ogDescription: "Default OG Description"
+        }
+      };
+      setParsedTranslations(parsed);
     }
 
-    // Wait for i18n to be initialized before calling initializeI18next
     if (i18nInitialized) {
-      // Initialize i18next directly with the translations
-      if (parsedTranslations && Object.keys(parsedTranslations).length > 0) {
-        initializeI18next(parsedTranslations, i18n.language);
+      if (parsed && Object.keys(parsed).length > 0) {
+        initializeI18next(parsed, i18n.language);
         console.log("i18next initialized and translations set.");
       } else {
         console.error("Translations are empty in useEffect. Falling back to default translations.");
@@ -66,16 +74,7 @@ function App({ Component, pageProps, translations }) {
     } else {
       console.error("i18n is not initialized. Cannot initialize i18next.");
     }
-    console.log("Translations in App component after useEffect:", parsedTranslations);
   }, [translations, i18nInitialized]);
-
-  // Ensure i18n is initialized and translations are available before rendering
-  let parsedTranslations = {};
-  try {
-    parsedTranslations = JSON.parse(translations);
-  } catch (error) {
-    console.error("Error parsing translations string:", error);
-  }
 
   if (!i18n.isInitialized || Object.keys(parsedTranslations).length === 0) {
     console.log("Rendering Loading component due to missing translations or uninitialized i18n");
@@ -83,24 +82,24 @@ function App({ Component, pageProps, translations }) {
   }
 
   // Log the translations received by the App component
-  console.log("Translations in App component:", translations);
+  console.log("Translations in App component:", parsedTranslations);
 
   return (
     <>
       <NextSeo
-        title={parsedTranslations ? parsedTranslations.seo.title : "Default Title"}
-        description={parsedTranslations ? parsedTranslations.seo.description : "Default Description"}
+        title={parsedTranslations.seo ? parsedTranslations.seo.title : "Default Title"}
+        description={parsedTranslations.seo ? parsedTranslations.seo.description : "Default Description"}
         canonical={`https://www.zigarettenautomatkarte.de/${i18n.language}`}
         aggregateRating={{
           ratingValue: "5",
           ratingCount: "94",
         }}
         datePublished="2024-02-03"
-        keywords={parsedTranslations ? parsedTranslations.seo.keywords : "default, keywords"}
+        keywords={parsedTranslations.seo ? parsedTranslations.seo.keywords : "default, keywords"}
         openGraph={{
           url: `https://www.zigarettenautomatkarte.de/${i18n.language}`,
-          title: parsedTranslations ? parsedTranslations.seo.ogTitle : "Default OG Title",
-          description: parsedTranslations ? parsedTranslations.seo.ogDescription : "Default OG Description",
+          title: parsedTranslations.seo ? parsedTranslations.seo.ogTitle : "Default OG Title",
+          description: parsedTranslations.seo ? parsedTranslations.seo.ogDescription : "Default OG Description",
           images: [
             {
               url: "https://www.zigarettenautomatkarte.de/screenshot.png",
@@ -159,12 +158,21 @@ export async function getServerSideProps(appContext) {
   const translationsFilePath = path.resolve('./public/locales', currentLanguage, 'common.json');
   console.log("Translations file path:", translationsFilePath);
 
-  let translations = {};
+  let translations = {
+    seo: {
+      title: "Default Title",
+      description: "Default Description",
+      keywords: "default, keywords",
+      ogTitle: "Default OG Title",
+      ogDescription: "Default OG Description"
+    }
+  };
   try {
-    translations = JSON.parse(fs.readFileSync(translationsFilePath, 'utf-8'));
+    const fileTranslations = JSON.parse(fs.readFileSync(translationsFilePath, 'utf-8'));
+    translations = { ...translations, ...fileTranslations };
     console.log("Fetched translations:", translations);
   } catch (error) {
-    console.error("Error reading translations file:", error);
+    console.error("Error reading translations file, using default translations:", error);
   }
 
   // Log the state of the i18n instance
@@ -182,9 +190,11 @@ export async function getServerSideProps(appContext) {
     serializedTranslations = JSON.stringify({});
   }
 
+  console.log("Serialized translations before returning from getServerSideProps:", serializedTranslations);
+
   return {
     props: {
-      translations: serializedTranslations,
+      translations: serializedTranslations || null,
     },
   };
 }
