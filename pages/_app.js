@@ -202,7 +202,7 @@ export async function getServerSideProps(appContext) {
     currentLanguage,
   };
 
-  console.log("Props object before returning from getServerSideProps:", props);
+  console.log("Translations object right before returning from getServerSideProps:", finalTranslations);
 
   return {
     props,
