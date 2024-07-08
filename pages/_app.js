@@ -4,24 +4,33 @@ import Script from "next/script";
 import { NextSeo } from "next-seo";
 import i18n from '../i18n'; // Import the initialized i18next instance
 import Loading from '../components/Loading'; // Import the Loading component
+import { i18nInitialized } from '../i18n'; // Import the i18nInitialized flag
 
 // Function to initialize i18next with server-side translations
 const initializeI18next = (translations, language) => {
   console.log("Initializing i18next with translations:", translations, "and language:", language);
-  if (translations) {
-    i18n.changeLanguage(language); // Set the language before adding resources
-    i18n.addResources(language, 'common', translations);
+  if (translations && Object.keys(translations).length > 0) {
+    if (i18nInitialized) {
+      i18n.changeLanguage(language); // Set the language before adding resources
+      i18n.addResources(language, 'common', translations);
+    } else {
+      console.error("i18next is not initialized. Cannot change language.");
+    }
   } else {
-    console.error("Invalid translations object passed to initializeI18next. Falling back to default translations.");
-    // Fallback to default translations if the provided translations are null
-    i18n.changeLanguage('en'); // Default to English
-    i18n.addResources('en', 'common', {
-      welcome_message: "Welcome",
-      map_title: "Ziggo Map",
-      search_placeholder: "Search for a place",
-      language_selector: "Select Language",
-      find_cigarette_machine: "Find Cigarette Machine"
-    });
+    console.error("Invalid or empty translations object passed to initializeI18next. Falling back to default translations.");
+    // Fallback to default translations if the provided translations are null or empty
+    if (i18nInitialized) {
+      i18n.changeLanguage('en'); // Default to English
+      i18n.addResources('en', 'common', {
+        welcome_message: "Welcome",
+        map_title: "Ziggo Map",
+        search_placeholder: "Search for a place",
+        language_selector: "Select Language",
+        find_cigarette_machine: "Find Cigarette Machine"
+      });
+    } else {
+      console.error("i18next is not initialized. Cannot change language.");
+    }
   }
 };
 
@@ -38,22 +47,27 @@ function App({ Component, pageProps, translations }) {
 
   useEffect(() => {
     console.log("Initial translations in useEffect:", translations);
-    // Initialize i18next directly with the translations
-    if (translations && Object.keys(translations).length > 0) {
-      initializeI18next(translations, i18n.language);
-      // Trigger a re-render once translations are initialized
-      setInitialized(true);
-      console.log("i18next initialized and translations set. State of initialized:", true);
+    // Wait for i18n to be initialized before calling initializeI18next
+    if (i18nInitialized) {
+      // Initialize i18next directly with the translations
+      if (translations && Object.keys(translations).length > 0) {
+        initializeI18next(translations, i18n.language);
+        // Trigger a re-render once translations are initialized
+        setInitialized(true);
+        console.log("i18next initialized and translations set. State of initialized:", true);
+      } else {
+        console.error("Translations are null or invalid in useEffect. Falling back to default translations.");
+        initializeI18next(null, 'en'); // Fallback to default translations
+        // Trigger a re-render once fallback translations are initialized
+        setInitialized(true);
+        console.log("Fallback translations initialized. State of initialized:", true);
+      }
     } else {
-      console.error("Translations are null or invalid in useEffect. Falling back to default translations.");
-      initializeI18next(null, 'en'); // Fallback to default translations
-      // Trigger a re-render once fallback translations are initialized
-      setInitialized(true);
-      console.log("Fallback translations initialized. State of initialized:", true);
+      console.error("i18n is not initialized. Cannot initialize i18next.");
     }
     console.log("Translations in App component after useEffect:", translations);
     console.log("State of initialized after useEffect:", initialized);
-  }, [translations]);
+  }, [translations, i18nInitialized]);
 
   // Ensure i18n is initialized and translations are available before rendering
   if (!i18n.isInitialized || !translations || !initialized) {
@@ -179,11 +193,20 @@ export async function getServerSideProps(appContext) {
     translations = null;
   }
 
+  // Log the translations object before returning
   console.log("Translations object before returning from getServerSideProps:", translations);
+
+  // Ensure translations object is not mutated
+  const finalTranslations = JSON.parse(JSON.stringify(translations));
+  console.log("Final translations object before returning from getServerSideProps:", finalTranslations);
+
+  const props = {
+    translations: finalTranslations || {}, // Ensure translations is always an object
+  };
+  console.log("Props object before returning from getServerSideProps:", props);
+
   return {
-    props: {
-      translations: translations,
-    },
+    props,
   };
 }
 
