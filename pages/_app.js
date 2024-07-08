@@ -153,10 +153,10 @@ export async function getServerSideProps(appContext) {
       };
     }
 
-    console.log("Translations object before returning from getServerSideProps:", translations);
+    console.log("Translations object before returning from getServerSideProps:", JSON.stringify(translations, null, 2));
     return {
       props: {
-        translations, // Pass the translations object directly
+        translations, // Pass the actual translations object
       },
     };
   } catch (error) {
