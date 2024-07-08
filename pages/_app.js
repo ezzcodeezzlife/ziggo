@@ -167,6 +167,11 @@ export async function getServerSideProps(appContext) {
 
   console.log("Translations object before serialization check:", translations);
 
+  // Log the type of each key-value pair within the translations object
+  Object.keys(translations).forEach(key => {
+    console.log(`Type of translations[${key}]:`, typeof translations[key]);
+  });
+
   // Ensure translations object contains expected keys
   const requiredKeys = ['seo'];
   const hasRequiredKeys = requiredKeys.every(key => key in translations);
