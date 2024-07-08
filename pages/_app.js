@@ -52,8 +52,8 @@ function App({ Component, pageProps, translations }) {
         initializeI18next(translations, i18n.language);
         console.log("i18next initialized and translations set.");
       } else {
-        console.error("Translations are null or invalid in useEffect. Falling back to default translations.");
-        initializeI18next(null, 'en'); // Fallback to default translations
+        console.error("Translations are empty in useEffect. Falling back to default translations.");
+        initializeI18next({}, 'en'); // Fallback to default translations
         console.log("Fallback translations initialized.");
       }
     } else {
@@ -63,7 +63,7 @@ function App({ Component, pageProps, translations }) {
   }, [translations, i18nInitialized]);
 
   // Ensure i18n is initialized and translations are available before rendering
-  if (!i18n.isInitialized || !translations) {
+  if (!i18n.isInitialized || Object.keys(translations).length === 0) {
     console.log("Rendering Loading component due to missing translations or uninitialized i18n");
     return <Loading />;
   }
@@ -145,7 +145,7 @@ export async function getServerSideProps(appContext) {
   const translationsFilePath = path.resolve('./public/locales', currentLanguage, 'common.json');
   console.log("Translations file path:", translationsFilePath);
 
-  let translations = null;
+  let translations = {};
   try {
     translations = JSON.parse(fs.readFileSync(translationsFilePath, 'utf-8'));
     console.log("Fetched translations:", translations);
@@ -156,46 +156,13 @@ export async function getServerSideProps(appContext) {
   // Log the state of the i18n instance
   console.log("i18n instance state before returning translations:", i18n);
 
-  // Verify the structure and serializability of the translations object
-  try {
-    const serializedTranslations = JSON.stringify(translations);
-    console.log("Serialized translations object:", serializedTranslations);
-  } catch (error) {
-    console.error("Error serializing translations object:", error);
-    translations = null;
-  }
-
-  // Additional check to ensure translations are correctly fetched
-  if (!translations || Object.keys(translations).length === 0) {
-    console.error("Translations are undefined or empty after fetching");
-    translations = null;
-  }
-
-  // Ensure translations object is serializable
-  const isSerializable = (obj) => {
-    try {
-      JSON.stringify(obj);
-      return true;
-    } catch (e) {
-      return false;
-    }
-  };
-
-  if (!isSerializable(translations)) {
-    console.error("Translations object is not serializable");
-    translations = null;
-  }
-
   // Log the translations object before returning
   console.log("Translations object before returning from getServerSideProps:", translations);
 
-  const props = {
-    translations: translations || {}, // Ensure translations is always an object
-  };
-  console.log("Props object before returning from getServerSideProps:", props);
-
   return {
-    props,
+    props: {
+      translations,
+    },
   };
 }
 
