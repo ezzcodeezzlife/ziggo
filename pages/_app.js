@@ -38,6 +38,7 @@ function App({ Component, pageProps, translations, originalTranslations, current
   const [localTranslations, setLocalTranslations] = useState(translations);
 
   useEffect(() => {
+    console.log("useEffect triggered with translations:", translations);
     setLocalTranslations(translations);
   }, [translations]);
 
@@ -61,13 +62,19 @@ function App({ Component, pageProps, translations, originalTranslations, current
     i18nInitPromise.then(() => {
       console.log("i18nInitPromise resolved");
       if (localTranslations && Object.keys(localTranslations).length > 0) {
+        console.log("Changing language to:", currentLanguage);
         i18n.changeLanguage(currentLanguage);
+        console.log("Adding resources to i18next:", localTranslations);
         i18n.addResources(currentLanguage, 'common', localTranslations);
         if (typeof window !== "undefined" && window.localStorage) {
           localStorage.setItem('translations', JSON.stringify(localTranslations));
+          console.log("Stored translations in local storage:", localTranslations);
         }
+      } else {
+        console.error("localTranslations is undefined or empty after i18nInitPromise resolved.");
       }
       setIsInitialized(true);
+      console.log("i18next initialization complete, isInitialized set to true.");
     }).catch(error => {
       console.error("Error resolving i18nInitPromise:", error);
     });
