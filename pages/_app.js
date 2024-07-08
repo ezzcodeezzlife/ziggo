@@ -137,6 +137,7 @@ export async function getServerSideProps(appContext) {
         JSON.stringify(obj);
         return true;
       } catch (e) {
+        console.error("Serialization error:", e);
         return false;
       }
     };
