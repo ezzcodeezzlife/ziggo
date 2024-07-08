@@ -35,7 +35,9 @@ class ErrorBoundary extends React.Component {
 function App({ Component, pageProps, translations, originalTranslations, currentLanguage }) {
   console.log("App component received props on initial render:", { Component, pageProps, translations, originalTranslations, currentLanguage });
   const [isInitialized, setIsInitialized] = useState(false);
+  console.log("Initial isInitialized state:", isInitialized);
   const [localTranslations, setLocalTranslations] = useState(translations);
+  console.log("Initial localTranslations state:", localTranslations);
 
   useEffect(() => {
     console.log("useEffect triggered with translations:", translations);
@@ -167,7 +169,7 @@ export async function getServerSideProps(appContext) {
     console.error(`Error loading translations for language ${currentLanguage}:`, error);
   }
 
-  console.log("Loaded translations object:", translations);
+  console.log("Loaded translations object before serialization:", translations);
 
   if (!translations || Object.keys(translations).length === 0) {
     console.error("Translations object is undefined or empty before returning.");
@@ -183,6 +185,8 @@ export async function getServerSideProps(appContext) {
     console.error("Translations object is not serializable:", error);
     serializableTranslations = { seo: { title: "Default Title", description: "Default Description", keywords: "default, keywords", ogTitle: "Default OG Title", ogDescription: "Default OG Description" } };
   }
+
+  console.log("Serializable translations object:", serializableTranslations);
 
   const props = {
     translations: serializableTranslations,
