@@ -13,7 +13,6 @@ import { CheckIcon } from "@heroicons/react/20/solid";
 const navigation = [
   { name: "Home", href: "/" },
   { name: "Zigarettenautomat Karte", href: "/karte" },
-
 ];
 
 const features = [
@@ -79,7 +78,7 @@ const footerNavigation = {
     {
       name: "Appsplosion",
       href: "https://www.programming-helper.com/contact-and-privacy",
-    }
+    },
   ],
   legal: [
     {

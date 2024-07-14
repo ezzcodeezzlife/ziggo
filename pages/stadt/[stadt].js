@@ -2,14 +2,14 @@ import { ChevronRightIcon } from "@heroicons/react/20/solid";
 import Contents from "../../components/contents";
 import Image from "next/image";
 import profilePic from "../../public/screenshot.png";
-import Head from 'next/head';
+import Head from "next/head";
 
 export default function Exasmple({ stadt }) {
   const canonicalUrl = `https://www.zigarettenautomatkarte.de/stadt/${stadt}`;
 
   return (
     <>
-       <Head>
+      <Head>
         <link rel="canonical" href={canonicalUrl} />
       </Head>
       <div className="relative isolate overflow-hidden bg-white">
@@ -51,7 +51,8 @@ export default function Exasmple({ stadt }) {
               </a>
             </div>
             <h1 className="mt-10 text-4xl font-bold tracking-tight text-gray-900 sm:text-6xl">
-              Zigarettenautomat in {stadt.charAt(0).toUpperCase() + stadt.slice(1)}
+              Zigarettenautomat in{" "}
+              {stadt.charAt(0).toUpperCase() + stadt.slice(1)}
             </h1>
             <p className="mt-6 text-lg leading-8 text-gray-600">
               Ein praktischer und zuverlässiger Weg um Zigarettenautomaten in
@@ -95,18 +96,187 @@ export default function Exasmple({ stadt }) {
 }
 
 export const getStaticPaths = async () => {
-  const stadt = ['berlin', 'frankfurt', 'stuttgart', 'münchen', 'hamburg', 'köln', 'düsseldorf', 'leipzig', 'hannover', 'nürnberg', 'dresden', 'dortmund', 'essen', 'bremen', 'bochum', 'duisburg', 'wuppertal', 'bielefeld', 'bonn', 'münster', 'karlsruhe', 'augsburg', 'wiesbaden', 'gelsenkirchen', 'mönchengladbach', 'braunschweig', 'chemnitz', 'kiel', 'aachen', 'halle', 'magdeburg', 'freiburg', 'krefeld', 'lübeck', 'oberhausen', 'erfurt', 'mainz', 'rostock', 'kassel', 'hagen', 'saarbrücken', 'hamm', 'mülheim', 'leverkusen', 'osnabrück', 'solingen', 'ludwigshafen', 'oldenburg', 'neuss', 'heidelberg', 'paderborn', 'wolfsburg', 'göttingen', 'trier', 'darmstadt', 'potsdam', 'würzburg', 'reutlingen', 'bremerhaven', 'koblenz', 'fürth', 'bergisch', 'gladbach', 'recklinghausen', 'pforzheim', 'offenbach', 'ulm', 'ingolstadt', 'gera', 'remscheid', 'heilbronn', 'siegen', 'erlangen', 'moers', 'cottbus', 'hildesheim', 'salzgitter', 'dresden', 'Wolfsburg', 'Neubrandenburg', 'Zwickau', 'Görlitz', 'Jena', 'Bottrop', 'Trier', 'Reutlingen', 'Bremerhaven', 'Lünen', 'Fürth', 'Marl', 'Ludwigsburg', 'Ratingen', 'Dessau', 'Castrop-Rauxel', 'Arnsberg', 'Villingen-Schwenningen', 'Norderstedt', 'Lüdenscheid', 'Dillenburg', 'Tübingen', 'Gütersloh', 'Zwickau', 'Schwerin', 'Bayreuth', 'Memmingen', 'Bamberg', 'Plauen', 'Fulda', 'Kempten', 'Landshut', 'Friedrichshafen', 'Herne', 'Gießen', 'Iserlohn', 'Neumünster', 'Weimar', 'Rastatt', 'Göttingen', 'Bünde', 'Brandenburg', 'Stralsund', 'Greifswald', 'Hagen', 'Rosenheim', 'Neuwied', 'Wilhelmshaven', 'Esslingen', 'Rüsselsheim', 'Frechen', 'Viersen', 'Mühlheim', 'Neu-Isenburg', 'Dormagen', 'Grevenbroich', 'Eschweiler', 'Hürth', 'Euskirchen', 'Stolberg', 'Detmold', 'Ahlen', 'Kerpen', 'Bergheim', 'Steinheim', 'Alsfeld', 'Offenburg', 'Hanau', 'Gummersbach', 'Uelzen', 'Cuxhaven', 'Nordhorn', 'Delmenhorst', 'Lüneburg', 'Unna', 'Rheine', 'Aschaffenburg', 'Hattingen', 'Lübbecke', 'Herford', 'Dorsten', 'Gladbeck', 'Minden', 'Neuwied', 'Beckum', 'Dinslaken', 'Hameln', 'Alsdorf', 'Albstadt', 'Sinsheim'];
-  const paths = stadt.map(stadt => ({ params: { stadt } }));
+  const stadt = [
+    "berlin",
+    "frankfurt",
+    "stuttgart",
+    "münchen",
+    "hamburg",
+    "köln",
+    "düsseldorf",
+    "leipzig",
+    "hannover",
+    "nürnberg",
+    "dresden",
+    "dortmund",
+    "essen",
+    "bremen",
+    "bochum",
+    "duisburg",
+    "wuppertal",
+    "bielefeld",
+    "bonn",
+    "münster",
+    "karlsruhe",
+    "augsburg",
+    "wiesbaden",
+    "gelsenkirchen",
+    "mönchengladbach",
+    "braunschweig",
+    "chemnitz",
+    "kiel",
+    "aachen",
+    "halle",
+    "magdeburg",
+    "freiburg",
+    "krefeld",
+    "lübeck",
+    "oberhausen",
+    "erfurt",
+    "mainz",
+    "rostock",
+    "kassel",
+    "hagen",
+    "saarbrücken",
+    "hamm",
+    "mülheim",
+    "leverkusen",
+    "osnabrück",
+    "solingen",
+    "ludwigshafen",
+    "oldenburg",
+    "neuss",
+    "heidelberg",
+    "paderborn",
+    "wolfsburg",
+    "göttingen",
+    "trier",
+    "darmstadt",
+    "potsdam",
+    "würzburg",
+    "reutlingen",
+    "bremerhaven",
+    "koblenz",
+    "fürth",
+    "bergisch",
+    "gladbach",
+    "recklinghausen",
+    "pforzheim",
+    "offenbach",
+    "ulm",
+    "ingolstadt",
+    "gera",
+    "remscheid",
+    "heilbronn",
+    "siegen",
+    "erlangen",
+    "moers",
+    "cottbus",
+    "hildesheim",
+    "salzgitter",
+    "dresden",
+    "Wolfsburg",
+    "Neubrandenburg",
+    "Zwickau",
+    "Görlitz",
+    "Jena",
+    "Bottrop",
+    "Trier",
+    "Reutlingen",
+    "Bremerhaven",
+    "Lünen",
+    "Fürth",
+    "Marl",
+    "Ludwigsburg",
+    "Ratingen",
+    "Dessau",
+    "Castrop-Rauxel",
+    "Arnsberg",
+    "Villingen-Schwenningen",
+    "Norderstedt",
+    "Lüdenscheid",
+    "Dillenburg",
+    "Tübingen",
+    "Gütersloh",
+    "Zwickau",
+    "Schwerin",
+    "Bayreuth",
+    "Memmingen",
+    "Bamberg",
+    "Plauen",
+    "Fulda",
+    "Kempten",
+    "Landshut",
+    "Friedrichshafen",
+    "Herne",
+    "Gießen",
+    "Iserlohn",
+    "Neumünster",
+    "Weimar",
+    "Rastatt",
+    "Göttingen",
+    "Bünde",
+    "Brandenburg",
+    "Stralsund",
+    "Greifswald",
+    "Hagen",
+    "Rosenheim",
+    "Neuwied",
+    "Wilhelmshaven",
+    "Esslingen",
+    "Rüsselsheim",
+    "Frechen",
+    "Viersen",
+    "Mühlheim",
+    "Neu-Isenburg",
+    "Dormagen",
+    "Grevenbroich",
+    "Eschweiler",
+    "Hürth",
+    "Euskirchen",
+    "Stolberg",
+    "Detmold",
+    "Ahlen",
+    "Kerpen",
+    "Bergheim",
+    "Steinheim",
+    "Alsfeld",
+    "Offenburg",
+    "Hanau",
+    "Gummersbach",
+    "Uelzen",
+    "Cuxhaven",
+    "Nordhorn",
+    "Delmenhorst",
+    "Lüneburg",
+    "Unna",
+    "Rheine",
+    "Aschaffenburg",
+    "Hattingen",
+    "Lübbecke",
+    "Herford",
+    "Dorsten",
+    "Gladbeck",
+    "Minden",
+    "Neuwied",
+    "Beckum",
+    "Dinslaken",
+    "Hameln",
+    "Alsdorf",
+    "Albstadt",
+    "Sinsheim",
+  ];
+  const paths = stadt.map((stadt) => ({ params: { stadt } }));
 
   return { paths, fallback: false };
-}
+};
 
 export const getStaticProps = async ({ params }) => {
   const stadt = params?.stadt;
 
   return {
     props: {
-      stadt
-    }
-  }
-}
+      stadt,
+    },
+  };
+};

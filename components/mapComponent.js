@@ -38,7 +38,7 @@ const MapComponent = () => {
         "https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png",
         {
           attribution: "©OpenStreetMap, ©CartoDB",
-        }
+        },
       ).addTo(mapRef.current);
 
       clusterGroupRef.current = L.markerClusterGroup();
@@ -46,7 +46,7 @@ const MapComponent = () => {
 
       // Add marker for default location
       const defaultMarker = L.marker(location, { icon: myIcon }).bindPopup(
-        '<p style="font-family: Arial, sans-serif; font-size: 14px; color: #333;">Default Location</p>'
+        '<p style="font-family: Arial, sans-serif; font-size: 14px; color: #333;">Default Location</p>',
       );
       clusterGroupRef.current.addLayer(defaultMarker);
 
@@ -77,7 +77,7 @@ const MapComponent = () => {
     if (bbox !== lastBBox) {
       const oldBounds = lastBBox
         ? L.latLngBounds(
-            ...lastBBox.split(",").map((coord) => parseFloat(coord))
+            ...lastBBox.split(",").map((coord) => parseFloat(coord)),
           )
         : null;
       const diffBounds = oldBounds ? newBounds.subtract(oldBounds) : newBounds;
@@ -94,7 +94,7 @@ const MapComponent = () => {
       fetch(
         "https://overpass-api.de/api/interpreter?data=[out:json];node[amenity=vending_machine][vending=cigarettes](" +
           diffBbox +
-          ");out;"
+          ");out;",
       )
         .then((response) => response.json())
         .then((data) => {
@@ -121,7 +121,7 @@ const MapComponent = () => {
                 '<li style="padding: 5px 0; font-family: Arial, sans-serif; font-size: 14px; color: #333;"><a href="https://www.google.com/maps/dir/?api=1&destination=' +
                 encodeURIComponent(node.lat + "," + node.lon) +
                 '" target="_blank">Routenplanung starten</a></li>' +
-                "</ul>"
+                "</ul>",
             );
 
             if (newBounds.contains(marker.getLatLng())) {
@@ -178,7 +178,7 @@ const MapComponent = () => {
         },
         (error) => {
           console.error("Error obtaining geolocation", error);
-        }
+        },
       );
     } else {
       console.error("Geolocation API not supported in this browser");

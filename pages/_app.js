@@ -6,7 +6,6 @@ import { Head } from "next/document";
 export default function App({ Component, pageProps }) {
   return (
     <>
-   
       <NextSeo
         title="Zigarettenautomat in der Nähe finden"
         description="Zigarettenautomat in der Nähe finden auf der Zigarettenautomat Karte"
@@ -15,12 +14,11 @@ export default function App({ Component, pageProps }) {
           ratingValue: "5",
           ratingCount: "94",
         }}
-        datePublished="2024-02-03" 
+        datePublished="2024-02-03"
         keywords="zigarettenautomat, zigarettenautomaten, zigarettenautomat finden, zigarettenautomaten finden, zigarettenautomat suche, zigarettenautomat karte, zigarettenautomat karte deutschland, zigarettenautomaten karte, zigarettenautomaten karte de"
         openGraph={{
           url: "https://www.zigarettenautomatkarte.de/",
-          title:
-            "Zigarettenautomat in der Nähe finden",
+          title: "Zigarettenautomat in der Nähe finden",
           description:
             "Zigarettenautomat in der Nähe finden auf der Zigarettenautomat Karte",
           images: [
