@@ -79,6 +79,10 @@ const footerNavigation = {
       name: "Appsplosion",
       href: "https://www.programming-helper.com/contact-and-privacy",
     },
+    {
+      name: "CigaretteMap.com",
+      href: "https://www.cigarettemap.com/",
+    },
   ],
   legal: [
     {
