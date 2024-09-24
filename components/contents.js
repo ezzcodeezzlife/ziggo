@@ -223,9 +223,19 @@ export default function Example() {
             </dl>
           </div>
         </div>
+<hr className="mt-12"></hr>
+
+{/* Ad Banner */}
+<div className="mx-auto mt-16 max-w-7xl px-6 lg:px-8">
+  <div className="relative w-full h-56 bg-gray-300 rounded-lg flex items-center justify-center text-gray-700 text-lg font-semibold">
+    {/* This is where your ad could appear */}
+    <span className="text-center">Ihr Adspace – Hier könnte Ihre Werbung stehen!</span>
+  </div>
+</div>
+
 
         {/* FAQs */}
-        <div className="mx-auto mt-32 max-w-2xl divide-y divide-gray-900/10 px-6 pb-8 sm:pb-24 sm:pt-12 lg:max-w-7xl lg:px-8 lg:pb-32">
+        <div className="mx-auto mt-16 max-w-2xl divide-y divide-gray-900/10 px-6 pb-8 sm:pb-24 sm:pt-12 lg:max-w-7xl lg:px-8 lg:pb-32">
           <h2 className="text-2xl font-bold leading-10 tracking-tight text-gray-900">
             Frequently asked questions
           </h2>
