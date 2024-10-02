@@ -113,7 +113,7 @@ export default function Example() {
         >
           <div className="flex lg:flex-1">
             <a href="#" className="-m-1.5 p-1.5">
-              <span className="sr-only">Your Company</span>
+              <span className="sr-only"> </span>
             </a>
           </div>
           <div className="flex pt-8 lg:hidden">
@@ -149,7 +149,7 @@ export default function Example() {
           <Dialog.Panel className="fixed inset-y-0 right-0 z-50 w-full overflow-y-auto bg-white px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10">
             <div className="flex items-center justify-between">
               <a href="#" className="-m-1.5 p-1.5">
-                <span className="sr-only">Your Company</span>
+                <span className="sr-only"> </span>
                 <img
                   className="h-8 w-auto"
                   src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
@@ -227,11 +227,24 @@ export default function Example() {
 
 {/* Ad Banner */}
 <div className="mx-auto mt-16 max-w-7xl px-6 lg:px-8">
-  <div className="relative w-full h-56 bg-gray-300 rounded-lg flex items-center justify-center text-gray-700 text-lg font-semibold">
-    {/* This is where your ad could appear */}
-    <span className="text-center">Ihr Adspace – Hier könnte Ihre Werbung stehen!</span>
-  </div>
-</div>
+      <a href="https://zedaco.de/zigaretten/" className="block">
+        <div className="relative w-full h-auto">
+          {/* Desktop Banner - versteckt auf Mobilgeräten */}
+          <img 
+            src="/ad.jpg" 
+            alt="Zigaretten online kaufen bei Zedaco" 
+            className="hidden md:block w-full rounded-lg"
+          />
+          
+          {/* Mobile Banner - versteckt auf Desktop */}
+          <img 
+            src="/ad2.jpg" 
+            alt="Zigaretten online kaufen bei Zedaco" 
+            className="block md:hidden w-full rounded-lg"
+          />
+        </div>
+      </a>
+    </div>
 
 
         {/* FAQs */}
