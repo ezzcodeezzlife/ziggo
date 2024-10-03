@@ -113,7 +113,7 @@ export default function Example() {
         >
           <div className="flex lg:flex-1">
             <a href="#" className="-m-1.5 p-1.5">
-              <span className="sr-only">Your Company</span>
+              <span className="sr-only"> </span>
             </a>
           </div>
           <div className="flex pt-8 lg:hidden">
@@ -149,7 +149,7 @@ export default function Example() {
           <Dialog.Panel className="fixed inset-y-0 right-0 z-50 w-full overflow-y-auto bg-white px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10">
             <div className="flex items-center justify-between">
               <a href="#" className="-m-1.5 p-1.5">
-                <span className="sr-only">Your Company</span>
+                <span className="sr-only"> </span>
                 <img
                   className="h-8 w-auto"
                   src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
@@ -223,9 +223,32 @@ export default function Example() {
             </dl>
           </div>
         </div>
+<hr className="mt-12"></hr>
+
+{/* Ad Banner */}
+<div className="mx-auto mt-16 max-w-7xl px-6 lg:px-8">
+      <a href="https://zedaco.de/zigaretten/" className="block">
+        <div className="relative w-full h-auto">
+          {/* Desktop Banner - versteckt auf Mobilgeräten */}
+          <img 
+            src="/ad.jpg" 
+            alt="Zigaretten online kaufen bei Zedaco" 
+            className="hidden md:block w-full rounded-lg"
+          />
+          
+          {/* Mobile Banner - versteckt auf Desktop */}
+          <img 
+            src="/ad2.jpg" 
+            alt="Zigaretten online kaufen bei Zedaco" 
+            className="block md:hidden w-full rounded-lg"
+          />
+        </div>
+      </a>
+    </div>
+
 
         {/* FAQs */}
-        <div className="mx-auto mt-32 max-w-2xl divide-y divide-gray-900/10 px-6 pb-8 sm:pb-24 sm:pt-12 lg:max-w-7xl lg:px-8 lg:pb-32">
+        <div className="mx-auto mt-16 max-w-2xl divide-y divide-gray-900/10 px-6 pb-8 sm:pb-24 sm:pt-12 lg:max-w-7xl lg:px-8 lg:pb-32">
           <h2 className="text-2xl font-bold leading-10 tracking-tight text-gray-900">
             Frequently asked questions
           </h2>
