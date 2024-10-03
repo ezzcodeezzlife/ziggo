@@ -330,11 +330,7 @@ export default function Example() {
             Footer
           </h2>
           <div className="xl:grid xl:grid-cols-3 xl:gap-8">
-            <img
-              className="h-7"
-              src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
-              alt="Company name"
-            />
+           
             <div className="mt-16 grid grid-cols-2 gap-8 xl:col-span-2 xl:mt-0">
               <div className="md:grid md:grid-cols-2 md:gap-8">
                 <div>
