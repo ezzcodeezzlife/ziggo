@@ -35,6 +35,10 @@ class MyDocument extends Document {
               rel="stylesheet"
               href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
             />
+
+
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8251732556629149"
+     crossorigin="anonymous"></script>
           </Head>
           <body>
              {/*
