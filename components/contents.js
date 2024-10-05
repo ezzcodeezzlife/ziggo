@@ -278,21 +278,6 @@ export default function Example() {
           </dl>
         </div>
 
-        <Script
-        async
-        src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8251732556629149"
-        crossOrigin="anonymous"
-        strategy="afterInteractive"
-      />
-      <ins
-        className="adsbygoogle"
-        style={{ display: "block" }}
-        data-ad-client="ca-pub-8251732556629149"
-        data-ad-slot="1268888286"
-        data-ad-format="auto"
-        data-full-width-responsive="true"
-      ></ins>
-   
 
         {/* CTA section */}
         <div className="relative -z-10 mt-32 px-6 lg:px-8">
@@ -343,20 +328,7 @@ export default function Example() {
         </div>
       </main>
 
-      <Script
-        async
-        src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8251732556629149"
-        crossOrigin="anonymous"
-        strategy="afterInteractive"
-      />
-      <ins
-        className="adsbygoogle"
-        style={{ display: "block" }}
-        data-ad-client="ca-pub-8251732556629149"
-        data-ad-slot="1268888286"
-        data-ad-format="auto"
-        data-full-width-responsive="true"
-      ></ins>
+    
 
       {/* Footer */}
       <div className="mx-auto mt-32 max-w-7xl px-6 lg:px-8">
