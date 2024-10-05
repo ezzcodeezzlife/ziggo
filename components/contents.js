@@ -186,6 +186,32 @@ export default function Example() {
       </header>
 
       <main className="isolate">
+
+
+      {/* Ad Banner */}
+<div className="mx-auto mt-16 max-w-7xl px-6 lg:px-8 pb-16">
+      <a href="https://zedaco.de/zigaretten/" className="block">
+        <div className="relative w-full h-auto">
+          {/* Desktop Banner - versteckt auf Mobilgeräten */}
+          <img 
+            src="/ad.jpg" 
+            alt="Zigaretten online kaufen bei Zedaco" 
+            className="hidden md:block w-full rounded-lg"
+          />
+          
+          {/* Mobile Banner - versteckt auf Desktop */}
+          <img 
+            src="/ad2.jpg" 
+            alt="Zigaretten online kaufen bei Zedaco" 
+            className="block md:hidden w-full rounded-lg"
+          />
+        </div>
+      </a>
+    </div>
+
+
+
+
         {/* Feature section */}
         <div className="mx-auto mt-1 max-w-7xl pt-3 px-6 sm:mt-2 lg:px-8">
           <div className="mx-auto max-w-2xl lg:text-center">
@@ -226,26 +252,6 @@ export default function Example() {
         </div>
 <hr className="mt-12"></hr>
 
-{/* Ad Banner */}
-<div className="mx-auto mt-16 max-w-7xl px-6 lg:px-8">
-      <a href="https://zedaco.de/zigaretten/" className="block">
-        <div className="relative w-full h-auto">
-          {/* Desktop Banner - versteckt auf Mobilgeräten */}
-          <img 
-            src="/ad.jpg" 
-            alt="Zigaretten online kaufen bei Zedaco" 
-            className="hidden md:block w-full rounded-lg"
-          />
-          
-          {/* Mobile Banner - versteckt auf Desktop */}
-          <img 
-            src="/ad2.jpg" 
-            alt="Zigaretten online kaufen bei Zedaco" 
-            className="block md:hidden w-full rounded-lg"
-          />
-        </div>
-      </a>
-    </div>
 
 
         {/* FAQs */}
