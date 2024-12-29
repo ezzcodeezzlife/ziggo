@@ -68,6 +68,7 @@ const footerNavigation = {
   solutions: [
     { name: "Home", href: "/" },
     { name: "Karte", href: "/karte" },
+    { name: "Git Invoice", href: "https://www.git-invoice.com/" },
   ],
   support: [
     {
