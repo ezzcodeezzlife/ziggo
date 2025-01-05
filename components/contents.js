@@ -10,6 +10,7 @@ import {
 } from "@heroicons/react/24/outline";
 import { CheckIcon } from "@heroicons/react/20/solid";
 import Script from "next/script";
+import AdSense from "./AdSense";
 
 const navigation = [
   { name: "Home", href: "/" },
@@ -230,6 +231,8 @@ export default function Example() {
               Zigarettenautomaten in Sekundenschnelle finden.
             </p>
           </div>
+
+
           <div className="mx-auto mt-16 max-w-2xl sm:mt-20 lg:mt-24 lg:max-w-4xl">
             <dl className="grid max-w-xl grid-cols-1 gap-x-8 gap-y-10 lg:max-w-none lg:grid-cols-2 lg:gap-y-16">
               {features.map((feature) => (
@@ -251,8 +254,9 @@ export default function Example() {
             </dl>
           </div>
         </div>
-<hr className="mt-12"></hr>
 
+
+<AdSense />
 
 
         {/* FAQs */}
@@ -278,6 +282,8 @@ export default function Example() {
             ))}
           </dl>
         </div>
+
+        <AdSense />
 
 
         {/* CTA section */}
@@ -306,13 +312,14 @@ export default function Example() {
               zuvor.
             </p>
             <div className="mt-10 flex items-center justify-center gap-x-6">
-              <a
-                href="/karte"
-                className="rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-              >
-                Los geht's
-              </a>
-            </div>
+  <a
+    href="/karte"
+    className="rounded-md bg-indigo-600 px-7 py-5 text-lg font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+  >
+    Los geht's
+  </a>
+</div>
+
           </div>
           <div
             className="absolute left-1/2 right-0 top-full -z-10 hidden -translate-y-1/2 transform-gpu overflow-hidden blur-3xl sm:block"
@@ -327,6 +334,7 @@ export default function Example() {
             />
           </div>
         </div>
+        <AdSense />
       </main>
 
     
