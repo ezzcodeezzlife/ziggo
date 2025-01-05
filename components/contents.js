@@ -256,7 +256,7 @@ export default function Example() {
         </div>
 
 
-        <div className="flex justify-center items-center h-full">
+        <div className="flex justify-center items-center ">
   <AdSense />
 </div>
 
@@ -286,7 +286,7 @@ export default function Example() {
         </div>
 
       
-        <div className="flex justify-center items-center h-full">
+        <div className="flex justify-center items-center ">
   <AdSense />
 </div>
 
@@ -343,7 +343,7 @@ export default function Example() {
       </main>
 
     
-      <div className="flex justify-center items-center h-full">
+      <div className="flex justify-center items-center ">
   <AdSense />
 </div>
 
