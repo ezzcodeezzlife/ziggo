@@ -3,7 +3,7 @@ import dynamic from "next/dynamic";
 
 const AdSense = () => {
   return (
-    <div style={{ textAlign: "center", minHeight: "300px", width: '100%',  }}>
+    <div style={{ textAlign: "center", minHeight: "100px", width: '100%',  }}>
       <ins
         className="adsbygoogle"
         style={{
