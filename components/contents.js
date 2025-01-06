@@ -342,10 +342,10 @@ export default function Example() {
         
       </main>
 
-    
+      {/* ad 3 
       <div className="flex justify-center items-center ">
   <AdSense />
-</div>
+</div>*/}
 
       {/* Footer */}
       <div className="mx-auto mt-32 max-w-7xl px-6 lg:px-8">
