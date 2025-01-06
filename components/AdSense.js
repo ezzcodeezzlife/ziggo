@@ -27,11 +27,7 @@ const AdSense = () => {
 
   return (
     <div style={{ textAlign: "center", minHeight: "100px", width: '100%', }}>
-      <script
-        async
-        src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8251732556629149"
-        crossOrigin="anonymous"
-      ></script>
+     
       <ins
         ref={adRef}
         className="adsbygoogle"

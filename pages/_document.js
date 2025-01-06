@@ -1,6 +1,6 @@
 import Document, { Html, Head, Main, NextScript } from "next/document";
 import { NextSeo } from "next-seo";
-
+import Script from 'next/script';
 class MyDocument extends Document {
   render() {
     return (
@@ -37,8 +37,8 @@ class MyDocument extends Document {
             />
 
 
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8251732556629149"
-     crossorigin="anonymous"></script>
+
+
           </Head>
           <body>
              {/*
