@@ -38,6 +38,12 @@ class MyDocument extends Document {
 
 
 
+<Script
+        async
+        src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8251732556629149`}
+        crossOrigin='anonymous'
+        strategy='afterInteractive'
+    />
 
           </Head>
           <body>

@@ -1,35 +1,10 @@
-import React, { useEffect, useRef } from "react";
+import React from "react";
 import dynamic from "next/dynamic";
 
 const AdSense = () => {
-  const adRef = useRef(null);
-
-  useEffect(() => {
-    const loadAd = () => {
-      if (typeof window !== "undefined" && window.adsbygoogle && adRef.current) {
-        try {
-          // Ensure the ad is initialized only once
-          if (!adRef.current.dataset.adLoaded) {
-            (window.adsbygoogle = window.adsbygoogle || []).push({});
-            adRef.current.dataset.adLoaded = "true";
-          }
-        } catch (err) {
-          console.error("AdSense error:", err);
-        }
-      }
-    };
-
-    // Use a timeout to ensure DOM is fully rendered
-    const timeout = setTimeout(loadAd, 500);
-
-    return () => clearTimeout(timeout);
-  }, []);
-
   return (
-    <div style={{ textAlign: "center", minHeight: "100px", width: '100%', }}>
-     
+    <div style={{ textAlign: "center", minHeight: "100px", width: '100%' }}>
       <ins
-        ref={adRef}
         className="adsbygoogle"
         style={{
           display: "block",
