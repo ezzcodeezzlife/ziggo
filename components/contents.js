@@ -256,9 +256,10 @@ export default function Example() {
         </div>
 
 
-        <div className="flex justify-center items-center ">
+        <div className="flex justify-center items-center w-full h-auto">
   <AdSense />
 </div>
+
 
 
         {/* FAQs */}
@@ -286,9 +287,10 @@ export default function Example() {
         </div>
 
       
-        <div className="flex justify-center items-center ">
+        <div className="flex justify-center items-center w-full h-auto">
   <AdSense />
 </div>
+
 
 
         {/* CTA section */}
