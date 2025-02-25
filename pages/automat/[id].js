@@ -50,12 +50,18 @@ const AutomatPage = () => {
       </Head>
 
       {loading ? (
-        <div style={styles.loadingContainer}>Loading...</div>
-      ) : error ? (
+  <div style={styles.loadingContainer} className="flex items-center justify-center">
+    <div className="w-8 h-8 border-4 border-t-4 border-blue-500 border-solid rounded-full animate-spin"></div>
+    <span className="ml-2">Loading... Daten werden geladen...</span>
+  </div>
+): error ? (
         <div style={styles.errorContainer}>{error}</div>
       ) : (
         <>
-          <h1 style={styles.title}>Cigarette Machine Profile</h1>
+        <a href="/karte" className="inline-flex space-x-6 text-blue-800 underline">
+        ← Zurück zur Karte
+        </a>
+
 
           <div style={styles.card}>
             <h2 style={styles.machineId}>Machine ID: {machine.id}</h2>
@@ -87,19 +93,6 @@ const AutomatPage = () => {
             )}
           </div>
 
-          {/* Navigation Links */}
-          <div style={styles.navLinks}>
-            {id && (
-              <>
-                <a href={`/automat/${parseInt(id) - 1}`} passHref>
-                  <a style={styles.navLink}>&larr; Previous</a>
-                </a>
-                <a href={`/automat/${parseInt(id) + 1}`} passHref>
-                  <a style={styles.navLink}>Next &rarr;</a>
-                </a>
-              </>
-            )}
-          </div>
 
           {/* Comment Section */}
           <div style={styles.commentSection}>
@@ -113,6 +106,21 @@ const AutomatPage = () => {
               data-page-title={`Cigarette Machine ${id}`}
               style={styles.cusdis}
             ></div>
+          </div>
+
+          
+          {/* Navigation Links */}
+          <div style={styles.navLinks}>
+            {id && (
+              <>
+                <a href={`/automat/${parseInt(id) - 1}`} passHref>
+                  <a style={styles.navLink}>&larr; Previous</a>
+                </a>
+                <a href={`/automat/${parseInt(id) + 1}`} passHref>
+                  <a style={styles.navLink}>Next &rarr;</a>
+                </a>
+              </>
+            )}
           </div>
 
           {/* Load Cusdis script */}
