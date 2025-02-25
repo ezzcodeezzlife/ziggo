@@ -28,7 +28,6 @@ const MapComponent = () => {
 
     if (!mapRef.current) {
       // Initialize the map
-      // Du bist krass
       mapRef.current = L.map("map", {
         minZoom: 10,
         maxZoom: 18,
@@ -38,7 +37,7 @@ const MapComponent = () => {
         "https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png",
         {
           attribution: "©OpenStreetMap, ©CartoDB",
-        },
+        }
       ).addTo(mapRef.current);
 
       clusterGroupRef.current = L.markerClusterGroup();
@@ -46,7 +45,7 @@ const MapComponent = () => {
 
       // Add marker for default location
       const defaultMarker = L.marker(location, { icon: myIcon }).bindPopup(
-        '<p style="font-family: Arial, sans-serif; font-size: 14px; color: #333;">Default Location</p>',
+        '<p style="font-family: Arial, sans-serif; font-size: 14px; color: #333;">Default Location</p>'
       );
       clusterGroupRef.current.addLayer(defaultMarker);
 
@@ -76,9 +75,7 @@ const MapComponent = () => {
 
     if (bbox !== lastBBox) {
       const oldBounds = lastBBox
-        ? L.latLngBounds(
-            ...lastBBox.split(",").map((coord) => parseFloat(coord)),
-          )
+        ? L.latLngBounds(...lastBBox.split(",").map((coord) => parseFloat(coord)))
         : null;
       const diffBounds = oldBounds ? newBounds.subtract(oldBounds) : newBounds;
 
@@ -94,7 +91,7 @@ const MapComponent = () => {
       fetch(
         "https://overpass-api.de/api/interpreter?data=[out:json];node[amenity=vending_machine][vending=cigarettes](" +
           diffBbox +
-          ");out;",
+          ");out;"
       )
         .then((response) => response.json())
         .then((data) => {
@@ -118,10 +115,12 @@ const MapComponent = () => {
                     );
                   })
                   .join("") +
-                '<li style="padding: 5px 0; font-family: Arial, sans-serif; font-size: 14px; color: #333;"><a href="https://www.google.com/maps/dir/?api=1&destination=' +
-                encodeURIComponent(node.lat + "," + node.lon) +
-                '" target="_blank">Routenplanung starten</a></li>' +
-                "</ul>",
+                
+            
+                '<li style="padding: 5px 0; text-align: center;"><a href="/automat/' +
+                node.id +
+                '" style="display: inline-block; padding: 8px 16px; background-color: #007bff; color: white; text-decoration: none; border-radius: 4px;">Automatenprofil ansehen</a></li>' +
+                "</ul>"
             );
 
             if (newBounds.contains(marker.getLatLng())) {
@@ -178,7 +177,7 @@ const MapComponent = () => {
         },
         (error) => {
           console.error("Error obtaining geolocation", error);
-        },
+        }
       );
     } else {
       console.error("Geolocation API not supported in this browser");

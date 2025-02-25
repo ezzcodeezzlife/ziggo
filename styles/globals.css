@@ -43,3 +43,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+#cusdis_thread iframe {
+  @apply w-full min-h-[900px] h-auto overflow-visible;
+}
