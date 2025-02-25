@@ -70,6 +70,7 @@ const footerNavigation = {
     { name: "Home", href: "/" },
     { name: "Karte", href: "/karte" },
     { name: "Git Invoice", href: "https://www.git-invoice.com/" },
+    { name: "Random Name Generator", href: "https://randomnamesgenerator.net" },
   ],
   support: [
     {
