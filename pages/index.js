@@ -49,7 +49,14 @@ export default function Example() {
             </p>
             <div className="mt-10 flex items-center gap-x-6">
               <a
-                href="/karte"
+                href="#"
+                onClick={(e) => {
+                  e.preventDefault(); // Prevent default jump behavior
+                  document.querySelector("#cta").scrollIntoView({
+                    behavior: "smooth", // Enables smooth scrolling
+                    block: "start" // Scrolls to the top of the target
+                  });
+                }}
                 className="rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
               >
                 Zigarettenautomaten Karte
@@ -65,7 +72,7 @@ export default function Example() {
           <div className="mx-auto mt-16 flex max-w-2xl sm:mt-24 lg:ml-10 lg:mr-0 lg:mt-0 lg:max-w-none lg:flex-none xl:ml-32">
             <div className="max-w-3xl flex-none sm:max-w-5xl lg:max-w-none">
               <div className="-m-2 rounded-xl bg-gray-900/5 p-2 ring-1 ring-inset ring-gray-900/10 lg:-m-4 lg:rounded-2xl lg:p-4">
-                <a href="/karte" className="block">
+                
                   <Image
                     src={profilePic}
                     alt="App screenshot"
@@ -73,7 +80,7 @@ export default function Example() {
                     height={1442}
                     className="w-[76rem] rounded-md shadow-2xl ring-1 ring-gray-900/10"
                   />
-                </a>
+               
               </div>
             </div>
           </div>
