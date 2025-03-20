@@ -54,7 +54,7 @@ export default function Example() {
               >
                 Zigarettenautomaten Karte
               </a>
-              <a
+              <a 
                 href="#features"
                 className="text-sm font-semibold leading-6 text-gray-900"
               >
