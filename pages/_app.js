@@ -61,6 +61,15 @@ export default function App({ Component, pageProps }) {
 })();
         `}
       </Script>
+      <Script
+  src="https://cdn.consentmanager.net/delivery/autoblocking/e54e36f2d2c77.js"
+  data-cmp-ab="1"
+  data-cmp-host="a.delivery.consentmanager.net"
+  data-cmp-cdn="cdn.consentmanager.net"
+  data-cmp-codesrc="16"
+  strategy="beforeInteractive"
+/>
+
       <Component {...pageProps} />
     </>
   );
