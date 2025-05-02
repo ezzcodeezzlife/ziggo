@@ -61,7 +61,13 @@ export default function App({ Component, pageProps }) {
 })();
         `}
       </Script>
-      
+      <Script
+        id="Cookiebot"
+        src="https://consent.cookiebot.com/uc.js"
+        data-cbid="32c77c56-2dca-490e-86c1-f4e74dc68efd"
+        type="text/javascript"
+        strategy="afterInteractive"
+      />
       <Component {...pageProps} />
     </>
   );
