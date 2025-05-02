@@ -61,12 +61,32 @@ export default function App({ Component, pageProps }) {
 })();
         `}
       </Script>
+      <Script id="iubenda-init" strategy="beforeInteractive">
+        {`
+          var _iub = _iub || [];
+          _iub.csConfiguration = {
+            siteId: 4014568,
+            cookiePolicyId: 30567564,
+            lang: "en",
+            storage: { useSiteId: true }
+          };
+        `}
+      </Script>
+
       <Script
-        id="Cookiebot"
-        src="https://consent.cookiebot.com/uc.js"
-        data-cbid="32c77c56-2dca-490e-86c1-f4e74dc68efd"
-        type="text/javascript"
-        strategy="afterInteractive"
+        src="https://cs.iubenda.com/autoblocking/4014568.js"
+        strategy="beforeInteractive"
+      />
+
+      <Script
+        src="//cdn.iubenda.com/cs/gpp/stub.js"
+        strategy="beforeInteractive"
+      />
+
+      <Script
+        src="//cdn.iubenda.com/cs/iubenda_cs.js"
+        strategy="lazyOnload"
+        charSet="UTF-8"
       />
       <Component {...pageProps} />
     </>
