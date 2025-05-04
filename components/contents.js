@@ -91,11 +91,11 @@ const footerNavigation = {
   legal: [
     {
       name: "Privacy",
-      href: "https://www.programming-helper.com/contact-and-privacy",
+      href: "/legal.html",
     },
     {
       name: "Terms",
-      href: "https://www.programming-helper.com/contact-and-privacy",
+      href: "/legal.html",
     },
   ],
 };
