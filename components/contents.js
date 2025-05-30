@@ -262,6 +262,8 @@ export default function Example() {
       </div>
 
 
+
+
         {/* FAQs */}
         <div className="mx-auto mt-16 max-w-2xl divide-y divide-gray-900/10 px-6 pb-8 sm:pb-24 sm:pt-12 lg:max-w-7xl lg:px-8 lg:pb-32">
           <h2 className="text-2xl font-bold leading-10 tracking-tight text-gray-900">
