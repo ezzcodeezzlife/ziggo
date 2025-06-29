@@ -15,6 +15,7 @@ import AdSense from "./AdSense";
 const navigation = [
   { name: "Home", href: "/" },
   { name: "Zigarettenautomat Karte", href: "/karte" },
+  { name: "Automaten aufstellen", href: "/automaten-aufstellen" },
 ];
 
 const features = [
@@ -69,6 +70,7 @@ const footerNavigation = {
   solutions: [
     { name: "Home", href: "/" },
     { name: "Karte", href: "/karte" },
+    { name: "Automaten aufstellen", href: "/automaten-aufstellen" },
     { name: "Git Invoice", href: "https://www.git-invoice.com/" },
     { name: "Random Name Generator", href: "https://randomnamesgenerator.net" },
   ],
@@ -110,17 +112,21 @@ export default function Example() {
   return (
     <div className="bg-white" id="features">
       {/* Header */}
-      <header className="absolute inset-x-0 top-0 z-50">
+      <header className="absolute inset-x-0 top-0 z-50 bg-white shadow-md">
         <nav
           className="flex items-center justify-between p-6 lg:px-8"
           aria-label="Global"
         >
           <div className="flex lg:flex-1">
-            <a href="#" className="-m-1.5 p-1.5">
-              <span className="sr-only"> </span>
+            <a href="/" className="-m-1.5 p-1.5">
+              <img
+                className="h-8 w-auto"
+                src="/icon.png" 
+                alt=""
+              />
             </a>
           </div>
-          <div className="flex pt-8 lg:hidden">
+          <div className="flex lg:hidden">
             <button
               type="button"
               className="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-gray-700"
@@ -135,7 +141,7 @@ export default function Example() {
               <a
                 key={item.name}
                 href={item.href}
-                className="text-sm font-semibold leading-6 text-gray-900"
+                className="text-sm font-semibold leading-6 text-gray-900 hover:text-indigo-600 transition-colors duration-300"
               >
                 {item.name}
               </a>
@@ -152,11 +158,11 @@ export default function Example() {
           <div className="fixed inset-0 z-50" />
           <Dialog.Panel className="fixed inset-y-0 right-0 z-50 w-full overflow-y-auto bg-white px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10">
             <div className="flex items-center justify-between">
-              <a href="#" className="-m-1.5 p-1.5">
-                <span className="sr-only"> </span>
+              <a href="/" className="-m-1.5 p-1.5">
+               
                 <img
                   className="h-8 w-auto"
-                  src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
+                  src="/icon.png"
                   alt=""
                 />
               </a>
@@ -253,6 +259,27 @@ export default function Example() {
                 </div>
               ))}
             </dl>
+          </div>
+        </div>
+
+        <div className="relative isolate overflow-hidden bg-gray-900 py-24 sm:py-32 rounded-lg mx-auto max-w-7xl px-6 lg:px-8 mt-16">
+          
+          <div className="mx-auto max-w-2xl text-center relative z-10">
+            <h2 className="text-base font-semibold leading-7 text-indigo-300">Service</h2>
+            <p className="mt-2 text-3xl font-bold tracking-tight text-white sm:text-4xl">
+              Eigenen Automaten aufstellen
+            </p>
+            <p className="mt-6 text-lg leading-8 text-gray-300">
+              Du hast einen Standort? Wir helfen dir, einen Zigarettenautomaten zu platzieren und beraten dich persönlich zur Umsetzung.
+            </p>
+            <div className="mt-10 flex items-center justify-center gap-x-6">
+              <a
+                href="/automaten-aufstellen"
+                className="rounded-md bg-indigo-600 px-8 py-4 text-xl font-bold text-white shadow-xl hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-all duration-300 ease-in-out transform hover:scale-105"
+              >
+                Automat aufstellen
+              </a>
+            </div>
           </div>
         </div>
 

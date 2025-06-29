@@ -50,15 +50,15 @@ export default function Example() {
             <div className="mt-10 flex items-center gap-x-6">
               <a
                 href="/karte"
-                className="rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                className="rounded-md bg-indigo-600 px-6 py-3 text-lg font-semibold text-white shadow-lg hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-all duration-300 ease-in-out transform hover:scale-105"
               >
                 Zigarettenautomaten Karte
               </a>
               <a 
-                href="#features"
-                className="text-sm font-semibold leading-6 text-gray-900"
+                href="/automaten-aufstellen"
+                className="rounded-md bg-white px-6 py-3 text-lg font-semibold text-indigo-600 shadow-lg ring-1 ring-inset ring-indigo-300 hover:bg-indigo-50 transition-all duration-300 ease-in-out transform hover:scale-105"
               >
-                Mehr Informationen <span aria-hidden="true">→</span>
+                Automat aufstellen
               </a>
             </div>
           </div>
